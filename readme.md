@@ -13,17 +13,20 @@
 * **Ramos Vallejo Christian Daniel** - *Esclavo* - [Llamame!!!!]( facebook.com/chistiandaniel.ramosvallejo)
 
 # I N S T A L A C I Ó N ! ! 
-1.- Clonación del Proyecto: 
-
-´´´git clone https://github.com/MichelleAm/Biblioteca
-´´´
-2.- Terminar la instalación de las librerías:
-´´´composer install
-´´´
-3.-Copiar el archivo .env.example a un .env nuevo:
-´´´cp .env.example .env
-´´´
-4.- Generar la llave:
-´´´php artisan key:generate --ansi
-´´´
+* 1.- Clonación del Proyecto: 
+```
+git clone https://github.com/MichelleAm/Biblioteca
+```
+* 2.- Terminar la instalación de las librerías:
+```
+composer install
+```
+* 3.-Copiar el archivo .env.example a un .env nuevo:
+```
+cp .env.example .env
+```
+* 4.- Generar la llave:
+```
+php artisan key:generate --ansi
+```
 
