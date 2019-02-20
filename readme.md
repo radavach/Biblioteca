@@ -10,7 +10,7 @@
 
 * **González Amador Michelle** - *Trabajador Inicial y Documentación* - 
 
-* **Ramos Vallejo Christian Daniel** - *Esclavo* - [Llamame!!!!] ( https://facebook.com/chistiandaniel.ramosvallejo)
+* **Ramos Vallejo Christian Daniel** - *Esclavo* - [Llamame!!!!] (https://www.facebook.com/chistiandaniel.ramosvallejo)
 
 # I N S T A L A C I Ó N ! ! 
 * 1.- Clonación del Proyecto: 
