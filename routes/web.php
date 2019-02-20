@@ -14,6 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/Info', function () {
-    return view('Informacion');
+Route::get('/Info', 'PaginaController@info');
+Route::get('/bienvenida/{nombre}/{apellido?}', function ($nombre, $apellido = null) {
+    //return $nombre.' '.$apellido;
+    return view('Paginas.bienvenida', compact('nombre', 'apellido'))
+    ->with(['nombre_completo'=> $nombre.' '.$apellido]);
+    //->with(['nombre'=> $nombre,
+    //'apellido' => $apellido]);
 });
+Route::get('/contacto', 'PaginaController@contacto');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
