@@ -38,7 +38,7 @@
                             <a class = "nav-link" href="{{action('PaginaController@info')}}">info.</a>
                         </li>
                         <li class="nav-item">
-                            <a class = "nav-link" href="/Colaboradores">colaboradores.</a>
+                            <a class = "nav-link" href="{{route('col')}}">colaboradores.</a>
                         </li>
                         <li class="nav-item">
                             <a class = "nav-link" href="/contacto">contacto.</a>

@@ -23,7 +23,7 @@ Route::get('/bienvenida/{nombre}/{apellido?}', function ($nombre, $apellido = nu
     //'apellido' => $apellido]);
 });
 Route::get('/contacto', 'PaginaController@contacto');
-Route::get('/Colaboradores', 'PaginaController@Colaboradores');
+Route::get('/Colaboradores', 'PaginaController@Colaboradores')->name('col');
 
 Auth::routes();
 
