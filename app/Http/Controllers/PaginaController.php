@@ -12,10 +12,14 @@ class PaginaController extends Controller
     }
     public function contacto()
     {
-
+        return view('Paginas.contacto');
     }
     public function bienvenida()
     {
 
     }
+    public function Colaboradores(){
+        return view('Paginas.Colaboradores');
+    }
+
 }

@@ -23,6 +23,8 @@ Route::get('/bienvenida/{nombre}/{apellido?}', function ($nombre, $apellido = nu
     //'apellido' => $apellido]);
 });
 Route::get('/contacto', 'PaginaController@contacto');
+Route::get('/Colaboradores', 'PaginaController@Colaboradores');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
