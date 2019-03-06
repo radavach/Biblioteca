@@ -16,7 +16,15 @@ class CreaTablaEmpleados extends Migration
         Schema::create('empleados', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
+            $table->string('apellidoPaterno');
+            $table->string('apellidoMaterno');
+            $table->string('nombreWmpleado');
+            $table->string('contrasena');
+            $table->integer('telefono');
+            $table->string('direccion');
             $table->string('rfc',20);
+            $table->string('correoElectronico');
+            $table->boolean('esAdmin');
             $table->timestamps();
         });
     }

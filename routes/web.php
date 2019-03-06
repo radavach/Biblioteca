@@ -14,16 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/Info', 'PaginaController@info');
-Route::get('/bienvenida/{nombre}/{apellido?}', function ($nombre, $apellido = null) {
-    //return $nombre.' '.$apellido;
-    return view('Paginas.bienvenida', compact('nombre', 'apellido'))
-    ->with(['nombre_completo'=> $nombre.' '.$apellido]);
-    //->with(['nombre'=> $nombre,
-    //'apellido' => $apellido]);
-});
+
+// Route::get('/bienvenida/{nombre}/{apellido?}', function ($nombre, $apellido = null) {
+//     //return $nombre.' '.$apellido;
+//     return view('Paginas.bienvenida', compact('nombre', 'apellido'))
+//     ->with(['nombre_completo'=> $nombre.' '.$apellido]);
+//     //->with(['nombre'=> $nombre,
+//     //'apellido' => $apellido]);
+// });
+
+Route::get('/info', 'PaginaController@info');
+Route::get('/bienvenida', 'PaginaController@bienvenida');
 Route::get('/contacto', 'PaginaController@contacto');
-Route::get('/Colaboradores', 'PaginaController@Colaboradores')->name('col');
+Route::get('/colaboradores', 'PaginaController@colaboradores')->name('col');
+
+Route::get('/empleados', "EmpleadosController@index")->name('empleado.index');
 
 Auth::routes();
 

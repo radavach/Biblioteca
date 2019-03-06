@@ -35,13 +35,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class = "nav-link" href="{{action('PaginaController@info')}}">info.</a>
+                            <a class = "nav-link" href="{{action('PaginaController@info')}}">Info</a>
                         </li>
                         <li class="nav-item">
-                            <a class = "nav-link" href="{{route('col')}}">colaboradores.</a>
+                            <a class = "nav-link" href="{{route('col')}}">Colaboradores</a>
                         </li>
                         <li class="nav-item">
-                            <a class = "nav-link" href="/contacto">contacto.</a>
+                            <a class = "nav-link" href="/contacto">Contacto</a>
                         </li>
                     </ul>
 
