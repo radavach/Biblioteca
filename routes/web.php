@@ -29,6 +29,11 @@ Route::get('/contacto', 'PaginaController@contacto');
 Route::get('/colaboradores', 'PaginaController@colaboradores')->name('col');
 
 Route::get('/empleados', "EmpleadosController@index")->name('empleado.index');
+Route::get('/inicio', function()
+{
+    return view('inicio');
+});
+
 
 Auth::routes();
 
