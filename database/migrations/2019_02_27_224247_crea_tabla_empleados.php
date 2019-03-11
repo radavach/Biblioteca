@@ -18,7 +18,7 @@ class CreaTablaEmpleados extends Migration
             $table->string('nombre');
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
-            $table->string('nombreWmpleado');
+            $table->string('nombreEmpleado');
             $table->string('contrasena');
             $table->integer('telefono');
             $table->string('direccion');
