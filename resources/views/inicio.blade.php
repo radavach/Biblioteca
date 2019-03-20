@@ -1,4 +1,3 @@
-Hola
 @extends('layouts.tabler');
 @section('contenido')
 

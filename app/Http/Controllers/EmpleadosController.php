@@ -26,4 +26,28 @@ class EmpleadosController extends Controller
 
         return view('empleados.empleadoIndex', compact('empleados'));
     }
+    public function create()
+    {
+        // return view('empleados.');
+    }
+    public function edit()
+    {
+        // poner rutas
+    }
+    public function show()
+    {
+        // poner rutas
+    }
+    public function update()
+    {
+        // poner rutas
+    }
+    public function delete()
+    {
+        // poner rutas
+    }
+    public function store()
+    {
+
+    }
 }

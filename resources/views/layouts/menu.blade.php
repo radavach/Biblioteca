@@ -12,13 +12,13 @@
                     </div>
                   </li>
                   <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Components</a>
+                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Empleado</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="./maps.html" class="dropdown-item ">Maps</a>
-                      <a href="./icons.html" class="dropdown-item ">Icons</a>
-                      <a href="./store.html" class="dropdown-item ">Store</a>
-                      <a href="./blog.html" class="dropdown-item ">Blog</a>
-                      <a href="./carousel.html" class="dropdown-item ">Carousel</a>
+                      <a href="./maps.html" class="dropdown-item ">Inicio</a>
+                      <a href="./icons.html" class="dropdown-item ">Agregar</a>
+                      <a href="./store.html" class="dropdown-item ">Editar</a>
+                      <a href="./blog.html" class="dropdown-item ">Eliminar</a>
+                      <a href="./carousel.html" class="dropdown-item ">Carrousel</a>
                     </div>
                   </li>
                   <li class="nav-item dropdown">
@@ -39,7 +39,7 @@
                       <a href="./rtl.html" class="dropdown-item ">RTL mode</a>
                     </div>
                   </li>
-                  <li class="nav-item dropdown">
+                <!--  <li class="nav-item dropdown">
                     <a href="./form-elements.html" class="nav-link"><i class="fe fe-check-square"></i> Forms</a>
                   </li>
                   <li class="nav-item">
@@ -47,6 +47,6 @@
                   </li>
                   <li class="nav-item">
                     <a href="./docs/index.html" class="nav-link"><i class="fe fe-file-text"></i> Documentation</a>
-                  </li>
+                  </li>-->
                 </ul>
               </div>
