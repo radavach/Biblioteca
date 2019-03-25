@@ -7,7 +7,7 @@
         </p>
 
         <div>
-            <table border="1">
+            <table class="table table-hover table-dark" >
                 <thead>
                     <tr>
                        <th>Nombre</th> 

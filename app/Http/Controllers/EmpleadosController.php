@@ -50,8 +50,20 @@ class EmpleadosController extends Controller
     {
         // poner rutas
     }
-    public function store()
+    public function store(Request $request)
     {
+        $request->validate(
+            [
+                'empleado' => 'required|max:255',
+                'clave' => 'required|min:3|max10',
+            ]
+        );
+
+        $emp = new Empleado();
+        $emp->dependencia = $request->input('empleado'); 
+        $dep->clave = $request->clave;
+        $dep->save();
+
 
     }
     public function destroy(Empleado $empleado)
