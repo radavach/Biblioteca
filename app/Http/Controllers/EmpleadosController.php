@@ -29,6 +29,8 @@ class EmpleadosController extends Controller
     public function create()
     {
         // return view('empleados.');
+        return view('documentos.documentoForm');
+
     }
     public function edit()
     {
