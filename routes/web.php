@@ -27,18 +27,21 @@ Route::get('/info', 'PaginaController@info');
 Route::get('/bienvenida', 'PaginaController@bienvenida');
 Route::get('/contacto', 'PaginaController@contacto');
 Route::get('/colaboradores', 'PaginaController@colaboradores')->name('col');
-
-Route::get('/empleados', "EmpleadosController@index")->name('empleado.index');
 Route::get('/inicio', function()
 {
     return view('inicio');
 });
-Route::get('/empleados/create', 'EmpleadosController@create');
-Route::get('/empleados/edit', 'EmpleadosController@edit');
-Route::get('/empleados/show', 'EmpleadosController@show');
-Route::get('/empleados/update', 'EmpleadosController@update');
-Route::get('/empleados/delete', 'EmpleadosController@delete');
-Route::get('/empleados/store', 'EmpleadosController@store');
+
+// Route::get('/empleados', "EmpleadosController@index")->name('empleado.index');
+// Route::get('/empleados/create', 'EmpleadosController@create');
+// Route::get('/empleados/edit', 'EmpleadosController@edit');
+// Route::get('/empleados/show', 'EmpleadosController@show');
+// Route::get('/empleados/update', 'EmpleadosController@update');
+// Route::get('/empleados/delete', 'EmpleadosController@delete');
+// Route::get('/empleados/store', 'EmpleadosController@store');
+
+Route::resource('empleados', 'EmpleadosController');
+
 ///Route::get('/empleados/update', 'EmpleadosController@update');
 
 Auth::routes();

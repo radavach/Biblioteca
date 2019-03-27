@@ -42,7 +42,7 @@
         <div class="header py-4">
           <div class="container">
             <div class="d-flex">
-              <a class="header-brand" href="./index.html">
+              <a class="header-brand" href="./">
                 <img src="{{asset('/demo/brand/tabler.svg')}}" class="header-brand-img" alt="tabler logo">
               </a>
               <div class="d-flex order-lg-2 ml-auto">
@@ -50,7 +50,7 @@
                   <a href="https://github.com/tabler/tabler" class="btn btn-sm btn-outline-primary" target="_blank">Source code</a>
                 </div>
                 {{-- @include('layouts.notificaciones') --}}
-                @include('layouts.user-menu');
+                @include('layouts.user-menu')
               </div>
               <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
                 <span class="header-toggler-icon"></span>
@@ -80,7 +80,7 @@
         </div>
       </div>
       {{-- @include('layouts.enlaces-footer') --}}
-      @include('layuots.footer')
+      @include('layouts.footer')
     </div>
   </body>
 </html>
