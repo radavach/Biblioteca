@@ -72,10 +72,15 @@ class EmpleadosController extends Controller
         //     ]
         // );
 
-        $emp = new Empleado();
-        $emp->empleado = $request->input('empleado'); 
-        $dep->clave = $request->clave;
-        $dep->save();
+        $request->merge();
+        Empleado::create($request->all());
+
+        // $emp = new Empleado();
+        // $emp->empleado = $request->input('empleado'); 
+        // $dep->clave = $request->clave;
+        // $dep->save();
+
+        
 
         return redirect()->route('empleado.index');
 
