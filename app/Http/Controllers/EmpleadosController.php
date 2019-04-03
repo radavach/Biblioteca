@@ -56,8 +56,11 @@ class EmpleadosController extends Controller
         $empleado->correoElectronico = $request->correoElectronico;
 
         $empleado->save();
+        $empleado->update($request->except('funcionarios_id'));
+        $empleado->funcionarios()->sync($request->funcionarios_id);
 
-        return redirect()->route('empleados.show', $empleado->id);
+       // return redirect()->route('empleados.show', $empleado->id);
+       return redirect()->route('empleados.index');
     }
     public function delete()
     {
