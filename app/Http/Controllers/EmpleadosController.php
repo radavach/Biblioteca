@@ -29,24 +29,35 @@ class EmpleadosController extends Controller
     public function create()
     {
         // return view('empleados.');
-        return view('documentos.documentoForm');
+        return view('empleados.empleadoForm');
 
     }
-    public function edit()
+    public function edit(Empleado $empleado)
     {
         // poner rutas
+        return view('empleados.empleadoForm', compact('empleado'));
     }
-    public function show()
+    public function show(Empleado $empleado)
     {
         // poner rutas
+        return view('empleados.empleadoShow', compact('empleado'));
     }
-    public function update()
+    public function update(Request $request, Empleado $empleado)
     {
         // poner rutas
-        $dependencia->dependencia = $request->input('dependencia');
-        $dependencia->clave = $request->clave;
-        $dependencia->save();
-        return redirect()->route('dependencias.show', $dependencia->id);
+        // $empleado->nombre = $request->input('nombre');
+        $empleado->nombre = $request->nombre;
+        $empleado->apellidoPaterno = $request->apellidoPaterno;
+        $empleado->apellidoMaterno = $request->apellidoMaterno;
+        $empleado->contrasena = $request->contrasena;
+        $empleado->telefono = $request->telefono;
+        $empleado->direccion = $request->direccion;
+        $empleado->rfc = $request->rfc;
+        $empleado->correoElectronico = $request->correoElectronico;
+
+        $empleado->save();
+
+        return redirect()->route('empleados.show', $empleado->id);
     }
     public function delete()
     {
@@ -54,18 +65,24 @@ class EmpleadosController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'empleado' => 'required|max:255',
-                'clave' => 'required|min:3|max10',
-            ]
-        );
+        // $request->validate(
+        //     [
+        //         'empleado' => 'required|max:255',
+        //         'clave' => 'required|min:3|max10',
+        //     ]
+        // );
 
-        $emp = new Empleado();
-        $emp->dependencia = $request->input('empleado'); 
-        $dep->clave = $request->clave;
-        $dep->save();
+        $request->merge();
+        Empleado::create($request->all());
 
+        // $emp = new Empleado();
+        // $emp->empleado = $request->input('empleado'); 
+        // $dep->clave = $request->clave;
+        // $dep->save();
+
+        
+
+        return redirect()->route('empleado.index');
 
     }
     public function destroy(Empleado $empleado)

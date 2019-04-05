@@ -14,6 +14,9 @@ class CreaTablaBibliotecas extends Migration
     public function up()
     {
         Schema::create('bibliotecas', function (Blueprint $table) {
+
+            $table->engine = 'InnoDB';
+            
             $table->increments('id');
             $table->string('nombre');
             $table->time('horaApertura');
@@ -22,7 +25,7 @@ class CreaTablaBibliotecas extends Migration
             $table->string('telefono');
             $table->string('paginaWeb');
             $table->string('facebook');
-            $table->string('mail');
+            $table->string('email');
             $table->timestamps();
         });
     }
