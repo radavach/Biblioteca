@@ -14,17 +14,14 @@ class CreaTablaEmpleados extends Migration
     public function up()
     {
         Schema::create('empleados', function (Blueprint $table) {
+
+            $table->engine = 'InnoDB';
+
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('apellidoPaterno');
-            $table->string('apellidoMaterno');
-            $table->string('nombreEmpleado');
-            $table->string('contrasena');
-            $table->integer('telefono');
-            $table->string('direccion');
+            $table->string('idEmpleado');
             $table->string('rfc',20);
-            $table->string('correoElectronico');
             $table->boolean('esAdmin');
+            $table->string('contrasena');
             $table->timestamps();
         });
     }
