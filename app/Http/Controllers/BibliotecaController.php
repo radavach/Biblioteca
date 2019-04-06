@@ -15,6 +15,8 @@ class BibliotecaController extends Controller
     public function index()
     {
         //
+        $bibliotecas = Biblioteca::all();
+        return view('bibliotecas.bibliotecaIndex', compact('bibliotecas'));
     }
 
     /**
@@ -25,6 +27,7 @@ class BibliotecaController extends Controller
     public function create()
     {
         //
+       return view('bibliotecas.bibliotecaForm');
     }
 
     /**
@@ -36,6 +39,9 @@ class BibliotecaController extends Controller
     public function store(Request $request)
     {
         //
+        $biblioteca = Biblioteca::create($request->all());
+
+        return redirect()->route('bibliotecas.index');
     }
 
     /**
@@ -47,6 +53,7 @@ class BibliotecaController extends Controller
     public function show(Biblioteca $biblioteca)
     {
         //
+        return view('bibliotecas.bibliotecaShow', compact('biblioteca'));
     }
 
     /**
@@ -58,6 +65,7 @@ class BibliotecaController extends Controller
     public function edit(Biblioteca $biblioteca)
     {
         //
+        return view('bibliotecas.bibliotecaForm', compact('biblioteca'));
     }
 
     /**
@@ -70,6 +78,9 @@ class BibliotecaController extends Controller
     public function update(Request $request, Biblioteca $biblioteca)
     {
         //
+        $biblioteca->update($request->all());
+
+        return redirect()->route('bibliotecas.show', $biblioteca->id);
     }
 
     /**
@@ -81,5 +92,11 @@ class BibliotecaController extends Controller
     public function destroy(Biblioteca $biblioteca)
     {
         //
+        $biblioteca->delete();
+        return redirect()->route('bibliotecas.index')
+            ->with([
+                'mensaje' => 'Biblioteca Eliminada',
+                'alert-class' => 'alert-warning',
+            ]);
     }
 }
