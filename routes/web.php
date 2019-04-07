@@ -40,7 +40,15 @@ Route::get('/inicio', function()
 // Route::get('/empleados/delete', 'EmpleadosController@delete');
 // Route::get('/empleados/store', 'EmpleadosController@store');
 
-Route::resource('empleados', 'EmpleadosController');
+Route::resource('/bibliotecas', 'BibliotecaController');
+Route::resource('/clientes', 'ClienteController');
+Route::resource('/ejemplares', 'EjemplarController');
+Route::resource('/empleados', 'EmpleadosController');
+Route::resource('/libros', 'LibroController');
+Route::resource('/materiales', 'MaterialController');
+Route::resource('/personas', 'PersonaController');
+Route::resource('/prestamos', 'PrestamoController');
+Route::resource('/usuarios', 'UsuarioController');
 
 ///Route::get('/empleados/update', 'EmpleadosController@update');
 
