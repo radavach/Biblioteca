@@ -82,3 +82,7 @@
 |        | GET|HEAD  | usuarios/{usuario}            | usuarios.show       | App\Http\Controllers\UsuarioController@show                            | web          |
 |        | GET|HEAD  | usuarios/{usuario}/edit       | usuarios.edit       | App\Http\Controllers\UsuarioController@edit                            | web          |
 +--------+-----------+-------------------------------+---------------------+------------------------------------------------------------------------+--------------+
+
+Cosas que llevamos
+-biblioteca
+-clientes
