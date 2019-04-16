@@ -72,9 +72,9 @@
 
                 <div class="form-group">
                   <label class="form-label">Bibliotecas</label>
-                  <select name="idBiblioteca" class="form-control">
+                  <select name="biblioteca_id" class="form-control">
                     @foreach($bibliotecas as $biblioteca)
-                        <option value="{{ $biblioteca->id }}" {{ isset($persona) && ($persona->idBiblioteca == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
+                        <option value="{{ $biblioteca->id }}" {{ isset($persona) && ($persona->biblioteca_id == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
                     @endforeach
                   </select>
                 </div>

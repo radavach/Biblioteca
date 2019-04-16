@@ -16,63 +16,64 @@ class AgregarLlavesForaneasEnTablas extends Migration
         //
 
         Schema::table('libros', function(Blueprint $table){
-            $table->unsignedInteger('idBiblioteca');
-            $table->foreign('idBiblioteca')
+            $table->unsignedInteger('biblioteca_id');
+            $table->foreign('biblioteca_id')
                 ->references('id')
                 ->on('bibliotecas')
                 ->onDelete('cascade');
         });
         
         Schema::table('empleados', function(Blueprint $table){
-            $table->integer('idPersona')->unsigned();
-            $table->foreign('idPersona')
+            $table->integer('persona_id')->unsigned();
+            $table->foreign('persona_id')
             ->references('id')
             ->on('personas')
             ->onDelete('cascade');
         });
         
         Schema::table('prestamos', function(Blueprint $table){
-            $table->unsignedInteger('idEjemplar');
-            $table->foreign('idEjemplar')
+            $table->unsignedInteger('ejemplar_id');
+            $table->foreign('ejemplar_id')
                 ->references('id')
                 ->on('ejemplares')
                 ->onDelete('cascade');        
 
-            $table->unsignedInteger('idCliente');
-            $table->foreign('idCliente')
+            $table->unsignedInteger('cliente_id');
+            $table->foreign('cliente_id')
                 ->references('id')
                 ->on('clientes')
                 ->onDelete('cascade');
         });
         
         Schema::table('materiales', function(Blueprint $table){
-            $table->UnsignedInteger('idBiblioteca');
-            $table->foreign('idBiblioteca')
+            $table->UnsignedInteger('biblioteca_id');
+            $table->foreign('biblioteca_id')
                 ->references('id')
                 ->on('bibliotecas')
                 ->onDelete('cascade');
         });
 
         Schema::table('ejemplares', function(Blueprint $table){
-            $table->unsignedInteger('idLibro');
             $table->integer('isbLibro');
-            $table->foreign('idLibro')
+            
+            $table->unsignedInteger('libro_id');
+            $table->foreign('libro_id')
                 ->references('id')
                 ->on('libros')
                 ->onDelete('cascade');
         });
 
         Schema::table('clientes', function(Blueprint $table){
-            $table->unsignedInteger('idPersona');
-            $table->foreign('idPersona')
+            $table->unsignedInteger('persona_id');
+            $table->foreign('persona_id')
                 ->references('id')
                 ->on('personas')
                 ->onDelete('cascade');
         });
 
         Schema::table('personas', function(Blueprint $table){
-            $table->unsignedInteger('idBiblioteca');
-            $table->foreign('idBiblioteca')
+            $table->unsignedInteger('biblioteca_id');
+            $table->foreign('biblioteca_id')
                 ->references('id')
                 ->on('bibliotecas')
                 ->onDelete('cascade');
@@ -88,25 +89,27 @@ class AgregarLlavesForaneasEnTablas extends Migration
     {
         //
         Schema::table('empleados', function(Blueprint $table){
-            $table->dropColumn('idPersona');
+            $table->dropColumn('persona_id');
         });
         Schema::table('libros', function(Blueprint $table){
-            $table->dropColumn('idBiblioteca');
+            $table->dropColumn('biblioteca_id');
         });
         Schema::table('materiales', function(Blueprint $table){
-            $table->dropColumn('idBiblioteca');
+            $table->dropColumn('biblioteca_id');
         });
         Schema::table('prestamos', function(Blueprint $table){
-            $table->dropColumn('idCliente');
+            $table->dropColumn('ejemplar_id');
+            $table->dropColumn('cliente_id');
         });
         Schema::table('ejemplares', function(Blueprint $table){
             $table->dropColumn('isbLibro');
+            $table->dropColumn('libro_id');
         });
         Schema::table('clientes', function(Blueprint $table){
-            $table->dropColumn('idPersona');
+            $table->dropColumn('persona_id');
         });
         Schema::table('personas', function(Blueprint $table){
-            $table->dropColumn('idBiblioteca');
+            $table->dropColumn('biblioteca_id');
         });
     }
 }

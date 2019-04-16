@@ -12,7 +12,6 @@
             <h3 class="card-title">Capturar Cliente</h3>
           </div>
           <div class="card-body">
-
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -23,7 +22,7 @@
                 </div>
             @endif
 
-            @if(isset($biblioteca))
+            @if(isset($cliente))
                 <form action="{{ route('clientes.update', $cliente->id) }}" method="POST">
                     <input type="hidden" name="_method" value="PATCH">
             @else
@@ -33,47 +32,51 @@
                 
                 <div class="form-group">
                   <label class="form-label">Nombre</label>
-                  <input type="text" class="form-control" name="nombre" value="{{ isset($biblioteca) ? $biblioteca->nombre : '' }}{{ old('nombre') }}" placeholder="Nombre de la biblioteca">
-                    @if ($errors->has('biblioteca'))
+                  <input type="text" class="form-control" name="nombre" value="{{ isset($cliente) ? $persona->nombre : '' }}{{ old('nombre') }}" placeholder="Nombre de la persona">
+                    @if ($errors->has('nombre'))
                         <span class="alert alert-danger">
-                            <strong>{{ $errors->first('biblioteca') }}</strong>
+                            <strong>{{ $errors->first('nombre') }}</strong>
                         </span>
                     @endif
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label">Apertura</label>
-                  <input type="time" class="form-control" name="horaApertura" value="{{ $biblioteca->horaApertura ?? '' }}{{ old('horaApertura') }}" placeholder="Hora de apertura">
-                </div>
-                
-                <div class="form-group">
-                  <label class="form-label">Cierre</label>
-                  <input type="time" class="form-control" name="horaCierre" value="{{ $biblioteca->horaCierre ?? '' }}{{ old('horaApertura') }}" placeholder="Hora de cierre">
-                </div>
-                
-                <div class="form-group">
-                  <label class="form-label">Dias</label>
-                  <input type="date" class="form-control" name="dias" value="{{ $biblioteca->dias ?? '' }}{{ old('dias') }}" placeholder="Dias">
-                </div>
-                
-                <div class="form-group">
-                  <label class="form-label">telefono</label>
-                  <input type="text" class="form-control" name="telefono" value="{{ $biblioteca->telefono ?? '' }}{{ old('telefono') }}" placeholder="Telefono">
+                  <label class="form-label">Apellido Paterno</label>
+                  <input type="text" class="form-control" name="apellidoPaterno" value="{{ isset($cliente) ? $persona->apellidoPaterno : '' }}" placeholder="Apellido Paterno">
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label">Pagina Web</label>
-                  <input type="text" class="form-control" name="paginaWeb" value="{{ $biblioteca->paginaWeb ?? '' }}{{ old('paginaWeb') }}" placeholder="Pagina Web">
+                <label class="form-label">Apellido Materno</label>
+                <input type="text" class="form-control" name="apellidoMaterno" value="{{ isset($cliente) ? $persona->apellidoMaterno : '' }}" placeholder="Apellido Materno">
                 </div>
-                
+
                 <div class="form-group">
-                  <label class="form-label">Facebook</label>
-                  <input type="text" class="form-control" name="facebook" value="{{ $biblioteca->facebook ?? '' }}{{ old('facebook') }}" placeholder="Facebook">
+                <label class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control" name="nombreUsuario" value="{{ isset($cliente) ? $persona->nombreUsuario : '' }}" placeholder="Nombre de Usuario">
                 </div>
-                
+
                 <div class="form-group">
-                  <label class="form-label">Email</label>
-                  <input type="text" class="form-control" name="email" value="{{ $biblioteca->email ?? '' }}{{ old('email') }}" placeholder="Email">
+                  <label class="form-label">Teléfono</label>
+                  <input type="text" class="form-control" name="telefono" value="{{ isset($cliente) ? $persona->telefono : '' }}" placeholder="Teléfono">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Direccion</label>
+                  <input type="text" class="form-control" name="direccion" value="{{ isset($cliente) ? $persona->direccion : '' }}" placeholder="Direccion">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Correo Electronico</label>
+                  <input type="text" class="form-control" name="email" value="{{ isset($cliente) ? $persona->email : '' }}" placeholder="Correo Electronico">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Bibliotecas</label>
+                  <select name="biblioteca_id" class="form-control">
+                    @foreach($bibliotecas as $biblioteca)
+                        <option value="{{ $biblioteca->id }}" {{ isset($cliente) && ($persona->biblioteca_id == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
+                    @endforeach
+                  </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary ml-auto">Aceptar</button>

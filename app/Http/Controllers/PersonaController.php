@@ -45,8 +45,9 @@ class PersonaController extends Controller
             'nombre' => 'required|min:3',
             'apellidoPaterno' => 'required|min:3',
             'apellidoMaterno' => 'nullable|min:3',
-            'nombreUsuario' => 'required|min:3|max:7',
+            'nombreUsuario' => 'required|min:3',
             'email' => 'required|min:3',
+            'biblioteca_id' => 'required'
         ]);
 
         $persona = Persona::create($request->all());
@@ -75,7 +76,8 @@ class PersonaController extends Controller
     public function edit(Persona $persona)
     {
         //
-        return view('personas.personaForm', compact('persona'));
+        $bibliotecas = Biblioteca::all();
+        return view('personas.personaForm', compact('persona', 'bibliotecas'));
     }
 
     /**
@@ -92,9 +94,9 @@ class PersonaController extends Controller
             'nombre' => 'required|min:3',
             'apellidoPaterno' => 'required|min:3',
             'apellidoMaterno' => 'nullable|min:3',
-            'nombreUsuario' => 'requires|min:3',
+            'nombreUsuario' => 'required|min:3',
             'email' => 'required|min:3',
-            'idBiblioteca' => 'required|min:3',
+            'biblioteca_id' => 'required',
         ]);
         
         $persona->update($request->all());
@@ -114,7 +116,7 @@ class PersonaController extends Controller
         $persona->delete();
         return redirect()->route('personas.index')
             ->with([
-                'mensaje' => 'Persona Eliminadad',
+                'mensaje' => 'Persona Eliminada',
                 'alert-class' => 'alert-warning',
             ]);
     }
