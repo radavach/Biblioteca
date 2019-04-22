@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libro;
+use App\Biblioteca;
 use Illuminate\Http\Request;
 
 class LibroController extends Controller
@@ -15,6 +16,8 @@ class LibroController extends Controller
     public function index()
     {
         //
+        $libros = Libro::all();
+        return view('libros.libroIndex', compact('libros'));
     }
 
     /**
@@ -25,6 +28,8 @@ class LibroController extends Controller
     public function create()
     {
         //
+        $bibliotecas = Biblioteca::all();
+        return view('libros.libroForm', compact('bibliotecas'));
     }
 
     /**
@@ -36,6 +41,36 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'isbn' => 'require',
+            'titulo' => 'require',
+            'subtitulo' => 'require',
+            'autor' => 'require',
+            'editorial' => 'require',
+            'anio' => 'require',
+            'genero' => 'require',
+            'idioma' => 'require',
+            'seccion' => 'require',
+            'ejemplar' => 'require',
+            'diasMaxPrestamo' => 'require',
+            'linkImagen' => 'require',
+            'idBiblioteca' => 'require',
+        ]);
+
+        $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario'));
+
+        $estado = $request->estado === "TRUE" ? true : false;
+
+        $ejemplar = Ejemplar::create([
+            'numEjemp' => $request->numEjemp,
+            'origen' => $request->origen,
+            'estado' => $estado,
+            'comentario' => $request->comentario,
+            'biblioteca_id' => $biblioteca->id,
+        ]);
+
+        return redirect()->route('libros.index');
+
     }
 
     /**
@@ -47,6 +82,7 @@ class LibroController extends Controller
     public function show(Libro $libro)
     {
         //
+        return view('libros.libroShow', compact('libro'));
     }
 
     /**
@@ -58,6 +94,9 @@ class LibroController extends Controller
     public function edit(Libro $libro)
     {
         //
+        $ejemplares = libro->ejemplares();
+        $bibliotecas = Biblioteca::all();
+        return view('librerioas.libreriaForm', compact('bibliotecas', 'ejemplares', 'libro'));
     }
 
     /**
@@ -70,6 +109,35 @@ class LibroController extends Controller
     public function update(Request $request, Libro $libro)
     {
         //
+        $request->validate([
+            'isbn' => 'require',
+            'titulo' => 'require',
+            'subtitulo' => 'require',
+            'autor' => 'require',
+            'editorial' => 'require',
+            'anio' => 'require',
+            'genero' => 'require',
+            'idioma' => 'require',
+            'seccion' => 'require',
+            'ejemplar' => 'require',
+            'diasMaxPrestamo' => 'require',
+            'linkImagen' => 'require',
+            'idBiblioteca' => 'require',
+        ]);
+
+        $biblioteca = $libro->biblioteca()->update($request->except('numEjemp', 'origen', 'estado', 'comentario'));
+
+        $estado = $request->estado === "TRUE" ? true : false;
+
+        $libro->update([
+            'numEjemp' => $request->numEjemp,
+            'origen' => $request->origen,
+            'estado' => $estado,
+            'comentario' => $request->comentario,
+            'biblioteca_id' => $biblioteca->id,
+        ]);
+
+        return redirect()->route('libros.index');
     }
 
     /**
@@ -81,5 +149,11 @@ class LibroController extends Controller
     public function destroy(Libro $libro)
     {
         //
+        $libro->delete();
+        return redirect()->route('libro.index')
+            >with([
+                'mensaje' => 'Libro Eliminado',
+                'alert-class' => 'alert-warning',
+            ]);
     }
 }

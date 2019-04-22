@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-10 offset-1">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Capturar Empleado</h3>
@@ -41,7 +41,17 @@
                   </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary ml-auto">Aceptar</button>
+                <button type="submit" class="btn btn-primary ml-auto">Seleccionar</button>
+                
+                @if ($errors->has('empleado_id'))
+                  <br>
+                  <br>
+                  <span class="alert alert-danger">
+                      <strong>Es necesario seleccionar un usuario</strong>
+                  </span>
+                  <br>
+                  <br>
+                @endif
             </form>
 
             @if(isset($empleado))
@@ -54,13 +64,15 @@
 
                 <div class="form-group">
                   <label class="form-label">Nombre</label>
-                  <input type="text" class="form-control" name="nombre" value="{{ isset($persona) ? $persona->nombre : '' }}{{ old('nombre') }}" placeholder="Nombre de la persona">
+                  <input type="text" class="form-control" name="nombre" value="{{ isset($persona) ? $persona->nombre : '' }}" placeholder="Nombre de la persona">
                   @if ($errors->has('nombre'))
                       <span class="alert alert-danger">
                           <strong>{{ $errors->first('nombre') }}</strong>
                       </span>
                   @endif
                 </div>
+
+                <input type="hidden" name="empleado_id" value="{{ isset($persona) ? $persona->id : ''}}">
 
                 <div class="form-group">
                   <label class="form-label">Apellido Paterno</label>

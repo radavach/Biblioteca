@@ -75,9 +75,15 @@ class EmpleadosController extends Controller
             'email' => 'required|min:3',
             'rfc' => 'required|min:13',
             'biblioteca_id' => 'required',
+            'empleado_id' => 'required',
         ]);
 
-        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin'));
+        $empleado->update([
+            'persona_id' => $request->empleado_id,
+            'idEmpleado' => $request->empleado_id,
+        ]);
+
+        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
 
         $esAdmin = $request->esAdmin === "TRUE" ? true : false;
 
@@ -104,9 +110,9 @@ class EmpleadosController extends Controller
             'email' => 'required|min:3',
             'rfc' => 'required|min:13',
             'biblioteca_id' => 'required',
+            'empleado_id' => 'required',
+            'esAdmin' => 'required',
         ]);
-        
-        $persona = Persona::create($request->except('rfc', 'contrasena', 'esAdmin'));
         
         $esAdmin = $request->esAdmin === "TRUE" ? true : false;
 
@@ -117,9 +123,10 @@ class EmpleadosController extends Controller
             'persona_id' => $persona->id,
             'idEmpleado' => $persona->id,
         ]);
+        
+        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
 
         return redirect()->route('empleados.index');
-
     }
     public function destroy(Empleado $empleado)
     {
