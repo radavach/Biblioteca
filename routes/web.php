@@ -38,7 +38,9 @@ Route::get('/inicio', function()
 // Route::get('/empleados/show', 'EmpleadosController@show');
 // Route::get('/empleados/update', 'EmpleadosController@update');
 // Route::get('/empleados/delete', 'EmpleadosController@delete');
-// Route::get('/empleados/store', 'EmpleadosController@store');
+
+Route::post('/empleados/redireccionar', 'EmpleadosController@redireccionar')->name('empleados.redireccionar');
+Route::post('/empleados/redireccionarEmp/{empleado}', 'EmpleadosController@redireccionarEmp')->name('empleados.redireccionarEmp');
 
 Route::resource('/bibliotecas', 'BibliotecaController');
 Route::resource('/clientes', 'ClienteController');

@@ -3,7 +3,7 @@
 
 <div class="page-header">
     <div class="page-title">
-        SHOW LIBRO
+        SHOW CLIENTE
     </div>
 </div>
 
@@ -40,15 +40,15 @@
                             <td>{{ $persona->direccion }}</td>
                             <td>{{ $persona->email }}</td>
                             <td>
-                                <a href="{{ route('personas.edit', $persona->id) }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-sm btn-warning">
                                     Editar
                                 </a>
-                                <form action="{{ route('personas.destroy', $persona->id) }}" method="POST">
+                                <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE"> 
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger">
                                         Borrar
-                                        </button>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

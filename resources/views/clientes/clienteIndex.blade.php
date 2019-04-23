@@ -3,7 +3,7 @@
 
 <div class="page-header">
     <div class="page-title">
-        INDEX LIBRO
+        INDEX CLIENTES
     </div>
 </div>
 
@@ -16,24 +16,21 @@
 
             <div class="card-body">
                 <table class="table table-hover table-dark" >
-
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Titulo</th> 
-                            <th>Autor</th>
-                            <th>ISBN</th> 
+                            <th>Nombre Usuario</th> 
+                            <th>Correo Electronico</th> 
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($libros as $libro)
+                        @foreach ($clientes as $cliente)
                             <tr>
-                                <td><a href="{{ route('libros.show', $libro->id) }}">{{ $libro->id }}</a></td>
-                                <td>{{ $libro->titulo }}</td>
-                                <td>{{ $libro->autor }}</td>
-                                <td>{{ $libro->isbn }}</td>
-                                <td><a href="{{ route('libros.edit', $libro->id) }}" class = "btn btn-sm btn-warning">Editar</a></td>
+                                <td><a href="{{ route('clientes.show', $cliente->id) }}">{{ $cliente->id }}</a></td>                        
+                                <td>{{ $cliente->persona->nombreUsuario }}</td>
+                                <td>{{ $cliente->persona->email }}</td>
+                                <td><a href="{{ route('clientes.edit', $cliente->id) }}" class = "btn btn-sm btn-warning">Editar</a></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -42,4 +39,5 @@
         </div>
     </div>
 </div>
+
 @endsection

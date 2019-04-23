@@ -1,44 +1,48 @@
-@extends('layouts.app')
-@section('content')
-    <h1>Bienvenido al sistema compañero trabajador!</h1>
-    <p>
-        Formulario de aplicaciones
-    </p>
+@extends('layouts.tabler')
+@section('contenido')
 
-    <div>
-        <table class="table table-hover table-dark" >
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th> 
-                    <th colspan="2">Apellido</th> 
-                    <th>Nombre Empleado</th> 
-                    <th>Contraseña</th> 
-                    <th>Telefono</th> 
-                    <th>Direccion</th> 
-                    <th>RFC</th> 
-                    <th>Correo Electronico</th> 
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($empleados as $empleado)
-                    <tr>
-                        <td>{{ $empleado->id }}</td>
-                        <td>{{ $empleado->nombre }}</td>
-                        <td>{{ $empleado->apellidoPaterno }}</td>
-                        <td>{{ $empleado->apellidoMaterno }}</td>
-                        <td>{{ $empleado->nombreEmpleado }}</td>
-                        <td>{{ $empleado->contrasena }}</td>
-                        <td>{{ $empleado->telefono }}</td>
-                        <td>{{ $empleado->direccion }}</td>
-                        <td>{{ $empleado->rfc }}</td>
-                        <td>{{ $empleado->correoElectronico }}</td>
-                        <td><a href="{{ route('empleados.show', $empleado->id) }}">Detalle</a></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+<div class="page-header">
+    <div class="page-title">
+        INDEX EMPLEADOS
     </div>
+<<<<<<< HEAD
 @endsection
 ///<!--SOY ADORABLEEEEEEEEE!!!!-->
+=======
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>Bienvenido al sistema compañero trabajador!</h3>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-hover table-dark" >
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre Usuario</th> 
+                            <th>Correo Electronico</th> 
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($empleados as $empleado)
+                            <tr>
+                                <td><a href="{{ route('empleados.show', $empleado->id) }}">{{ $empleado->id }}</a></td>
+                                <td>{{ $empleado->persona->nombreUsuario }}</td>
+                                <td>{{ $empleado->persona->email }}</td>
+                                <td><a href="{{ route('empleados.edit', $empleado->id) }}" class="btn btn-sm btn-warning">Editar</a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+>>>>>>> uptream/master

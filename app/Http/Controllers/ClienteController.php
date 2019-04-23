@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Biblioteca;
+use App\Persona;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -15,6 +17,8 @@ class ClienteController extends Controller
     public function index()
     {
         //
+        $clientes = Cliente::all();
+        return view('clientes.clienteIndex', compact('clientes'));
     }
 
     /**
@@ -25,6 +29,8 @@ class ClienteController extends Controller
     public function create()
     {
         //
+        $bibliotecas = Biblioteca::all();
+        return view('clientes.clienteForm', compact('bibliotecas'));
     }
 
     /**
@@ -36,6 +42,19 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre' => 'required|min:3',
+            'apellidoPaterno' => 'required|min:3',
+            'apellidoMaterno' => 'nullable|min:3',
+            'nombreUsuario' => 'required|min:3',
+            'email' => 'required|min:3',
+            'biblioteca_id' => 'required',
+        ]);
+
+        $persona = Persona::create($request->all());
+        $cliente = Cliente::create(['persona_id' => $persona->id, 'idCliente' => $persona->id]);
+        
+        return redirect()->route('clientes.index');
     }
 
     /**
@@ -47,6 +66,8 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         //
+        $persona = $cliente->persona;
+        return view('clientes.clienteShow', compact('cliente', 'persona'));
     }
 
     /**
@@ -58,6 +79,9 @@ class ClienteController extends Controller
     public function edit(Cliente $cliente)
     {
         //
+        $bibliotecas = Biblioteca::all();
+        $persona = $cliente->persona;
+        return view('clientes.clienteForm', compact('cliente', 'bibliotecas', 'persona'));
     }
 
     /**
@@ -70,6 +94,18 @@ class ClienteController extends Controller
     public function update(Request $request, Cliente $cliente)
     {
         //
+        $request->validate([
+            'nombre' => 'required|min:3',
+            'apellidoPaterno' => 'required|min:3',
+            'apellidoMaterno' => 'nullable|min:3',
+            'nombreUsuario' => 'required|min:3',
+            'email' => 'required|min:3',
+            'biblioteca_id' => 'required',
+        ]);
+        
+        $cliente->persona()->update($request->all());
+
+        return redirect()->route('clientes.show', $cliente->id);
     }
 
     /**
@@ -81,5 +117,11 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+        $cliente->persona()->delete();
+        return redirect()->route('clientes.index')
+            ->with([
+                'mensaje' => 'Cliente Eliminado',
+                'alert-class' => 'alert-warning',
+            ]);
     }
 }

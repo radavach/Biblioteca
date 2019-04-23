@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-10 offset-1">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Capturar Persona</h3>
@@ -72,9 +72,9 @@
 
                 <div class="form-group">
                   <label class="form-label">Bibliotecas</label>
-                  <select name="idBiblioteca" class="form-control">
+                  <select name="biblioteca_id" class="form-control">
                     @foreach($bibliotecas as $biblioteca)
-                        <option value="{{ $biblioteca->id }}" {{ isset($persona) && ($persona->idBiblioteca == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
+                        <option value="{{ $biblioteca->id }}" {{ isset($persona) && ($persona->biblioteca_id == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
                     @endforeach
                   </select>
                 </div>
