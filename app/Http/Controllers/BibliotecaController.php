@@ -39,6 +39,13 @@ class BibliotecaController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre' => 'required|min:3',
+            'horaApertura' => 'required',
+            'horaCierre' => 'required',
+            'email' => 'required',
+        ]);
+
         $biblioteca = Biblioteca::create($request->all());
 
         return redirect()->route('bibliotecas.index');
@@ -77,7 +84,14 @@ class BibliotecaController extends Controller
      */
     public function update(Request $request, Biblioteca $biblioteca)
     {
-        //
+        //    
+        $request->validate([
+            'nombre' => 'required|min:3',
+            'horaApertura' => 'required',
+            'horaCierre' => 'required',
+            'email' => 'required',
+        ]);
+        
         $biblioteca->update($request->all());
 
         return redirect()->route('bibliotecas.show', $biblioteca->id);

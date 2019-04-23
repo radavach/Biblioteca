@@ -72,7 +72,7 @@
                 </div>
                 
                 <div class="form-group">
-                  <label class="form-label">Email</label>
+                  <label class="form-label">Coreo Electronico</label>
                   <input type="text" class="form-control" name="email" value="{{ $biblioteca->email ?? '' }}{{ old('email') }}" placeholder="Email">
                 </div>
 
