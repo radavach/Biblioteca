@@ -14,7 +14,9 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        //Se sacan todos los materiales de la tabla con el mismo nombre
+        $materiales = Material::all();
+        return view('materiales.materialIndex', compact('materiales'));
     }
 
     /**
@@ -24,7 +26,9 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        //Se manda la informacion de todas las bibliotecas para saber a cual asignarla
+        $bibliotecas = Biblioteca::all();
+        return view('materiales.materialForm', compact('bibliotecas'));
     }
 
     /**
@@ -36,6 +40,21 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'idArticulo' => 'required',
+            'nombre' => 'required',
+            'seccion' => 'required',
+            'tipo' => 'required',
+            'ejemplar' => 'required',
+            'linkImagen' => 'required',
+            'autor' => 'required',
+            'anio' => 'required',
+            'biblioteca_id' => 'required',
+        ]);
+
+        $material = Material::create($request->all());
+
+        return redirect()->route('materiales.index');
     }
 
     /**
@@ -47,6 +66,7 @@ class MaterialController extends Controller
     public function show(Material $material)
     {
         //
+        return view('materiales.materialShow', compact('material'));
     }
 
     /**
@@ -58,6 +78,10 @@ class MaterialController extends Controller
     public function edit(Material $material)
     {
         //
+
+        $bibliotecas = Biblioteca::all();
+        return view('materiales.libroForm', compact('bibliotecas', 'material'));
+        
     }
 
     /**
@@ -70,6 +94,21 @@ class MaterialController extends Controller
     public function update(Request $request, Material $material)
     {
         //
+        $request->validate([
+            'idArticulo' => 'required',
+            'nombre' => 'required',
+            'seccion' => 'required',
+            'tipo' => 'required',
+            'ejemplar' => 'required',
+            'linkImagen' => 'required',
+            'autor' => 'required',
+            'anio' => 'required',
+            'biblioteca_id' => 'required',
+        ]);
+
+        $material->update($request->all());
+
+        return redirect()->route('materiales.index');
     }
 
     /**
@@ -81,5 +120,11 @@ class MaterialController extends Controller
     public function destroy(Material $material)
     {
         //
+        $material->delete();
+        return redirect()->route('materiales.index')
+            >with([
+                'mensaje' => 'Material Eliminado',
+                'alert-class' => 'alert-warning',
+            ]);
     }
 }

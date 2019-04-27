@@ -42,32 +42,22 @@ class LibroController extends Controller
     {
         //
         $request->validate([
-            'isbn' => 'require',
-            'titulo' => 'require',
-            'subtitulo' => 'require',
-            'autor' => 'require',
-            'editorial' => 'require',
-            'anio' => 'require',
-            'genero' => 'require',
-            'idioma' => 'require',
-            'seccion' => 'require',
-            'ejemplar' => 'require',
-            'diasMaxPrestamo' => 'require',
-            'linkImagen' => 'require',
-            'idBiblioteca' => 'require',
+            'isbn' => 'required',
+            'titulo' => 'required',
+            'subtitulo' => 'required',
+            'autor' => 'required',
+            'editorial' => 'required',
+            'anio' => 'required',
+            'genero' => 'required',
+            'idioma' => 'required',
+            'seccion' => 'required',
+            'ejemplar' => 'required',
+            'diasMaxPrestamo' => 'required',
+            'linkImagen' => 'required',
+            'biblioteca_id' => 'required',
         ]);
 
         $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario'));
-
-        $estado = $request->estado === "TRUE" ? true : false;
-
-        $ejemplar = Ejemplar::create([
-            'numEjemp' => $request->numEjemp,
-            'origen' => $request->origen,
-            'estado' => $estado,
-            'comentario' => $request->comentario,
-            'biblioteca_id' => $biblioteca->id,
-        ]);
 
         return redirect()->route('libros.index');
 
@@ -94,9 +84,9 @@ class LibroController extends Controller
     public function edit(Libro $libro)
     {
         //
-        $ejemplares = libro->ejemplares();
+        $ejemplares = $libro->ejemplares();
         $bibliotecas = Biblioteca::all();
-        return view('librerioas.libreriaForm', compact('bibliotecas', 'ejemplares', 'libro'));
+        return view('libros.libroForm', compact('bibliotecas', 'ejemplares', 'libro'));
     }
 
     /**
@@ -110,32 +100,24 @@ class LibroController extends Controller
     {
         //
         $request->validate([
-            'isbn' => 'require',
-            'titulo' => 'require',
-            'subtitulo' => 'require',
-            'autor' => 'require',
-            'editorial' => 'require',
-            'anio' => 'require',
-            'genero' => 'require',
-            'idioma' => 'require',
-            'seccion' => 'require',
-            'ejemplar' => 'require',
-            'diasMaxPrestamo' => 'require',
-            'linkImagen' => 'require',
-            'idBiblioteca' => 'require',
+            'isbn' => 'required',
+            'titulo' => 'required',
+            'subtitulo' => 'required',
+            'autor' => 'required',
+            'editorial' => 'required',
+            'anio' => 'required',
+            'genero' => 'required',
+            'idioma' => 'required',
+            'seccion' => 'required',
+            'ejemplar' => 'required',
+            'diasMaxPrestamo' => 'required',
+            'linkImagen' => 'required',
+            'biblioteca_id' => 'required',
         ]);
 
-        $biblioteca = $libro->biblioteca()->update($request->except('numEjemp', 'origen', 'estado', 'comentario'));
+        $libro->update($request->except('numEjemp', 'origen', 'estado', 'comentario'));
 
-        $estado = $request->estado === "TRUE" ? true : false;
-
-        $libro->update([
-            'numEjemp' => $request->numEjemp,
-            'origen' => $request->origen,
-            'estado' => $estado,
-            'comentario' => $request->comentario,
-            'biblioteca_id' => $biblioteca->id,
-        ]);
+       
 
         return redirect()->route('libros.index');
     }
@@ -150,7 +132,7 @@ class LibroController extends Controller
     {
         //
         $libro->delete();
-        return redirect()->route('libro.index')
+        return redirect()->route('libros.index')
             >with([
                 'mensaje' => 'Libro Eliminado',
                 'alert-class' => 'alert-warning',

@@ -18,7 +18,7 @@ class CreaTablaLibros extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->integer('isb');
+            $table->integer('isbn');
             $table->string('titulo');
             $table->string('subtitulo');
             $table->string('autor');

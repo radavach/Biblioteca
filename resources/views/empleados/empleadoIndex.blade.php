@@ -5,10 +5,6 @@
     <div class="page-title">
         INDEX EMPLEADOS
     </div>
-<<<<<<< HEAD
-@endsection
-///<!--SOY ADORABLEEEEEEEEE!!!!-->
-=======
 </div>
 
 <div class="row">
@@ -45,4 +41,3 @@
 </div>
 
 @endsection
->>>>>>> uptream/master

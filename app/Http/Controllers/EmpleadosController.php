@@ -56,11 +56,6 @@ class EmpleadosController extends Controller
         // poner rutas
         // $empleado->nombre = $request->input('nombre');
 
-<<<<<<< HEAD
-        $empleado->save();
-       //Nuevo $empleado->update($request->except('funcionarios_id'));
-       //Nuevo $empleado->funcionarios()->sync($request->funcionarios_id);
-=======
         // $empleado->nombre = $request->nombre;
         // $empleado->apellidoPaterno = $request->apellidoPaterno;
         // $empleado->apellidoMaterno = $request->apellidoMaterno;
@@ -98,7 +93,6 @@ class EmpleadosController extends Controller
             'esAdmin' => $esAdmin,
         ]);
 
->>>>>>> uptream/master
 
        return redirect()->route('empleados.show', $empleado->id);
        // Nuevo return redirect()->route('empleados.index');
@@ -119,6 +113,7 @@ class EmpleadosController extends Controller
             'biblioteca_id' => 'required',
             'empleado_id' => 'required',
             'esAdmin' => 'required',
+            
         ]);
         
         $esAdmin = $request->esAdmin === "TRUE" ? true : false;
@@ -129,6 +124,34 @@ class EmpleadosController extends Controller
             'esAdmin' => $esAdmin,
             'persona_id' => $persona->id,
             'idEmpleado' => $persona->id,
+        ]);
+        
+        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
+
+        return redirect()->route('empleados.index');
+    }
+    public function crearEmp(Request $request, Persona $persona)
+    {
+        $request->validate([
+            'nombre' => 'required|min:3',
+            'apellidoPaterno' => 'required|min:3',
+            'apellidoMaterno' => 'nullable|min:3',
+            'nombreUsuario' => 'required|min:3',
+            'email' => 'required|min:3',
+            'rfc' => 'required|min:13',
+            'biblioteca_id' => 'required',
+            'empleado_id' => 'required',
+            'esAdmin' => 'required',
+        ]);
+        
+        $esAdmin = $request->esAdmin === "TRUE" ? true : false;
+
+        $empleado = Empleado::create([
+            'rfc' => $request->rfc,
+            'contrasena' => $request->contrasena,
+            'esAdmin' => $esAdmin,
+            'persona_id' => $request->empleado_id,
+            'idEmpleado' => $request->empleado_id,
         ]);
         
         $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
@@ -163,6 +186,6 @@ class EmpleadosController extends Controller
             ->first();
         // $persona = Persona::where('id', $request->persona_id);
     
-        return view('empleados.empleadoForm', compact('personas', 'empleado', 'bibliotecas', 'persona'));
+        return view('empleados.empleadoForm', compact('personas', 'bibliotecas', 'persona'));
     }
 }
