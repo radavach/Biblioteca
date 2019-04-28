@@ -42,32 +42,22 @@ class LibroController extends Controller
     {
         //
         $request->validate([
-            'isbn' => 'require',
-            'titulo' => 'require',
-            'subtitulo' => 'require',
-            'autor' => 'require',
-            'editorial' => 'require',
-            'anio' => 'require',
-            'genero' => 'require',
-            'idioma' => 'require',
-            'seccion' => 'require',
-            'ejemplar' => 'require',
-            'diasMaxPrestamo' => 'require',
-            'linkImagen' => 'require',
-            'idBiblioteca' => 'require',
+            'isbn' => 'required',
+            'titulo' => 'required',
+            'subtitulo' => 'required',
+            'autor' => 'required',
+            'editorial' => 'required',
+            'anio' => 'required',
+            'genero' => 'required',
+            'idioma' => 'required',
+            'seccion' => 'required',
+            'ejemplar' => 'required',
+            'diasMaxPrestamo' => 'required',
+            'linkImagen' => 'required',
+            'biblioteca_id' => 'required',
         ]);
 
         $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario'));
-
-        $estado = $request->estado === "TRUE" ? true : false;
-
-        $ejemplar = Ejemplar::create([
-            'numEjemp' => $request->numEjemp,
-            'origen' => $request->origen,
-            'estado' => $estado,
-            'comentario' => $request->comentario,
-            'biblioteca_id' => $biblioteca->id,
-        ]);
 
         return redirect()->route('libros.index');
 
@@ -96,7 +86,7 @@ class LibroController extends Controller
         //
         $ejemplares = $libro->ejemplares();
         $bibliotecas = Biblioteca::all();
-        return view('librerias.libreriaForm', compact('bibliotecas', 'ejemplares', 'libro'));
+        return view('libros.libroForm', compact('bibliotecas', 'ejemplares', 'libro'));
     }
 
     /**
@@ -110,32 +100,24 @@ class LibroController extends Controller
     {
         //
         $request->validate([
-            'isbn' => 'require',
-            'titulo' => 'require',
-            'subtitulo' => 'require',
-            'autor' => 'require',
-            'editorial' => 'require',
-            'anio' => 'require',
-            'genero' => 'require',
-            'idioma' => 'require',
-            'seccion' => 'require',
-            'ejemplar' => 'require',
-            'diasMaxPrestamo' => 'require',
-            'linkImagen' => 'require',
-            'idBiblioteca' => 'require',
+            'isbn' => 'required',
+            'titulo' => 'required',
+            'subtitulo' => 'required',
+            'autor' => 'required',
+            'editorial' => 'required',
+            'anio' => 'required',
+            'genero' => 'required',
+            'idioma' => 'required',
+            'seccion' => 'required',
+            'ejemplar' => 'required',
+            'diasMaxPrestamo' => 'required',
+            'linkImagen' => 'required',
+            'biblioteca_id' => 'required',
         ]);
 
         $libro->update($request->except('numEjemp', 'origen', 'estado', 'comentario'));
 
-        $estado = $request->estado === "TRUE" ? true : false;
-
-        $libro->update([
-            'numEjemp' => $request->numEjemp,
-            'origen' => $request->origen,
-            'estado' => $estado,
-            'comentario' => $request->comentario,
-            'biblioteca_id' => $biblioteca->id,
-        ]);
+       
 
         return redirect()->route('libros.index');
     }

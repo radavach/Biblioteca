@@ -11,7 +11,11 @@ class Libro extends Model
 
     public function biblioteca()
     {
-        return $this->belongTo(Biblioteca::class);
+        return $this->belongsTo(Biblioteca::class);
+    }
+    public function ejemplares()
+    {
+        return $this->hasMany(Ejemplar::class);
     }
     public function ejemplares()
     {

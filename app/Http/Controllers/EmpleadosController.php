@@ -95,7 +95,8 @@ class EmpleadosController extends Controller
         ]);
 
 
-        return redirect()->route('empleados.show', $empleado->id);
+       return redirect()->route('empleados.show', $empleado->id);
+       // Nuevo return redirect()->route('empleados.index');
     }
     public function store(Request $request)
     {
@@ -109,6 +110,7 @@ class EmpleadosController extends Controller
             'biblioteca_id' => 'required',
             'persona_id' => 'required',
             'esAdmin' => 'required',
+            
         ]);
         
         $esAdmin = $request->esAdmin === "TRUE" ? true : false;
@@ -125,7 +127,34 @@ class EmpleadosController extends Controller
 
         return redirect()->route('empleados.index');
     }
+    public function crearEmp(Request $request, Persona $persona)
+    {
+        $request->validate([
+            'nombre' => 'required|min:3',
+            'apellidoPaterno' => 'required|min:3',
+            'apellidoMaterno' => 'nullable|min:3',
+            'nombreUsuario' => 'required|min:3',
+            'email' => 'required|min:3',
+            'rfc' => 'required|min:13',
+            'biblioteca_id' => 'required',
+            'empleado_id' => 'required',
+            'esAdmin' => 'required',
+        ]);
+        
+        $esAdmin = $request->esAdmin === "TRUE" ? true : false;
 
+        $empleado = Empleado::create([
+            'rfc' => $request->rfc,
+            'contrasena' => $request->contrasena,
+            'esAdmin' => $esAdmin,
+            'persona_id' => $request->empleado_id,
+            'idEmpleado' => $request->empleado_id,
+        ]);
+        
+        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
+
+        return redirect()->route('empleados.index');
+    }
     public function destroy(Empleado $empleado)
     {
         $empleado->delete();
