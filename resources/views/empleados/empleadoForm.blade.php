@@ -55,9 +55,15 @@
             </form>
 
             @if(isset($empleado))
+                @if(isset($persona))
+                  {{var_dump($persona)}}
+                @endif
                 <form action="{{ route('empleados.update', $empleado->id) }}" method="POST">
                     <input type="hidden" name="_method" value="PATCH">
             @else
+                @if(isset($persona))
+                  {{var_dump($persona)}}
+                @endif
                 <form action="{{ route('empleados.store') }}" method="POST">
             @endif
                 @csrf
@@ -72,7 +78,7 @@
                   @endif
                 </div>
 
-                <input type="hidden" name="empleado_id" value="{{ isset($persona) ? $persona->id : ''}}">
+                <input type="hidden" name="persona_id" value="{{ isset($persona) ? $persona->id : ''}}">
 
                 <div class="form-group">
                   <label class="form-label">Apellido Paterno</label>

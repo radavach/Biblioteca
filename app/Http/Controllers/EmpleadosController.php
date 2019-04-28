@@ -28,6 +28,12 @@ class EmpleadosController extends Controller
 
         return view('empleados.empleadoIndex', compact('empleados'));
     }
+    public function show(Empleado $empleado)
+    {
+        // poner rutas
+        $persona = $empleado->persona;
+        return view('empleados.empleadoShow', compact('empleado', 'persona'));
+    }
     public function create()
     {
         // return view('empleados.');
@@ -45,12 +51,7 @@ class EmpleadosController extends Controller
         $personas = Persona::all();
         return view('empleados.empleadoForm', compact('personas', 'empleado', 'bibliotecas', 'persona'));
     }
-    public function show(Empleado $empleado)
-    {
-        // poner rutas
-        $persona = $empleado->persona;
-        return view('empleados.empleadoShow', compact('empleado', 'persona'));
-    }
+
     public function update(Request $request, Empleado $empleado)
     {
         // poner rutas
@@ -75,15 +76,15 @@ class EmpleadosController extends Controller
             'email' => 'required|min:3',
             'rfc' => 'required|min:13',
             'biblioteca_id' => 'required',
-            'empleado_id' => 'required',
+            'persona_id' => 'required',
         ]);
 
         $empleado->update([
-            'persona_id' => $request->empleado_id,
-            'idEmpleado' => $request->empleado_id,
+            'persona_id' => $request->persona_id,
+            'idEmpleado' => $request->persona_id,
         ]);
 
-        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
+        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'persona_id'));
 
         $esAdmin = $request->esAdmin === "TRUE" ? true : false;
 
@@ -96,10 +97,6 @@ class EmpleadosController extends Controller
 
         return redirect()->route('empleados.show', $empleado->id);
     }
-    public function delete()
-    {
-        // poner rutas
-    }
     public function store(Request $request)
     {
         $request->validate([
@@ -110,7 +107,7 @@ class EmpleadosController extends Controller
             'email' => 'required|min:3',
             'rfc' => 'required|min:13',
             'biblioteca_id' => 'required',
-            'empleado_id' => 'required',
+            'persona_id' => 'required',
             'esAdmin' => 'required',
         ]);
         
@@ -120,14 +117,15 @@ class EmpleadosController extends Controller
             'rfc' => $request->rfc,
             'contrasena' => $request->contrasena,
             'esAdmin' => $esAdmin,
-            'persona_id' => $persona->id,
-            'idEmpleado' => $persona->id,
+            'persona_id' => $request->persona_id,
+            'idEmpleado' => $request->persona_id,
         ]);
         
-        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
+        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'persona_id'));
 
         return redirect()->route('empleados.index');
     }
+
     public function destroy(Empleado $empleado)
     {
         $empleado->delete();
@@ -156,6 +154,6 @@ class EmpleadosController extends Controller
             ->first();
         // $persona = Persona::where('id', $request->persona_id);
     
-        return view('empleados.empleadoForm', compact('personas', 'empleado', 'bibliotecas', 'persona'));
+        return view('empleados.empleadoForm', compact('personas', 'bibliotecas', 'persona'));
     }
 }

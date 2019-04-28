@@ -94,9 +94,9 @@ class LibroController extends Controller
     public function edit(Libro $libro)
     {
         //
-        $ejemplares = libro->ejemplares();
+        $ejemplares = $libro->ejemplares();
         $bibliotecas = Biblioteca::all();
-        return view('librerioas.libreriaForm', compact('bibliotecas', 'ejemplares', 'libro'));
+        return view('librerias.libreriaForm', compact('bibliotecas', 'ejemplares', 'libro'));
     }
 
     /**
@@ -125,7 +125,7 @@ class LibroController extends Controller
             'idBiblioteca' => 'require',
         ]);
 
-        $biblioteca = $libro->biblioteca()->update($request->except('numEjemp', 'origen', 'estado', 'comentario'));
+        $libro->update($request->except('numEjemp', 'origen', 'estado', 'comentario'));
 
         $estado = $request->estado === "TRUE" ? true : false;
 
@@ -150,7 +150,7 @@ class LibroController extends Controller
     {
         //
         $libro->delete();
-        return redirect()->route('libro.index')
+        return redirect()->route('libros.index')
             >with([
                 'mensaje' => 'Libro Eliminado',
                 'alert-class' => 'alert-warning',
