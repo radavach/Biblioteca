@@ -54,9 +54,12 @@
                 @endif
             </form>
 
+       
             @if(isset($empleado))
                 <form action="{{ route('empleados.update', $empleado->id) }}" method="POST">
                     <input type="hidden" name="_method" value="PATCH">
+            @elseif(isset($persona))
+                <form action="{{ route('empleados.crearEmp', $persona->id) }}" method="POST">
             @else
                 <form action="{{ route('empleados.store') }}" method="POST">
             @endif

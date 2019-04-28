@@ -94,13 +94,43 @@ class EmpleadosController extends Controller
         ]);
 
 
-        return redirect()->route('empleados.show', $empleado->id);
+       return redirect()->route('empleados.show', $empleado->id);
+       // Nuevo return redirect()->route('empleados.index');
     }
     public function delete()
     {
         // poner rutas
     }
     public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|min:3',
+            'apellidoPaterno' => 'required|min:3',
+            'apellidoMaterno' => 'nullable|min:3',
+            'nombreUsuario' => 'required|min:3',
+            'email' => 'required|min:3',
+            'rfc' => 'required|min:13',
+            'biblioteca_id' => 'required',
+            'empleado_id' => 'required',
+            'esAdmin' => 'required',
+            
+        ]);
+        
+        $esAdmin = $request->esAdmin === "TRUE" ? true : false;
+
+        $empleado = Empleado::create([
+            'rfc' => $request->rfc,
+            'contrasena' => $request->contrasena,
+            'esAdmin' => $esAdmin,
+            'persona_id' => $persona->id,
+            'idEmpleado' => $persona->id,
+        ]);
+        
+        $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
+
+        return redirect()->route('empleados.index');
+    }
+    public function crearEmp(Request $request, Persona $persona)
     {
         $request->validate([
             'nombre' => 'required|min:3',
@@ -120,8 +150,8 @@ class EmpleadosController extends Controller
             'rfc' => $request->rfc,
             'contrasena' => $request->contrasena,
             'esAdmin' => $esAdmin,
-            'persona_id' => $persona->id,
-            'idEmpleado' => $persona->id,
+            'persona_id' => $request->empleado_id,
+            'idEmpleado' => $request->empleado_id,
         ]);
         
         $empleado->persona()->update($request->except('rfc', 'contrasena', 'esAdmin', 'empleado_id'));
@@ -156,6 +186,6 @@ class EmpleadosController extends Controller
             ->first();
         // $persona = Persona::where('id', $request->persona_id);
     
-        return view('empleados.empleadoForm', compact('personas', 'empleado', 'bibliotecas', 'persona'));
+        return view('empleados.empleadoForm', compact('personas', 'bibliotecas', 'persona'));
     }
 }

@@ -84,6 +84,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="form-label">Ejemplar</label>
+                        <input type="text" class="form-control" name="ejemplar" value="{{ isset($libro) ? $libro->ejemplar : '' }}" placeholder="No. de ejemplar del Libro">
+                    </div>
+
+                    <div class="form-group">
                         <label class="form-label">Dias Maximo de Prestamo</label>
                         <input type="text" class="form-control" name="diasMaxPrestamo" value="{{ isset($libro) ? $libro->diasMaxPrestamo : '' }}" placeholder="Días Maximos de prestamo del libro">
                     </div>
@@ -95,6 +100,11 @@
                                 <option value="{{ $biblioteca->id }}" {{ isset($libro) && ($libro->biblioteca_id == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Link Imagen</label>
+                        <input type="text" class="form-control" name="linkImagen" value="{{ isset($libro) ? $libro->linkImagen : '' }}" placeholder="Imagen del ejemplar del Libro">
                     </div>
 
                     <button type="submit" class="btn btn-primary ml-auto">Aceptar</button>
