@@ -20,39 +20,31 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>ISBN</th> 
-                            <th>Titulo</th> 
-                            <th>Subtitulo</th> 
-                            <th>Autor</th> 
-                            <th>Editorial</th> 
-                            <th>Año</th> 
-                            <th>Genero</th>
-                            <th>Idioma</th>
-                            <th>Seccion</th>
-                            <th>Ejemplar</th>
-                            <th>Dias de Prestamo</th>
+                            <th>Nombre</th> 
+                            <th>Apellido Paterno</th> 
+                            <th>Apellido Materno</th> 
+                            <th>Nombre de usuario</th> 
+                            <th>Teléfono</th> 
+                            <th>Dirección</th> 
+                            <th>Email</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ $libro->id }}</td>
-                            <td>{{ $libro->isbn }}</td>
-                            <td>{{ $libro->titulo }}</td>
-                            <td>{{ $libro->subtitulo }}</td>
-                            <td>{{ $libro->autor }}</td>
-                            <td>{{ $libro->editorial }}</td>
-                            <td>{{ $libro->anio }}</td>
-                            <td>{{ $libro->genero }}</td>
-                            <td>{{ $libro->idioma }}</td>
-                            <td>{{ $libro->seccion }}</td>
-                            <td>{{ $libro->ejemplar }}</td>
-                            <td>{{ $libro->diasMaxPrestamo }}</td>
+                            <td>{{ $persona->id }}</td>
+                            <td>{{ $persona->nombre }}</td>
+                            <td>{{ $persona->apellidoPaterno }}</td>
+                            <td>{{ $persona->apellidoMaterno }}</td>
+                            <td>{{ $persona->nombreUsuario }}</td>
+                            <td>{{ $persona->telefono }}</td>
+                            <td>{{ $persona->direccion }}</td>
+                            <td>{{ $persona->email }}</td>
                             <td>
-                                <a href="{{ route('libros.edit', $libro->id) }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('personas.edit', $persona->id) }}" class="btn btn-sm btn-warning">
                                     Editar
                                 </a>
-                                <form action="{{ route('libros.destroy', $libro->id) }}" method="POST">
+                                <form action="{{ route('personas.destroy', $persona->id) }}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE"> 
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger">

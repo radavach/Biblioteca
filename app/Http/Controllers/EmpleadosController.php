@@ -94,7 +94,6 @@ class EmpleadosController extends Controller
             'esAdmin' => $esAdmin,
         ]);
 
-
        return redirect()->route('empleados.show', $empleado->id);
        // Nuevo return redirect()->route('empleados.index');
     }
@@ -110,7 +109,6 @@ class EmpleadosController extends Controller
             'biblioteca_id' => 'required',
             'persona_id' => 'required',
             'esAdmin' => 'required',
-            
         ]);
         
         $esAdmin = $request->esAdmin === "TRUE" ? true : false;
@@ -127,7 +125,7 @@ class EmpleadosController extends Controller
 
         return redirect()->route('empleados.index');
     }
-    public function crearEmp(Request $request, Persona $persona)
+    public function crearEmp(Request $request)
     {
         $request->validate([
             'nombre' => 'required|min:3',

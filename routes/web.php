@@ -41,7 +41,7 @@ Route::get('/inicio', function()
 
 Route::post('/empleados/redireccionar', 'EmpleadosController@redireccionar')->name('empleados.redireccionar');
 Route::post('/empleados/redireccionarEmp/{empleado}', 'EmpleadosController@redireccionarEmp')->name('empleados.redireccionarEmp');
-Route::post('/empleados/crearEmpleado/{empleado}', 'EmpleadosController@crearEmp')->name('empleados.crearEmp');
+// Route::post('/empleados/crearEmpleado', 'EmpleadosController@crearEmp')->name('empleados.crearEmp');
 
 Route::resource('/bibliotecas', 'BibliotecaController');
 Route::resource('/clientes', 'ClienteController');
