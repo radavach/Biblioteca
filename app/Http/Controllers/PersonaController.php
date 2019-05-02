@@ -113,10 +113,11 @@ class PersonaController extends Controller
     public function destroy(Persona $persona)
     {
         //
+        $delete = $persona->nombreUsuario;
         $persona->delete();
         return redirect()->route('personas.index')
             ->with([
-                'mensaje' => 'Persona Eliminada',
+                'mensaje' => 'Persona Eliminada ' . $delete,
                 'alert-class' => 'alert-warning',
             ]);
     }

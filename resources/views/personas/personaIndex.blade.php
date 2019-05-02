@@ -15,6 +15,9 @@
             </div>
 
             <div class="card-body">
+
+                @include('extra.mensajes')
+
                 <table class="table table-hover table-dark" >
 
                     <thead>

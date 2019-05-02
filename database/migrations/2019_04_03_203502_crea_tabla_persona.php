@@ -22,7 +22,7 @@ class CreaTablaPersona extends Migration
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
             $table->string('nombreUsuario');
-            $table->string('telefono');
+            $table->string('telefono')->nullable();
             $table->string('direccion');
             $table->string('email');
             $table->timestamps();

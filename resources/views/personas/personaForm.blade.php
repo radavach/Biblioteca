@@ -12,15 +12,8 @@
             <h3 class="card-title">Capturar Persona</h3>
           </div>
           <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
+            @include('extra.errores')
 
             @if(isset($persona))
                 <form action="{{ route('personas.update', $persona->id) }}" method="POST">
