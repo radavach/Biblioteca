@@ -3,6 +3,7 @@
     @section('content')
     <h1>Informacion del sistema</h1>
     <p>
-        Gestor del Sistema.
+        <h2>Visitanos en</h2>
+        
     </p>
     @endsection
