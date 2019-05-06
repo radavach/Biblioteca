@@ -11,7 +11,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3>Bienvenido al sistema compañero trabajador!</h3>
+                <h3>Bienvenido al sistema</h3>
             </div>
 
             <div class="card-body">

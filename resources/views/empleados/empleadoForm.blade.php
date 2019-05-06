@@ -24,9 +24,9 @@
 
 
             @if(isset($empleado))
-              <form action="{{ route('empleados.redireccionarEmp', $empleado->id) }}" method="POST">
+              <form action="{{ route('empleados.redireccionarEmp', $empleado->id) }}" method="GET">
             @else
-              <form action="{{ route('empleados.redireccionar') }}" method="POST">
+              <form action="{{ route('empleados.redireccionar') }}" method="GET">
             @endif
               @csrf
 

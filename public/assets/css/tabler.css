@@ -72,7 +72,7 @@ body {
   line-height: 1.5;
   color: #495057;
   text-align: left;
-  background-color: #f5f7fb;
+  background-color: #B99467;
 }
 
 [tabindex="-1"]:focus {
@@ -10262,12 +10262,12 @@ body.fixed-header .page {
 
 .aside-footer {
   padding: 1rem 1.5rem;
-  border-top: 1px solid rgba(0, 40, 100, 0.12);
+  border-top: 1px solid rgba(36, 156, 185, 0.12);
 }
 
 .aside-header {
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+  border-bottom: 1px solid rgba(36, 156, 185, 0.12);
 }
 
 .header {
@@ -10387,11 +10387,11 @@ body.fixed-header .header {
 }
 
 .footer {
-  background: #fff;
+  background: #FFC6CF;
   border-top: 1px solid rgba(0, 40, 100, 0.12);
   font-size: 0.875rem;
   padding: 1.25rem 0;
-  color: #9aa0ac;
+  color: #FFC6CF;
 }
 
 .footer a:not(.btn) {
@@ -17547,7 +17547,7 @@ svg {
 
 .fe {
   font-family: 'feather' !important;
-  speak: none;
+  /*speak: none;*/
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
