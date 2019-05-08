@@ -24,9 +24,9 @@
 
 
             @if(isset($empleado))
-              <form action="{{ route('empleados.redireccionarEmp', $empleado->id) }}" method="POST">
+              <form action="{{ route('empleados.redireccionarEmp', $empleado->id) }}" method="GET">
             @else
-              <form action="{{ route('empleados.redireccionar') }}" method="POST">
+              <form action="{{ route('empleados.redireccionar') }}" method="GET">
             @endif
               @csrf
 
@@ -59,8 +59,6 @@
                 <form action="{{ route('empleados.update', $empleado->id) }}" method="POST">
                     <input type="hidden" name="_method" value="PATCH">
             @else
-                
-
                 <form action="{{ route('empleados.store') }}" method="POST">
             @endif
                 @csrf

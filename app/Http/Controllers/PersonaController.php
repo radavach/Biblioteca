@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class PersonaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('admin')->only('create', 'store', 'edit', 'update', 'destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -101,7 +108,11 @@ class PersonaController extends Controller
         
         $persona->update($request->all());
 
-        return redirect()->route('personas.show', $persona->id);
+        return redirect()->route('personas.show', $persona->id)
+            ->with([
+                'mensaje' => 'El usuario ' . $persona->nombre . ' fue actualizado',
+                'alert-class' => 'alert-warning',
+            ]);
     }
 
     /**

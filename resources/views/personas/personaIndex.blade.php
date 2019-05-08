@@ -16,7 +16,7 @@
 
             <div class="card-body">
 
-                @include('extra.mensajes')
+                @include('extra.mensajes')  
 
                 <table class="table table-hover table-dark" >
 

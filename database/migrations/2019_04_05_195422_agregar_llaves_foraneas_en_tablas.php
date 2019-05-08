@@ -15,6 +15,21 @@ class AgregarLlavesForaneasEnTablas extends Migration
     {
         //
 
+        Schema::table('users', function(Blueprint $table) {
+            $table->string('nombre');
+            $table->string('apellidoPaterno');
+            $table->string('apellidoMaterno');
+            $table->string('nombreUsuario');
+            $table->string('telefono')->nullable();
+            $table->string('direccion');
+
+            $table->unsignedInteger('biblioteca_id');
+            $table->foreign('biblioteca_id')
+                ->references('id')
+                ->on('bibliotecas')
+                ->onDelete('cascade');
+        });
+
         Schema::table('libros', function(Blueprint $table){
             $table->unsignedInteger('biblioteca_id');
             $table->foreign('biblioteca_id')
