@@ -70,9 +70,9 @@ body {
   font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #944F5B;
+  color: #C2DAEF;
   text-align: left;
-  background-color: #B99467;
+  background-color: #226383;
 }
 
 [tabindex="-1"]:focus {
@@ -172,6 +172,12 @@ a {
   background-color: #E7E2DC;
   -webkit-text-decoration-skip: objects;
 }
+.a-ESE-ENLACE-ES-MIO {
+  color: #34495E;
+  text-decoration: none;
+  background-color: #8DA7BE;
+  -webkit-text-decoration-skip: objects;
+}
 
 a:hover {
   color: #295a9f;
@@ -239,6 +245,7 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  color: #000;
 }
 
 button {
@@ -1530,7 +1537,7 @@ pre code {
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
-  background-color: transparent;
+  background-color: #BDB7FF;
 }
 
 .table th, .text-wrap table th,
@@ -1538,7 +1545,7 @@ pre code {
 .text-wrap table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #FCE9C4;
+  border-top: 1px solid #BDB7FF;
 }
 
 .table thead th, .text-wrap table thead th {
@@ -1593,31 +1600,31 @@ pre code {
 .table-primary,
 .table-primary > th,
 .table-primary > td {
-  background-color: #cbdbf2;
+  background-color: #477bc5;
 }
 
 .table-hover .table-primary:hover {
-  background-color: #FCE9C4;
+  background-color: #477bc5;
 }
 
 .table-hover .table-primary:hover > td,
 .table-hover .table-primary:hover > th {
-  background-color: #FCE9C4;
+  background-color: #477bc5;
 }
 
 .table-secondary,
 .table-secondary > th,
 .table-secondary > td {
-  background-color: #dddfe2;
+  background-color: #477bc5;
 }
 
 .table-hover .table-secondary:hover {
-  background-color: #cfd2d6;
+  background-color: #477bc5;
 }
 
 .table-hover .table-secondary:hover > td,
 .table-hover .table-secondary:hover > th {
-  background-color: #cfd2d6;
+  background-color: #477bc5;
 }
 
 .table-success,
@@ -1638,16 +1645,16 @@ pre code {
 .table-info,
 .table-info > th,
 .table-info > td {
-  background-color: #cbe7fb;
+  background-color: #477bc5;
 }
 
 .table-hover .table-info:hover {
-  background-color: #b3dcf9;
+  background-color: #477bc5;
 }
 
 .table-hover .table-info:hover > td,
 .table-hover .table-info:hover > th {
-  background-color: #b3dcf9;
+  background-color: #477bc5;
 }
 
 .table-warning,
@@ -1733,19 +1740,19 @@ pre code {
 
 .table .thead-light th, .text-wrap table .thead-light th {
   color: #495057;
-  background-color: #e9ecef;
+  background-color: #BCBDB8;
   border-color: #dee2e6;
 }
 
 .table-dark {
   color: #f5f7fb;
-  background-color: #212529;
+  background-color: #8DA7BE;
 }
 
 .table-dark th,
 .table-dark td,
 .table-dark thead th {
-  border-color: #32383e;
+  border-color: #028090;
 }
 
 .table-dark.table-bordered, .text-wrap table.table-dark {
@@ -1831,13 +1838,12 @@ pre code {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: #312726;
-  background-color: #BED5E8;
+  background-color: #ffffff;
   background-clip: padding-box;
   border: 1px solid rgba(0, 40, 100, 0.12);
   border-radius: 3px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
 @media screen and (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
@@ -4333,7 +4339,7 @@ input[type="button"].btn-block {
 .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
   color: #fff;
 }
-
+/*Modificado*/
 .card {
   position: relative;
   display: -ms-flexbox;
@@ -4342,7 +4348,20 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #8DA7BE;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 40, 100, 0.12);
+  border-radius: 3px;
+}
+.card-mi-card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #ffffff;
   background-clip: border-box;
   border: 1px solid rgba(0, 40, 100, 0.12);
   border-radius: 3px;
@@ -7818,6 +7837,10 @@ button.bg-dark:focus {
 .pb-4,
 .py-4 {
   padding-bottom: 1rem !important;
+}
+
+div.header.py-4{
+  background-color: #028090;
 }
 
 .pl-4,
@@ -12851,7 +12874,7 @@ a.icon:hover {
 }
 
 .table th, .text-wrap table th {
-  color: #9aa0ac;
+  color: #000000;
   text-transform: uppercase;
   font-size: 0.875rem;
   font-weight: 400;
@@ -13064,9 +13087,9 @@ a.icon:hover {
   border-top: 1px solid rgba(0, 40, 100, 0.12);
   color: #6e7687;
 }
-
+/*En Modificaión*/
 .card-header {
-  background: none;
+  background: #677A8B;
   padding: 0.5rem 1.5rem;
   display: -ms-flexbox;
   display: flex;
