@@ -33,7 +33,7 @@
                     <tbody>
                         @foreach ($bibliotecas as $biblioteca)
                             <tr>
-                                <td><a href="{{ route('bibliotecas.show', $biblioteca->id) }}">{{ $biblioteca->id }}</a></td>
+                                <td><a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.show', $biblioteca->id) }}">{{ $biblioteca->id }}</a></td>
                                 <td>{{ $biblioteca->nombre }}</td>
                                 <td>{{ $biblioteca->horaApertura }}</td>
                                 <td>{{ $biblioteca->horaCierre }}</td>
