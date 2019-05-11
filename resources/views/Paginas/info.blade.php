@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.tabler')
 
-    @section('content')
+    @section('contenido')
     <h1>Informacion del sistema</h1>
     <p>
         <h2>Visitanos en</h2>
         
     </p>
+
     @endsection

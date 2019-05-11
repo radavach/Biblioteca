@@ -12,6 +12,13 @@
         <div class="card">
             <div class="card-header">
                 <h3>Bienvenido al sistema</h3>
+
+                <div class="ml-auto">
+                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.create') }}">
+                        <button type="submit" class="btn ">Registrar Biblioteca</button>
+                    </form>
+                </div>
+
             </div>
 
             <div class="card-body">
