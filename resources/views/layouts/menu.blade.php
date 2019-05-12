@@ -1,14 +1,26 @@
 <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item">
-                    <a href="./inicio.html" class="nav-link active"><i class="fe fe-home"></i> Inicio</a>
+                    <a href="{{ route('inicio') }}" class="nav-link active"><i class="fe fe-home"></i> Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-box"></i> Interface</a>
+                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-book"></i> Bibliotecas</a>
                     <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="./cards.html" class="dropdown-item ">Listado</a>
-                      <!--<a href="./charts.html" class="dropdown-item ">Charts</a>
-                      <a href="./pricing-cards.html" class="dropdown-item ">Pricing cards</a>-->
+                      <a href="{{ route('bibliotecas.index') }}" class="dropdown-item ">Inicio</a>
+                      <a href="{{ route('bibliotecas.create') }}" class="dropdown-item ">Crear</a>
+                      
+                      <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-book-open"></i> Libros</a>
+                      <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                        <a href="{{ route('libros.index') }}" class="dropdown-item dropdown-item-right">Inicio L</a>
+                        <a href="{{ route('libros.create') }}" class="dropdown-item dropdown-item-right">Crear L</a>
+                      </div>
+                  
+                      <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-paperclip"></i> Materiales</a>
+                      <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                        <a href="{{ route('materiales.index') }}" class="dropdown-item dropdown-item-right">Inicio M</a>
+                        <a href="{{ route('materiales.create') }}" class="dropdown-item dropdown-item-right">Crear M</a>
+                      </div>
+
                     </div>
                   </li>
                   <li class="nav-item dropdown">

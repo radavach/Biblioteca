@@ -1,4 +1,13 @@
 <!doctype html>
+
+@php 
+    session_start();
+    session_destroy();
+    session_start();
+    $_SESSION['icon_num'] = rand(1, 7);
+@endphp
+    
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">

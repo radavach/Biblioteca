@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
@@ -47,7 +48,7 @@
               </a>
               <div class="d-flex order-lg-2 ml-auto">
                 <div class="nav-item d-none d-md-flex">
-                  <a href="https://github.com/tabler/tabler" class="btn btn-sm btn-outline-primary" target="_blank">Source code</a>
+                  <a href="https://github.com/tabler/tabler" class="btn btn-sm btn-primary" target="_blank">Source code</a>
                 </div>
                 {{-- @include('layouts.notificaciones') --}}
                 @include('layouts.user-menu')

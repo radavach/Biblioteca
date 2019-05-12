@@ -18631,3 +18631,16 @@ svg {
 .fe-zoom-out:before {
   content: "\ea06";
 }
+
+.clas-esp{
+  background-color: #f8f8f8;
+  border-radius: 5px;
+}
+
+.texto-resolution-blue{
+  color: #00218a !important;
+}
+
+.texto-celestial-blue{
+  color: #3e92cc !important;
+}

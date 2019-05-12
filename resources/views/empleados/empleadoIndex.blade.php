@@ -12,6 +12,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Bienvenido al sistema compañero trabajador!</h3>
+                <div class="ml-auto">
+                    <form class="input-icon my-3 my-lg-0" action="{{ route('empleados.create') }}">
+                        <button type="submit" class="btn ">Registrar Empleado</button>
+                    </form>
+                </div>
             </div>
 
             <div class="card-body">

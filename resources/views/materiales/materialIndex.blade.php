@@ -10,6 +10,11 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Capturar Material</h3>
+            <div class="ml-auto">
+                    <form class="input-icon my-3 my-lg-0" action="{{ route('materiales.create') }}">
+                        <button type="submit" class="btn ">Registrar Material</button>
+                    </form>
+                </div>
           </div>
 
             <div class="card-body">
