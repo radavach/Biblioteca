@@ -16,16 +16,17 @@ class CreaTablaBibliotecas extends Migration
         Schema::create('bibliotecas', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
-            
+            $table->softDeletes();
+
             $table->increments('id');
             $table->string('nombre');
             $table->time('horaApertura');
             $table->time('horaCierre');
-            $table->date('dias');
-            $table->string('telefono');
-            $table->string('paginaWeb');
-            $table->string('facebook');
-            $table->string('email');
+            $table->date('dias')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('paginaWeb')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

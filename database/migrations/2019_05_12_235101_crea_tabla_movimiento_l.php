@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreaTablaPrestamos extends Migration
+class CreaTablaMovimientoL extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,22 @@ class CreaTablaPrestamos extends Migration
      */
     public function up()
     {
-        Schema::create('prestamos', function (Blueprint $table) {
+        Schema::create('movimientoL', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
-            
+            $table->softDeletes();
+
             $table->increments('id');
-            $table->integer('idPrestamo');
-            $table->integer('isbnLibro');
-            $table->integer('numEjemplar');
+            $table->integer('idPrestamo')->nullable();
+            $table->string('isbnLibro')->nullable();
+            $table->integer('numEjemplar')->nullable();
             $table->dateTime('fechaPrestamo');
-            $table->string('nombreUsuario');
-            $table->string('rfcCliente');
+            $table->string('nombreUsuario')->nullable();
+            $table->string('rfcCliente')->nullable();
             $table->boolean('devuelto');
-            $table->dateTime('fechaDevolucion');
+            $table->dateTime('fechaDevolucion')->nullable();
             $table->double('comisionTotal');
             $table->timestamps();
-
         });
     }
 
@@ -39,6 +39,6 @@ class CreaTablaPrestamos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prestamos');
+        Schema::dropIfExists('movimientoL');
     }
 }

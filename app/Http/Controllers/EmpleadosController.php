@@ -39,7 +39,7 @@ class EmpleadosController extends Controller
         // return view('empleados.');
         $bibliotecas = Biblioteca::all();
         $personas = Persona::all();
-
+        
         return view('empleados.empleadoForm', compact('personas', 'bibliotecas'));
 
     }

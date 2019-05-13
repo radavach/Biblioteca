@@ -23,25 +23,27 @@
             @endif
 
 
-            @if(isset($empleado))
-              <form action="{{ route('empleados.redireccionarEmp', $empleado->id) }}" method="GET">
-            @else
-              <form action="{{ route('empleados.redireccionar') }}" method="GET">
-            @endif
-              @csrf
+            @if(isset($personas))
+              @if(isset($empleado))
+                <form action="{{ route('empleados.redireccionarEmp', $empleado->id) }}" method="GET">
+              @else
+                <form action="{{ route('empleados.redireccionar') }}" method="GET">
+              @endif
+                @csrf
 
                 <div class="form-group">
                   <label class="form-label">Persona a la que esta asignado</label>
                   <select name="persona_id" class="form-control">
                     @foreach($personas as $person)
-                        <option value="{{ $person->id }}" {{ isset($persona) && ($persona->id == $person->id) !== false ? 'selected' : ''}}>
-                          {{ $person->id }} - {{ $person->nombre }}
-                        </option>
+                    <option value="{{ $person->id }}" {{ isset($persona) && ($persona->id == $person->id) !== false ? 'selected' : ''}}>
+                      {{ $person->id }} - {{ $person->nombre }}
+                    </option>
                     @endforeach
                   </select>
                 </div>
-
+                
                 <button type="submit" class="btn btn-primary ml-auto">Seleccionar</button>
+            @endif
                 
                 @if ($errors->has('empleado_id'))
                   <br>
@@ -58,7 +60,7 @@
             @if(isset($empleado))
                 <form action="{{ route('empleados.update', $empleado->id) }}" method="POST">
                     <input type="hidden" name="_method" value="PATCH">
-            @else
+            @elseif(isset($personas))
                 <form action="{{ route('empleados.store') }}" method="POST">
             @endif
                 @csrf

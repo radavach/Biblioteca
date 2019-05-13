@@ -27,7 +27,8 @@ class LoginController extends Controller
      */
 
       
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
+    protected $redirectTo = '/info';
     public function redirecTo()
     {
         session(['apodo' => 'mich']);

@@ -82,7 +82,7 @@
                         <a href="{{ route('login') }}">Ingreso</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Registrar</a>
+                            <a href="{{ route('userx.create') }}">Registrar</a>
                         @endif
                     @endauth
                 </div>
@@ -91,6 +91,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     Biblioteca U DE G
+                    <!-- @php isset($_SESSION['icon_num']) ? print $_SESSION['icon_num'] : print ':)'; @endphp -->
                 </div>
 
                 <div class="links">

@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-})->name('inicio');
+})->name('inicio')->middleware('inicioSesion');
 
 // Route::get('/bienvenida/{nombre}/{apellido?}', function ($nombre, $apellido = null) {
 //     //return $nombre.' '.$apellido;
@@ -23,7 +23,7 @@ Route::get('/', function () {
 //     //'apellido' => $apellido]);
 // });
 
-Route::get('/info', 'PaginaController@info');
+Route::get('/info', 'PaginaController@info')->name('paginaInfo');
 Route::get('/bienvenida', 'PaginaController@bienvenida');
 Route::get('/contacto', 'PaginaController@contacto');
 Route::get('/colaboradores', 'PaginaController@colaboradores')->name('col');
@@ -32,7 +32,7 @@ Route::get('/inicio', function()
     return view('inicio');
 });
 
-// Route::get('/empleados', "EmpleadosController@index")->name('empleado.index');
+Route::get('/userx', "UserController@create")->name('userx.create');
 // Route::get('/empleados/create', 'EmpleadosController@create');
 // Route::get('/empleados/edit', 'EmpleadosController@edit');
 // Route::get('/empleados/show', 'EmpleadosController@show');

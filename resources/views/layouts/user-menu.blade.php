@@ -1,7 +1,7 @@
 @php session_start(); @endphp
 <div class="dropdown">
     <a href="#" class="nav-link pr-0 leading-none clas-esp" data-toggle="dropdown">
-    <span class="avatar" style="background-image: <?php isset(Auth::user()->imagen)? print 'url(./demo/faces/female/'.$Auth::user()->imagen.'.jpg)' : print 'url(./assets/images/imagenes/'.$_SESSION['icon_num'].'.jpg)'; ?>"></span>
+    <span class="avatar" style="background-image: <?php isset(Auth::user()->imagen)? print 'url(./demo/faces/female/'.$Auth::user()->imagen.'.jpg)' : (isset($_SESSION['icon_num'])? print 'url(./assets/images/imagenes/'.$_SESSION['icon_num'].'.jpg)' : print 'url(./assets/images/imagenes/3.jpg)'); ?>"></span>
     <!-- 'url(./assets/images/imagenes/Arato-Andras-1.jpg)' -->
     <span class="ml-2 d-none d-lg-block">
         <span class="text-default texto-celestial-blue">@if(Auth::user() !== null) {{ Auth::user()->name }} @else Anonimo @endif </span>
@@ -26,8 +26,14 @@
     <a class="dropdown-item" href="#">
         <i class="dropdown-icon fe fe-help-circle"></i> Need help?
     </a>
-    <a class="dropdown-item" href="#">
+    <a class="dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
         <i class="dropdown-icon fe fe-log-out"></i> Sign out
     </a>
+    
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
     </div>
 </div>

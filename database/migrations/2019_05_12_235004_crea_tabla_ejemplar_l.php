@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreaTablaEjemplares extends Migration
+class CreaTablaEjemplarL extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreaTablaEjemplares extends Migration
      */
     public function up()
     {
-        Schema::create('ejemplares', function (Blueprint $table) {
+        Schema::create('ejemplarL', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
-            
-            $table->increments('id');
-            $table->integer('numEjemp');
-            $table->string('origen');
-            $table->boolean('estado');
-            $table->string('comentario');
-            $table->timestamps();
+            $table->softDeletes();
 
+            $table->increments('id');
+            $table->integer('numEjemp')->nullable();
+            $table->string('origen')->nullable();
+            $table->boolean('estado');
+            $table->string('comentario')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -34,6 +34,6 @@ class CreaTablaEjemplares extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ejemplares');
+        Schema::dropIfExists('ejemplarL');
     }
 }

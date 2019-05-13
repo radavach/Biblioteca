@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreaTablaPersona extends Migration
+class CreaTablaClientes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,20 @@ class CreaTablaPersona extends Migration
      */
     public function up()
     {
-        Schema::create('personas', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
-            
+            $table->softDeletes();
+
             $table->increments('id');
             $table->string('nombre');
             $table->string('apellidoPaterno');
-            $table->string('apellidoMaterno');
+            $table->string('apellidoMaterno')->nullable();
             $table->string('nombreUsuario');
             $table->string('telefono')->nullable();
             $table->string('direccion');
             $table->string('email');
             $table->timestamps();
-
         });
     }
 
@@ -37,6 +37,6 @@ class CreaTablaPersona extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personas');
+        Schema::dropIfExists('clientes');
     }
 }

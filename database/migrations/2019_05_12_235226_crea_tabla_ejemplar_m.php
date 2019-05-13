@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreaTablaClientes extends Migration
+class CreaTablaEjemplarM extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreaTablaClientes extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('ejemplarM', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
-            
+            $table->softDeletes();
+
             $table->increments('id');
-            $table->string('idCliente');
+            $table->integer('numEjemp')->nullable();
+            $table->string('origen')->nullable();
+            $table->boolean('estado');
+            $table->string('comentario')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreaTablaClientes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('ejemplarM');
     }
 }

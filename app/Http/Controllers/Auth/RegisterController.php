@@ -28,7 +28,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
+    protected $redirectTo = '/info';
 
     /**
      * Create a new controller instance.
@@ -49,9 +50,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'nombre' => ['required', 'max:255'],
+            'apellidoPaterno' => ['required', 'max:255'],
+            'nombreUsuario' => ['required', 'max:255'],
+            'direccion' => ['required', 'max:255'],
+            'biblioteca_id' => ['required'],
         ]);
     }
 
@@ -63,10 +69,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $esAdmin = false;
+        if(isset($data['esAdmin']))
+        {
+            $data['esAdmin'] === 'TRUE' ? $esAdmin = true :  $esAdmin = false;
+        }
+
+        $name = $data['nombre'] . " " . $data['apellidoPaterno'] . " " . $data['apellidoMaterno'];
+
         return User::create([
-            'name' => $data['name'],
+            // 'name' => $data['name'],
+            'name' => $name,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'nombre' => $data['nombre'],
+            'apellidoPaterno' => $data['apellidoPaterno'],
+            // if(isset($data['apellidoMaterno']))'apellidoPaterno' => $data['apellidoPAterno'],
+            'apellidoMaterno' => $data['apellidoMaterno'],
+            'nombreUsuario' => $data['nombreUsuario'],
+            'telefono' => $data['telefono'],
+            'direccion' => $data['direccion'],
+            'rfc' => $data['rfc'],
+            'biblioteca_id' => $data['biblioteca_id'],
+            'esAdmin' => $esAdmin,
         ]);
     }
 }

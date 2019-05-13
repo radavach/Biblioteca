@@ -14,22 +14,23 @@ class CreaTablaLibros extends Migration
     public function up()
     {
         Schema::create('libros', function (Blueprint $table) {
-            
+
             $table->engine = 'InnoDB';
+            $table->softDeletes();
 
             $table->increments('id');
-            $table->integer('isbn');
+            $table->string('isbn');
             $table->string('titulo');
-            $table->string('subtitulo');
+            $table->string('subtitulo')->nullable();
             $table->string('autor');
             $table->string('editorial');
             $table->integer('anio');
-            $table->string('genero');
+            $table->string('genero')->nullable();
             $table->string('idioma');
-            $table->string('seccion');
-            $table->integer('ejemplar');
+            $table->string('seccion')->nullable();
+            $table->integer('ejemplar')->nullable();
             $table->integer('diasMaxPrestamo');
-            $table->string('linkImagen');
+            $table->string('linkImagen')->nullable();
             $table->timestamps();
         });
     }

@@ -16,16 +16,17 @@ class CreaTablaMateriales extends Migration
         Schema::create('materiales', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
-            
+            $table->softDeletes();
+
             $table->increments('id');
             $table->string('idArticulo');
             $table->string('nombre');
-            $table->string('seccion');
-            $table->string('tipo');
-            $table->integer('ejemplar');
-            $table->string('linkImagen');
-            $table->string('autor');
-            $table->integer('anio');
+            $table->string('seccion')->nullable();
+            $table->string('tipo')->nullable();
+            $table->integer('ejemplar')->nullable();
+            $table->string('linkImagen')->nullable();
+            $table->string('autor')->nullable();
+            $table->integer('anio')->nullable();
             $table->timestamps();
         });
     }
