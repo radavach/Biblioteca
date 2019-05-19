@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use App\Biblioteca;
 use Illuminate\Http\Request;
 
+if(!isset($_SESSION)) session_start();
+
 class BibliotecaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('admin')->only('create', 'store', 'edit', 'update', 'destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +35,7 @@ class BibliotecaController extends Controller
     public function create()
     {
         //
-       return view('bibliotecas.bibliotecaForm');
+        return view('bibliotecas.bibliotecaForm');
     }
 
     /**
@@ -60,6 +68,8 @@ class BibliotecaController extends Controller
     public function show(Biblioteca $biblioteca)
     {
         //
+        // dd($biblioteca);
+        // $_SESSION['biblioteca'] = $bibliotecas;
         return view('bibliotecas.bibliotecaShow', compact('biblioteca'));
     }
 

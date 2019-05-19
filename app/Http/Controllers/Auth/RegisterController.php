@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Biblioteca;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -22,6 +23,13 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+
+    public function showRegistrationForm()
+    {
+        $bibliotecas = Biblioteca::all();
+        return view('auth.register', compact('bibliotecas'));
+    }
 
     /**
      * Where to redirect users after registration.

@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-})->name('inicio')->middleware('inicioSesion');
+})->name('inicio')->middleware('guest');
 
 // Route::get('/bienvenida/{nombre}/{apellido?}', function ($nombre, $apellido = null) {
 //     //return $nombre.' '.$apellido;
@@ -32,7 +32,6 @@ Route::get('/inicio', function()
     return view('inicio');
 });
 
-Route::get('/userx', "UserController@create")->name('userx.create');
 // Route::get('/empleados/create', 'EmpleadosController@create');
 // Route::get('/empleados/edit', 'EmpleadosController@edit');
 // Route::get('/empleados/show', 'EmpleadosController@show');

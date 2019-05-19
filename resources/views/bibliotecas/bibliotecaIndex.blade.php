@@ -1,11 +1,12 @@
 @extends('layouts.tabler')
 @section('contenido')
-
 <div class="page-header">
     <div class="page-title">
         INDEX BIBLIOTECAS
     </div>
 </div>
+
+@include('extra.mensajes')  
 
 <div class="row">
     <div class="col-md-12">
