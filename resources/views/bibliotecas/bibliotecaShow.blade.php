@@ -43,9 +43,11 @@
                                 <td>{{ $biblioteca->facebook }}</td>
                                 <td>{{ $biblioteca->email }}</td>
                                 <td>
+                                    @can('permisos_admin', $biblioteca)
                                     <a href="{{ route('bibliotecas.edit', $biblioteca->id) }}" class="btn btn-sm btn-warning">
                                         Editar
                                     </a>
+                                    @endcan
                                     <form action="{{ route('bibliotecas.destroy', $biblioteca->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE"> 
                                         @csrf

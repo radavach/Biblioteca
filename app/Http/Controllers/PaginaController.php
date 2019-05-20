@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+
+if(!isset($_SESSION)) session_start(); 
 
 class PaginaController extends Controller
 {
     public function info()
     {
+        if(\Auth::user() !== null and Gate::denies('permisos_admin')){ $_SESSION['biblioteca'] = \Auth::user()->biblioteca_id;}
         return view('paginas.info');
     }
     public function contacto()

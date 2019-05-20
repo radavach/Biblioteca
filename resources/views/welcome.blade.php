@@ -1,10 +1,12 @@
 <!doctype html>
 
 @php 
-    session_start();
-    session_destroy();
-    session_start();
-    $_SESSION['icon_num'] = rand(1, 7);
+    if(isset($_SESSION))
+    {
+        session_destroy();
+        session_start();
+        $_SESSION['icon_num'] = rand(1, 7);
+    }
 @endphp
     
 

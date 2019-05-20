@@ -52,7 +52,7 @@
                             <td>{{ $libro->linkImagen}}</td>
                             
                             <td>
-                                <a href="{{ route('libros.edit', $libro->id) }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('bibliotecas.librosB.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
                                     Editar
                                 </a>
                                 <form action="{{ route('libros.destroy', $libro->id) }}" method="POST">

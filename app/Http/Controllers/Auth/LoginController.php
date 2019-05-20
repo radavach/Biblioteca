@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+if(!isset($_SESSION)){session_start();}
 
 class LoginController extends Controller
 {
@@ -19,7 +22,6 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
     /**
      * Where to redirect users after login.
      *
@@ -29,9 +31,11 @@ class LoginController extends Controller
       
     // protected $redirectTo = '/home';
     protected $redirectTo = '/info';
+    // protected $redirectTo = "{{ route('paginasInfo') }}";
     public function redirecTo()
     {
         session(['apodo' => 'mich']);
+        
         return '/empleados';
     }
 
@@ -44,4 +48,5 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
 }

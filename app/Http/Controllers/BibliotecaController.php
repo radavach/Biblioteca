@@ -11,6 +11,7 @@ class BibliotecaController extends Controller
 {
     public function __construct()
     {
+        // if(isset($_SESSION['biblioteca'])) unset($_SESSION['biblioteca']);
         $this->middleware('auth')->except('index', 'show');
         $this->middleware('admin')->only('create', 'store', 'edit', 'update', 'destroy');
     }
@@ -23,6 +24,7 @@ class BibliotecaController extends Controller
     public function index()
     {
         //
+        unset($_SESSION['biblioteca']);
         $bibliotecas = Biblioteca::all();
         return view('bibliotecas.bibliotecaIndex', compact('bibliotecas'));
     }
@@ -68,9 +70,12 @@ class BibliotecaController extends Controller
     public function show(Biblioteca $biblioteca)
     {
         //
-        // dd($biblioteca);
-        // $_SESSION['biblioteca'] = $bibliotecas;
-        return view('bibliotecas.bibliotecaShow', compact('biblioteca'));
+        // dd($biblioteca->id);
+        $_SESSION['biblioteca'] = $biblioteca;
+        // return view('bibliotecas.bibliotecaShow', compact('biblioteca'));
+        // return view('bibliotecas.Unabiblioteca.index', $biblioteca);
+        return redirect()->route('bibliotecas.unaBiblioteca.index', $biblioteca);
+        // return view('bibliotecas.unaBiblioteca.index', $biblioteca->id);
     }
 
     /**
