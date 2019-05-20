@@ -13,5 +13,9 @@ class UsuarioSeeder extends Seeder
     {
         //
         factory(App\User::class, 10)->create();
+        factory(App\User::class)->create([
+            'email' => 'danielophj@hotmail.com',
+            'esAdmin' => TRUE
+        ]);
     }
 }

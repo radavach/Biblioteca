@@ -14,7 +14,7 @@
                 <h3>Bienvenido al sistema compañero trabajador!</h3>
                 <div class="ml-auto">
                     <form class="input-icon my-3 my-lg-0" action="{{ route('clientes.create') }}">
-                        <button type="submit" class="btn ">Registrar Cliente</button>
+                        <button type="submit" class="btn btn-primary">Registrar Cliente</button>
                     </form>
                 </div>
             </div>

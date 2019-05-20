@@ -5,8 +5,17 @@ namespace App\Http\Controllers;
 use App\Biblioteca;
 use Illuminate\Http\Request;
 
+if(!isset($_SESSION)) session_start();
+
 class BibliotecaController extends Controller
 {
+    public function __construct()
+    {
+        // if(isset($_SESSION['biblioteca'])) unset($_SESSION['biblioteca']);
+        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('admin')->only('create', 'store', 'edit', 'update', 'destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +24,7 @@ class BibliotecaController extends Controller
     public function index()
     {
         //
+        unset($_SESSION['biblioteca']);
         $bibliotecas = Biblioteca::all();
         return view('bibliotecas.bibliotecaIndex', compact('bibliotecas'));
     }
@@ -27,7 +37,7 @@ class BibliotecaController extends Controller
     public function create()
     {
         //
-       return view('bibliotecas.bibliotecaForm');
+        return view('bibliotecas.bibliotecaForm');
     }
 
     /**
@@ -60,7 +70,12 @@ class BibliotecaController extends Controller
     public function show(Biblioteca $biblioteca)
     {
         //
-        return view('bibliotecas.bibliotecaShow', compact('biblioteca'));
+        // dd($biblioteca->id);
+        $_SESSION['biblioteca'] = $biblioteca;
+        // return view('bibliotecas.bibliotecaShow', compact('biblioteca'));
+        // return view('bibliotecas.Unabiblioteca.index', $biblioteca);
+        return redirect()->route('bibliotecas.unaBiblioteca.index', $biblioteca);
+        // return view('bibliotecas.unaBiblioteca.index', $biblioteca->id);
     }
 
     /**

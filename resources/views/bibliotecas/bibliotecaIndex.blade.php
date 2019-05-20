@@ -1,11 +1,12 @@
 @extends('layouts.tabler')
 @section('contenido')
-
 <div class="page-header">
     <div class="page-title">
         INDEX BIBLIOTECAS
     </div>
 </div>
+
+@include('extra.mensajes')  
 
 <div class="row">
     <div class="col-md-12">
@@ -13,11 +14,13 @@
             <div class="card-header">
                 <h3>Bienvenido al sistema</h3>
 
-                <div class="ml-auto">
-                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.create') }}">
-                        <button type="submit" class="btn ">Registrar Biblioteca</button>
-                    </form>
-                </div>
+                @can('bibliotecaAsig')
+                    <div class="ml-auto">
+                        <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.create') }}">
+                            <button type="submit" class="btn ">Registrar Biblioteca</button>
+                        </form>
+                    </div>
+                @endcan
 
             </div>
 

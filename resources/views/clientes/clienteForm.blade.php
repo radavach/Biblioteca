@@ -80,7 +80,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary ml-auto">Aceptar</button>
-
+                <a href="{{ route('clientes.index') }}" class="btn btn-danger">Cancelar</a>
             </form>
 
           </div>

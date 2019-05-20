@@ -1,10 +1,12 @@
 <!doctype html>
 
 @php 
-    session_start();
-    session_destroy();
-    session_start();
-    $_SESSION['icon_num'] = rand(1, 7);
+    if(isset($_SESSION))
+    {
+        session_destroy();
+        session_start();
+        $_SESSION['icon_num'] = rand(1, 7);
+    }
 @endphp
     
 
@@ -82,7 +84,7 @@
                         <a href="{{ route('login') }}">Ingreso</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('userx.create') }}">Registrar</a>
+                            <a href="{{ route('register') }}">Registrar</a>
                         @endif
                     @endauth
                 </div>

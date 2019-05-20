@@ -23,5 +23,15 @@ class BibliotecaSeeder extends Seeder
             'facebook' => 'paginaBiblioteca1',
             'email' => 'paginaBiblioteca1@gmail.com',
         ]);
+        Biblioteca::create([
+            'nombre' => 'Mario Castañeda',
+            'horaApertura' => date("H:i:s", mktime(8,00)),
+            'horaCierre' => date("H:i:s", mktime(19,00)),
+            'dias' => $fecha,
+            'telefono' => '12345678',
+            'paginaWeb' => 'paginaBiblioteca2.com',
+            'facebook' => 'paginaBiblioteca2',
+            'email' => 'paginaBiblioteca2@gmail.com',
+        ]);
     }
 }

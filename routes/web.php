@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-})->name('inicio')->middleware('inicioSesion');
+})->name('inicio')->middleware('guest');
 
 // Route::get('/bienvenida/{nombre}/{apellido?}', function ($nombre, $apellido = null) {
 //     //return $nombre.' '.$apellido;
@@ -23,7 +23,7 @@ Route::get('/', function () {
 //     //'apellido' => $apellido]);
 // });
 
-Route::get('/info', 'PaginaController@info')->name('paginaInfo');
+Route::get('info', 'PaginaController@info')->name('paginaInfo');
 Route::get('/bienvenida', 'PaginaController@bienvenida');
 Route::get('/contacto', 'PaginaController@contacto');
 Route::get('/colaboradores', 'PaginaController@colaboradores')->name('col');
@@ -32,7 +32,6 @@ Route::get('/inicio', function()
     return view('inicio');
 });
 
-Route::get('/userx', "UserController@create")->name('userx.create');
 // Route::get('/empleados/create', 'EmpleadosController@create');
 // Route::get('/empleados/edit', 'EmpleadosController@edit');
 // Route::get('/empleados/show', 'EmpleadosController@show');
@@ -44,14 +43,16 @@ Route::get('/empleados/redireccionarEmp/{empleado}', 'EmpleadosController@redire
 // Route::post('/empleados/crearEmpleado', 'EmpleadosController@crearEmp')->name('empleados.crearEmp');
 
 Route::resource('/bibliotecas', 'BibliotecaController');
+Route::resource('/bibliotecas.unaBiblioteca', 'UnaBibliotecaController');
 Route::resource('/clientes', 'ClienteController');
 Route::resource('/ejemplares', 'EjemplarController');
 Route::resource('/empleados', 'EmpleadosController');
 Route::resource('/libros', 'LibroController');
+Route::resource('/bibliotecas.librosB', 'LibrosBController');
 Route::resource('/materiales', 'MaterialController');
 Route::resource('/personas', 'PersonaController');
 Route::resource('/prestamos', 'PrestamoController');
-Route::resource('/usuarios', 'UsuarioController');
+// Route::resource('/usuarios', 'UsuarioController');
 
 ///Route::get('/empleados/update', 'EmpleadosController@update');
 

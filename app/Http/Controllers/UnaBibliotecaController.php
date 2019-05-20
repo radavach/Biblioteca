@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Biblioteca;
 use Illuminate\Http\Request;
 
-class UsuarioController extends Controller
+if(!isset($_SESSION)) session_start();
+
+class UnaBibliotecaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($biblioteca_id)
     {
         //
+        $bibliotecas = Biblioteca::where('id', $biblioteca_id)
+               ->get();
+        $_SESSION['biblioteca'] = $biblioteca_id;
+        return view('bibliotecas.bibliotecaIndex', compact('bibliotecas'));
     }
 
     /**
@@ -21,7 +28,7 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($biblioteca_id)
     {
         //
     }
@@ -32,7 +39,7 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($biblioteca_id, Request $request)
     {
         //
     }
@@ -40,10 +47,10 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Biblioteca  $biblioteca
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($biblioteca_id, Biblioteca $biblioteca)
     {
         //
     }
@@ -51,10 +58,10 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Biblioteca  $biblioteca
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($biblioteca_id, Biblioteca $biblioteca)
     {
         //
     }
@@ -63,10 +70,10 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Biblioteca  $biblioteca
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($biblioteca_id, Request $request, Biblioteca $biblioteca)
     {
         //
     }
@@ -74,10 +81,10 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Biblioteca  $biblioteca
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($biblioteca_id, Biblioteca $biblioteca)
     {
         //
     }

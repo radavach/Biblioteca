@@ -1,5 +1,6 @@
 @extends('layouts.tabler')
 @section('contenido')
+@php if(!isset($_SESSION)){session_start();} @endphp
 <div class="page-header">
     <div class="page-title">
         AGREGAR LIBRO
@@ -24,12 +25,26 @@
                     </div>
                 @endif
 
-                @if(isset($libro))
-                    <form action="{{ route('libros.update', $libro->id) }}" method="POST">
-                        <input type="hidden" name="_method" value="PATCH">
+                @if(!isset($biblio))
+
+                    @if(isset($libro))
+                        <form action="{{ route('libros.update', $libro->id) }}" method="POST">
+                            <input type="hidden" name="_method" value="PATCH">
+                    @else
+                        <form action="{{ route('libros.store') }}" method="POST">
+                    @endif
+                    
                 @else
-                    <form action="{{ route('libros.store') }}" method="POST">
+
+                    @if(isset($libro))
+                        <form action="{{ route('bibliotecas.librosB.update', [$biblio, $libro->id]) }}" method="POST">
+                            <input type="hidden" name="_method" value="PATCH">
+                    @else
+                        <form action="{{ route('bibliotecas.librosB.store', $biblio) }}" method="POST">
+                    @endif
+
                 @endif
+
                     @csrf
                     
                     <div class="form-group">
@@ -97,7 +112,11 @@
                         <label class="form-label">Bibliotecas</label>
                         <select name="biblioteca_id" class="form-control">
                             @foreach($bibliotecas as $biblioteca)
-                                <option value="{{ $biblioteca->id }}" {{ isset($libro) && ($libro->biblioteca_id == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
+                                @if(!isset($biblio))
+                                    <option value="{{ $biblioteca->id }}" {{ isset($libro) && ($libro->biblioteca_id == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
+                                @elseif($biblioteca->id == $biblio)
+                                    <option value="{{ $biblioteca->id }}"> {{ $biblioteca->nombre }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
