@@ -52,10 +52,10 @@
                             <td>{{ $libro->linkImagen}}</td>
                             
                             <td>
-                                <a href="{{ route('bibliotecas.librosB.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
                                     Editar
                                 </a>
-                                <form action="{{ route('libros.destroy', $libro->id) }}" method="POST">
+                                <form action="{{ route('bibliotecas.libros.destroy', [$libro->biblioteca_id, $libro->id]) }}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE"> 
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger">
