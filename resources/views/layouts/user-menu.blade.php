@@ -23,7 +23,7 @@
     </span>
     </a>
     
-    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+    <div id="menu-user-dropdown" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
         
         @if(\Auth::user() !== null)
         @can('inicioSesion')

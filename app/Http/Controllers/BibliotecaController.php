@@ -21,12 +21,21 @@ class BibliotecaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         unset($_SESSION['biblioteca']);
-        $bibliotecas = Biblioteca::all();
-        return view('bibliotecas.bibliotecaIndex', compact('bibliotecas'));
+
+        if (!empty($request->buscar)) {
+            $bibliotecas = Biblioteca::where('nombre', 'like', '%'.$request->buscar.'%')
+                ->orderBy('nombre')
+                ->paginate(10);
+        } else {
+            $bibliotecas = Biblioteca::orderBy('nombre')->paginate(10);
+        }
+
+        // $bibliotecas = Biblioteca::all();
+        return view('bibliotecas.bibliotecaIndex', compact('bibliotecas')); 
     }
 
     /**

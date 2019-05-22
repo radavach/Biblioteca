@@ -42,7 +42,15 @@ Route::get('/empleados/redireccionar', 'EmpleadosController@redireccionar')->nam
 Route::get('/empleados/redireccionarEmp/{empleado}', 'EmpleadosController@redireccionarEmp')->name('empleados.redireccionarEmp');
 // Route::post('/empleados/crearEmpleado', 'EmpleadosController@crearEmp')->name('empleados.crearEmp');
 
-Route::resource('/bibliotecas', 'BibliotecaController');
+// Route::resource('/bibliotecas', 'BibliotecaController');
+Route::match(['GET', 'POST'], '/bibliotecas/listado', 'BibliotecaController@index')->name('bibliotecas.index');
+Route::post('/bibliotecas', 'BibliotecaController@store')->name('bibliotecas.store');
+Route::get('/bibliotecas/create', 'BibliotecaController@create')->name('bibliotecas.create');
+Route::get('/bibliotecas/{biblioteca}', 'BibliotecaController@show')->name('bibliotecas.show');
+Route::delete('/bibliotecas/{biblioteca}', 'BibliotecaController@destroy')->name('bibliotecas.destroy');
+Route::match(['put', 'patch'], '/bibliotecas/{biblioteca}', 'BibliotecaController@update')->name('bibliotecas.update');
+Route::get('/bibliotecas/{biblioteca}/edit', 'BibliotecaController@edit')->name('bibliotecas.edit');
+
 Route::resource('/bibliotecas.unaBiblioteca', 'UnaBibliotecaController');
 Route::resource('/clientes', 'ClienteController');
 Route::resource('/ejemplares', 'EjemplarController');
