@@ -13,9 +13,15 @@
             <div class="card-header">
                 <h3>Bienvenido al sistema compañero trabajador!</h3>
                 <div class="ml-auto">
+                    @cannot('bibliotecaAsig')
                     <form class="input-icon my-3 my-lg-0" action="{{ route('libros.create') }}">
                         <button type="submit" class="btn ">Registrar Libros</button>
                     </form>
+                    @else
+                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.libros.create', $_SESSION['biblioteca']) }}">
+                        <button type="submit" class="btn ">Registrar Libros</button>
+                    </form>
+                    @endcannot
                 </div>
             </div>
 

@@ -37,10 +37,10 @@
                 @else
 
                     @if(isset($libro))
-                        <form action="{{ route('bibliotecas.librosB.update', [$biblio, $libro->id]) }}" method="POST">
+                        <form action="{{ route('bibliotecas.libros.update', [$biblio, $libro->id]) }}" method="POST">
                             <input type="hidden" name="_method" value="PATCH">
                     @else
-                        <form action="{{ route('bibliotecas.librosB.store', $biblio) }}" method="POST">
+                        <form action="{{ route('bibliotecas.libros.store', $biblio) }}" method="POST">
                     @endif
 
                 @endif

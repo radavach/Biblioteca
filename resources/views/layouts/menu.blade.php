@@ -22,7 +22,7 @@ if(!isset($_SESSION)){
     </li>
 
     <li class="nav-item">
-      <a href="{{ route('bibliotecas.librosB.index', $_SESSION['biblioteca']) }}" class="nav-link active"><i class="fe fe-book"></i> Libros</a>
+      <a href="{{ route('bibliotecas.libros.index', $_SESSION['biblioteca']) }}" class="nav-link active"><i class="fe fe-book"></i> Libros</a>
     </li>
 
     <li class="nav-item">

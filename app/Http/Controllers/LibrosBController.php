@@ -29,8 +29,9 @@ class LibrosBController extends Controller
     public function create($biblio)
     {
         //
-        $bibliotecas = Biblioteca::all();
-        return view('libros.libroForm', compact('bibliotecas'));
+        // $bibliotecas = Biblioteca::all();
+        $bibliotecas = Biblioteca::where('id', $biblio)->get();
+        return view('libros.libroForm', compact('bibliotecas', 'biblio'));
     }
 
     /**
@@ -45,16 +46,11 @@ class LibrosBController extends Controller
         $request->validate([
             'isbn' => 'required',
             'titulo' => 'required',
-            'subtitulo' => 'required',
             'autor' => 'required',
             'editorial' => 'required',
             'anio' => 'required',
-            'genero' => 'required',
             'idioma' => 'required',
-            'seccion' => 'required',
-            'ejemplar' => 'required',
             'diasMaxPrestamo' => 'required',
-            'linkImagen' => 'required',
             'biblioteca_id' => 'required',
         ]);
 
@@ -73,7 +69,7 @@ class LibrosBController extends Controller
     public function show($biblio, Libro $libro)
     {
         //
-        return view('libros.libroShow', compact('libro'));
+        return view('libros.libroShow', compact('libro', 'biblio'));
     }
 
     /**
@@ -103,16 +99,15 @@ class LibrosBController extends Controller
         $request->validate([
             'isbn' => 'required',
             'titulo' => 'required',
-            'subtitulo' => 'required',
             'autor' => 'required',
             'editorial' => 'required',
             'anio' => 'required',
-            'genero' => 'required',
+            //'genero' => 'required',
             'idioma' => 'required',
-            'seccion' => 'required',
-            'ejemplar' => 'required',
+            // 'seccion' => 'required',
+            // 'ejemplar' => 'required',
             'diasMaxPrestamo' => 'required',
-            'linkImagen' => 'required',
+            // 'linkImagen' => 'required',
             'biblioteca_id' => 'required',
         ]);
 
@@ -120,7 +115,7 @@ class LibrosBController extends Controller
 
        
 
-        return redirect()->route('bibliotecas.librosB.index', $biblio);
+        return redirect()->route('bibliotecas.libros.index', $biblio);
     }
 
     /**

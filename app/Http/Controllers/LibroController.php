@@ -84,9 +84,12 @@ class LibroController extends Controller
     public function edit(Libro $libro)
     {
         //
-        $ejemplares = $libro->ejemplares();
-        $bibliotecas = Biblioteca::all();
-        return view('libros.libroForm', compact('bibliotecas', 'ejemplares', 'libro'));
+        // $ejemplares = $libro->ejemplares();
+        // $bibliotecas = Biblioteca::all();
+        // return view('libros.libroForm', compact('bibliotecas', 'ejemplares', 'libro'));
+
+        // return view('bibliotecas.librosB.edit', [$libro->biblioteca_id, $libro]);
+        return redirect()->route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro]);
     }
 
     /**

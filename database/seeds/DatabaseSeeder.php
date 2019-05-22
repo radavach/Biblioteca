@@ -12,9 +12,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        $this->truncateTables(['users', 'bibliotecas',]);
+        $this->truncateTables(['users', 'bibliotecas','libros','materiales']);
         $this->call(BibliotecaSeeder::class);
         $this->call(UsuarioSeeder::class);
+        $this->call(LibroSeeder::class);
+        $this->call(MaterialSeeder::class);
         //$this->call(PersonaSeeder::class);
     }
 
