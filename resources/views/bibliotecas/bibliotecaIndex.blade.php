@@ -4,6 +4,17 @@
     <div class="page-title">
         INDEX BIBLIOTECAS
     </div>
+    @if(\Auth::user() === null || Gate::check('permisos_admin'))
+    <div class="col-lg-3 ml-auto">
+        <form action = " {{ route('bibliotecas.index') }}" class="input-icon my-3 my-lg-0" method="POST">
+            @csrf
+            <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1" name="buscar">
+            <div class="input-icon-addon">
+            <i class="fe fe-search"></i>
+            </div>
+        </form>
+    </div>
+    @endif
 </div>
 
 @include('extra.mensajes')  
@@ -17,6 +28,7 @@
                 @can('bibliotecaAsig')
                     <div class="ml-auto">
                         <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.create') }}">
+                            @csrf
                             <button type="submit" class="btn ">Registrar Biblioteca</button>
                         </form>
                     </div>

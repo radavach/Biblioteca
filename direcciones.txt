@@ -1,176 +1,191 @@
-+--------+-----------+-------------------------------------------------------------+-----------------------------------+------------------------------------------------------------------------+------------------------------------------------------+
-| Domain | Method    | URI                                                         | Name                              | Action
-          | Middleware                                           |
-+--------+-----------+-------------------------------------------------------------+-----------------------------------+------------------------------------------------------------------------+------------------------------------------------------+
-|        | GET|HEAD  | /                                                           | inicio                            | Closure
-          | web,guest                                            |
-|        | GET|HEAD  | _debugbar/assets/javascript                                 | debugbar.assets.js                | Barryvdh\Debugbar\Controllers\AssetController@js
-          | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
-|        | GET|HEAD  | _debugbar/assets/stylesheets                                | debugbar.assets.css               | Barryvdh\Debugbar\Controllers\AssetController@css
-          | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
-|        | DELETE    | _debugbar/cache/{key}/{tags?}                               | debugbar.cache.delete             | Barryvdh\Debugbar\Controllers\CacheController@delete
-          | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
-|        | GET|HEAD  | _debugbar/clockwork/{id}                                    | debugbar.clockwork                | Barryvdh\Debugbar\Controllers\OpenHandlerController@clockwork          | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
-|        | GET|HEAD  | _debugbar/open                                              | debugbar.openhandler              | Barryvdh\Debugbar\Controllers\OpenHandlerController@handle
-          | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
-|        | GET|HEAD  | _debugbar/telescope/{id}                                    | debugbar.telescope                | Barryvdh\Debugbar\Controllers\TelescopeController@show
-          | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
-|        | GET|HEAD  | api/user                                                    |                                   | Closure
-          | api,auth:api                                         |
-|        | GET|HEAD  | bibliotecas                                                 | bibliotecas.index                 | App\Http\Controllers\BibliotecaController@index
-          | web                                                  |
-|        | POST      | bibliotecas                                                 | bibliotecas.store                 | App\Http\Controllers\BibliotecaController@store
-          | web,auth,admin                                       |
-|        | GET|HEAD  | bibliotecas/create                                          | bibliotecas.create                | App\Http\Controllers\BibliotecaController@create
-          | web,auth,admin                                       |
-|        | DELETE    | bibliotecas/{biblioteca}                                    | bibliotecas.destroy               | App\Http\Controllers\BibliotecaController@destroy
-          | web,auth,admin                                       |
-|        | GET|HEAD  | bibliotecas/{biblioteca}                                    | bibliotecas.show                  | App\Http\Controllers\BibliotecaController@show
-          | web                                                  |
-|        | PUT|PATCH | bibliotecas/{biblioteca}                                    | bibliotecas.update                | App\Http\Controllers\BibliotecaController@update
-          | web,auth,admin                                       |
-|        | GET|HEAD  | bibliotecas/{biblioteca}/Unabiblioteca                      | bibliotecas.Unabiblioteca.index   | App\Http\Controllers\UnaBibliotecaController@index
-          | web                                                  |
-|        | POST      | bibliotecas/{biblioteca}/Unabiblioteca                      | bibliotecas.Unabiblioteca.store   | App\Http\Controllers\UnaBibliotecaController@store
-          | web                                                  |
-|        | GET|HEAD  | bibliotecas/{biblioteca}/Unabiblioteca/create               | bibliotecas.Unabiblioteca.create  | App\Http\Controllers\UnaBibliotecaController@create
-          | web                                                  |
-|        | PUT|PATCH | bibliotecas/{biblioteca}/Unabiblioteca/{Unabiblioteca}      | bibliotecas.Unabiblioteca.update  | App\Http\Controllers\UnaBibliotecaController@update
-          | web                                                  |
-|        | DELETE    | bibliotecas/{biblioteca}/Unabiblioteca/{Unabiblioteca}      | bibliotecas.Unabiblioteca.destroy | App\Http\Controllers\UnaBibliotecaController@destroy
-          | web                                                  |
-|        | GET|HEAD  | bibliotecas/{biblioteca}/Unabiblioteca/{Unabiblioteca}      | bibliotecas.Unabiblioteca.show    | App\Http\Controllers\UnaBibliotecaController@show
-          | web                                                  |
-|        | GET|HEAD  | bibliotecas/{biblioteca}/Unabiblioteca/{Unabiblioteca}/edit | bibliotecas.Unabiblioteca.edit    | App\Http\Controllers\UnaBibliotecaController@edit
-          | web                                                  |
-|        | GET|HEAD  | bibliotecas/{biblioteca}/edit                               | bibliotecas.edit                  | App\Http\Controllers\BibliotecaController@edit
-          | web,auth,admin                                       |
-|        | GET|HEAD  | bienvenida                                                  |                                   | App\Http\Controllers\PaginaController@bienvenida
-          | web                                                  |
-|        | GET|HEAD  | clientes                                                    | clientes.index                    | App\Http\Controllers\ClienteController@index
-          | web                                                  |
-|        | POST      | clientes                                                    | clientes.store                    | App\Http\Controllers\ClienteController@store
-          | web                                                  |
-|        | GET|HEAD  | clientes/create                                             | clientes.create                   | App\Http\Controllers\ClienteController@create
-          | web                                                  |
-|        | GET|HEAD  | clientes/{cliente}                                          | clientes.show                     | App\Http\Controllers\ClienteController@show
-          | web                                                  |
-|        | PUT|PATCH | clientes/{cliente}                                          | clientes.update                   | App\Http\Controllers\ClienteController@update
-          | web                                                  |
-|        | DELETE    | clientes/{cliente}                                          | clientes.destroy                  | App\Http\Controllers\ClienteController@destroy
-          | web                                                  |
-|        | GET|HEAD  | clientes/{cliente}/edit                                     | clientes.edit                     | App\Http\Controllers\ClienteController@edit
-          | web                                                  |
-|        | GET|HEAD  | colaboradores                                               | col                               | App\Http\Controllers\PaginaController@colaboradores
-          | web                                                  |
-|        | GET|HEAD  | contacto                                                    |                                   | App\Http\Controllers\PaginaController@contacto
-          | web                                                  |
-|        | POST      | ejemplares                                                  | ejemplares.store                  | App\Http\Controllers\EjemplarController@store
-          | web                                                  |
-|        | GET|HEAD  | ejemplares                                                  | ejemplares.index                  | App\Http\Controllers\EjemplarController@index
-          | web                                                  |
-|        | GET|HEAD  | ejemplares/create                                           | ejemplares.create                 | App\Http\Controllers\EjemplarController@create
-          | web                                                  |
-|        | GET|HEAD  | ejemplares/{ejemplare}                                      | ejemplares.show                   | App\Http\Controllers\EjemplarController@show
-          | web                                                  |
-|        | DELETE    | ejemplares/{ejemplare}                                      | ejemplares.destroy                | App\Http\Controllers\EjemplarController@destroy
-          | web                                                  |
-|        | PUT|PATCH | ejemplares/{ejemplare}                                      | ejemplares.update                 | App\Http\Controllers\EjemplarController@update
-          | web                                                  |
-|        | GET|HEAD  | ejemplares/{ejemplare}/edit                                 | ejemplares.edit                   | App\Http\Controllers\EjemplarController@edit
-          | web                                                  |
-|        | GET|HEAD  | empleados                                                   | empleados.index                   | App\Http\Controllers\EmpleadosController@index
-          | web                                                  |
-|        | POST      | empleados                                                   | empleados.store                   | App\Http\Controllers\EmpleadosController@store
-          | web                                                  |
-|        | GET|HEAD  | empleados/create                                            | empleados.create                  | App\Http\Controllers\EmpleadosController@create
-          | web                                                  |
-|        | GET|HEAD  | empleados/redireccionar                                     | empleados.redireccionar           | App\Http\Controllers\EmpleadosController@redireccionar
-          | web                                                  |
-|        | GET|HEAD  | empleados/redireccionarEmp/{empleado}                       | empleados.redireccionarEmp        | App\Http\Controllers\EmpleadosController@redireccionarEmp
-          | web                                                  |
-|        | PUT|PATCH | empleados/{empleado}                                        | empleados.update                  | App\Http\Controllers\EmpleadosController@update
-          | web                                                  |
-|        | DELETE    | empleados/{empleado}                                        | empleados.destroy                 | App\Http\Controllers\EmpleadosController@destroy
-          | web                                                  |
-|        | GET|HEAD  | empleados/{empleado}                                        | empleados.show                    | App\Http\Controllers\EmpleadosController@show
-          | web                                                  |
-|        | GET|HEAD  | empleados/{empleado}/edit                                   | empleados.edit                    | App\Http\Controllers\EmpleadosController@edit
-          | web                                                  |
-|        | GET|HEAD  | home                                                        | home                              | App\Http\Controllers\HomeController@index
-          | web                                                  |
-|        | GET|HEAD  | info                                                        | paginaInfo                        | App\Http\Controllers\PaginaController@info
-          | web                                                  |
-|        | GET|HEAD  | inicio                                                      |                                   | Closure
-          | web                                                  |
-|        | POST      | libros                                                      | libros.store                      | App\Http\Controllers\LibroController@store
-          | web                                                  |
-|        | GET|HEAD  | libros                                                      | libros.index                      | App\Http\Controllers\LibroController@index
-          | web                                                  |
-|        | GET|HEAD  | libros/create                                               | libros.create                     | App\Http\Controllers\LibroController@create
-          | web                                                  |
-|        | GET|HEAD  | libros/{libro}                                              | libros.show                       | App\Http\Controllers\LibroController@show
-          | web                                                  |
-|        | PUT|PATCH | libros/{libro}                                              | libros.update                     | App\Http\Controllers\LibroController@update
-          | web                                                  |
-|        | DELETE    | libros/{libro}                                              | libros.destroy                    | App\Http\Controllers\LibroController@destroy
-          | web                                                  |
-|        | GET|HEAD  | libros/{libro}/edit                                         | libros.edit                       | App\Http\Controllers\LibroController@edit
-          | web                                                  |
-|        | GET|HEAD  | login                                                       | login                             | App\Http\Controllers\Auth\LoginController@showLoginForm
-          | web,guest                                            |
-|        | POST      | login                                                       |                                   | App\Http\Controllers\Auth\LoginController@login
-          | web,guest                                            |
-|        | POST      | logout                                                      | logout                            | App\Http\Controllers\Auth\LoginController@logout
-          | web                                                  |
-|        | GET|HEAD  | materiales                                                  | materiales.index                  | App\Http\Controllers\MaterialController@index
-          | web                                                  |
-|        | POST      | materiales                                                  | materiales.store                  | App\Http\Controllers\MaterialController@store
-          | web                                                  |
-|        | GET|HEAD  | materiales/create                                           | materiales.create                 | App\Http\Controllers\MaterialController@create
-          | web                                                  |
-|        | GET|HEAD  | materiales/{materiale}                                      | materiales.show                   | App\Http\Controllers\MaterialController@show
-          | web                                                  |
-|        | PUT|PATCH | materiales/{materiale}                                      | materiales.update                 | App\Http\Controllers\MaterialController@update
-          | web                                                  |
-|        | DELETE    | materiales/{materiale}                                      | materiales.destroy                | App\Http\Controllers\MaterialController@destroy
-          | web                                                  |
-|        | GET|HEAD  | materiales/{materiale}/edit                                 | materiales.edit                   | App\Http\Controllers\MaterialController@edit
-          | web                                                  |
-|        | POST      | password/email                                              | password.email                    | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web,guest                                            |
-|        | POST      | password/reset                                              | password.update                   | App\Http\Controllers\Auth\ResetPasswordController@reset
-          | web,guest                                            |
-|        | GET|HEAD  | password/reset                                              | password.request                  | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web,guest                                            |
-|        | GET|HEAD  | password/reset/{token}                                      | password.reset                    | App\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web,guest                                            |
-|        | GET|HEAD  | personas                                                    | personas.index                    | App\Http\Controllers\PersonaController@index
-          | web                                                  |
-|        | POST      | personas                                                    | personas.store                    | App\Http\Controllers\PersonaController@store
-          | web,auth,admin                                       |
-|        | GET|HEAD  | personas/create                                             | personas.create                   | App\Http\Controllers\PersonaController@create
-          | web,auth,admin                                       |
-|        | PUT|PATCH | personas/{persona}                                          | personas.update                   | App\Http\Controllers\PersonaController@update
-          | web,auth,admin                                       |
-|        | DELETE    | personas/{persona}                                          | personas.destroy                  | App\Http\Controllers\PersonaController@destroy
-          | web,auth,admin                                       |
-|        | GET|HEAD  | personas/{persona}                                          | personas.show                     | App\Http\Controllers\PersonaController@show
-          | web                                                  |
-|        | GET|HEAD  | personas/{persona}/edit                                     | personas.edit                     | App\Http\Controllers\PersonaController@edit
-          | web,auth,admin                                       |
-|        | GET|HEAD  | prestamos                                                   | prestamos.index                   | App\Http\Controllers\PrestamoController@index
-          | web                                                  |
-|        | POST      | prestamos                                                   | prestamos.store                   | App\Http\Controllers\PrestamoController@store
-          | web                                                  |
-|        | GET|HEAD  | prestamos/create                                            | prestamos.create                  | App\Http\Controllers\PrestamoController@create
-          | web                                                  |
-|        | PUT|PATCH | prestamos/{prestamo}                                        | prestamos.update                  | App\Http\Controllers\PrestamoController@update
-          | web                                                  |
-|        | DELETE    | prestamos/{prestamo}                                        | prestamos.destroy                 | App\Http\Controllers\PrestamoController@destroy
-          | web                                                  |
-|        | GET|HEAD  | prestamos/{prestamo}                                        | prestamos.show                    | App\Http\Controllers\PrestamoController@show
-          | web                                                  |
-|        | GET|HEAD  | prestamos/{prestamo}/edit                                   | prestamos.edit                    | App\Http\Controllers\PrestamoController@edit
-          | web                                                  |
-|        | GET|HEAD  | register                                                    | register                          | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest                                            |
-|        | POST      | register                                                    |                                   | App\Http\Controllers\Auth\RegisterController@register
-          | web,guest                                            |
-+--------+-----------+-------------------------------------------------------------+-----------------------------------+------------------------------------------------------------------------+------------------------------------------------------+
++--------+---------------+-------------------------------------------------------------+-----------------------------------+------------------------------------------------------------------------+------------------------------------------------------+
+| Domain | Method        | URI                                                         | Name                              | Action                                                                 | Middleware
+                                    |
++--------+---------------+-------------------------------------------------------------+-----------------------------------+------------------------------------------------------------------------+------------------------------------------------------+
+|        | GET|HEAD      | /                                                           | inicio                            | Closure                                                                | web,guest
+                                    |
+|        | GET|HEAD      | _debugbar/assets/javascript                                 | debugbar.assets.js                | Barryvdh\Debugbar\Controllers\AssetController@js                       | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
+|        | GET|HEAD      | _debugbar/assets/stylesheets                                | debugbar.assets.css               | Barryvdh\Debugbar\Controllers\AssetController@css                      | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
+|        | DELETE        | _debugbar/cache/{key}/{tags?}                               | debugbar.cache.delete             | Barryvdh\Debugbar\Controllers\CacheController@delete                   | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
+|        | GET|HEAD      | _debugbar/clockwork/{id}                                    | debugbar.clockwork                | Barryvdh\Debugbar\Controllers\OpenHandlerController@clockwork          | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
+|        | GET|HEAD      | _debugbar/open                                              | debugbar.openhandler              | Barryvdh\Debugbar\Controllers\OpenHandlerController@handle             | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
+|        | GET|HEAD      | _debugbar/telescope/{id}                                    | debugbar.telescope                | Barryvdh\Debugbar\Controllers\TelescopeController@show                 | Barryvdh\Debugbar\Middleware\DebugbarEnabled,Closure |
+|        | GET|HEAD      | api/user                                                    |                                   | Closure                                                                | api,auth:api
+                                    |
+|        | GET|HEAD      | bibliotecas                                                 | bibliotecas.index                 | App\Http\Controllers\BibliotecaController@index                        | web
+                                    |
+|        | POST          | bibliotecas                                                 | bibliotecas.store                 | App\Http\Controllers\BibliotecaController@store                        | web,auth,admin
+                                    |
+|        | GET|HEAD      | bibliotecas/create                                          | bibliotecas.create                | App\Http\Controllers\BibliotecaController@create                       | web,auth,admin
+                                    |
+|        | GET|POST|HEAD | bibliotecas/listado                                         | bibliotecas.index                 | App\Http\Controllers\BibliotecaController@index                        | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}                                    | bibliotecas.show                  | App\Http\Controllers\BibliotecaController@show                         | web
+                                    |
+|        | DELETE        | bibliotecas/{biblioteca}                                    | bibliotecas.destroy               | App\Http\Controllers\BibliotecaController@destroy                      | web,auth,admin
+                                    |
+|        | PUT|PATCH     | bibliotecas/{biblioteca}                                    | bibliotecas.update                | App\Http\Controllers\BibliotecaController@update                       | web,auth,admin
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/edit                               | bibliotecas.edit                  | App\Http\Controllers\BibliotecaController@edit                         | web,auth,admin
+                                    |
+|        | POST          | bibliotecas/{biblioteca}/librosB                            | bibliotecas.librosB.store         | App\Http\Controllers\LibrosBController@store                           | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/librosB                            | bibliotecas.librosB.index         | App\Http\Controllers\LibrosBController@index                           | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/librosB/create                     | bibliotecas.librosB.create        | App\Http\Controllers\LibrosBController@create                          | web
+                                    |
+|        | PUT|PATCH     | bibliotecas/{biblioteca}/librosB/{librosB}                  | bibliotecas.librosB.update        | App\Http\Controllers\LibrosBController@update                          | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/librosB/{librosB}                  | bibliotecas.librosB.show          | App\Http\Controllers\LibrosBController@show                            | web
+                                    |
+|        | DELETE        | bibliotecas/{biblioteca}/librosB/{librosB}                  | bibliotecas.librosB.destroy       | App\Http\Controllers\LibrosBController@destroy                         | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/librosB/{librosB}/edit             | bibliotecas.librosB.edit          | App\Http\Controllers\LibrosBController@edit                            | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/unaBiblioteca                      | bibliotecas.unaBiblioteca.index   | App\Http\Controllers\UnaBibliotecaController@index                     | web
+                                    |
+|        | POST          | bibliotecas/{biblioteca}/unaBiblioteca                      | bibliotecas.unaBiblioteca.store   | App\Http\Controllers\UnaBibliotecaController@store                     | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/unaBiblioteca/create               | bibliotecas.unaBiblioteca.create  | App\Http\Controllers\UnaBibliotecaController@create                    | web
+                                    |
+|        | PUT|PATCH     | bibliotecas/{biblioteca}/unaBiblioteca/{unaBiblioteca}      | bibliotecas.unaBiblioteca.update  | App\Http\Controllers\UnaBibliotecaController@update                    | web
+                                    |
+|        | DELETE        | bibliotecas/{biblioteca}/unaBiblioteca/{unaBiblioteca}      | bibliotecas.unaBiblioteca.destroy | App\Http\Controllers\UnaBibliotecaController@destroy                   | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/unaBiblioteca/{unaBiblioteca}      | bibliotecas.unaBiblioteca.show    | App\Http\Controllers\UnaBibliotecaController@show                      | web
+                                    |
+|        | GET|HEAD      | bibliotecas/{biblioteca}/unaBiblioteca/{unaBiblioteca}/edit | bibliotecas.unaBiblioteca.edit    | App\Http\Controllers\UnaBibliotecaController@edit                      | web
+                                    |
+|        | GET|HEAD      | bienvenida                                                  |                                   | App\Http\Controllers\PaginaController@bienvenida                       | web
+                                    |
+|        | GET|HEAD      | clientes                                                    | clientes.index                    | App\Http\Controllers\ClienteController@index                           | web
+                                    |
+|        | POST          | clientes                                                    | clientes.store                    | App\Http\Controllers\ClienteController@store                           | web
+                                    |
+|        | GET|HEAD      | clientes/create                                             | clientes.create                   | App\Http\Controllers\ClienteController@create                          | web
+                                    |
+|        | GET|HEAD      | clientes/{cliente}                                          | clientes.show                     | App\Http\Controllers\ClienteController@show                            | web
+                                    |
+|        | PUT|PATCH     | clientes/{cliente}                                          | clientes.update                   | App\Http\Controllers\ClienteController@update                          | web
+                                    |
+|        | DELETE        | clientes/{cliente}                                          | clientes.destroy                  | App\Http\Controllers\ClienteController@destroy                         | web
+                                    |
+|        | GET|HEAD      | clientes/{cliente}/edit                                     | clientes.edit                     | App\Http\Controllers\ClienteController@edit                            | web
+                                    |
+|        | GET|HEAD      | colaboradores                                               | col                               | App\Http\Controllers\PaginaController@colaboradores                    | web
+                                    |
+|        | GET|HEAD      | contacto                                                    |                                   | App\Http\Controllers\PaginaController@contacto                         | web
+                                    |
+|        | GET|HEAD      | ejemplares                                                  | ejemplares.index                  | App\Http\Controllers\EjemplarController@index                          | web
+                                    |
+|        | POST          | ejemplares                                                  | ejemplares.store                  | App\Http\Controllers\EjemplarController@store                          | web
+                                    |
+|        | GET|HEAD      | ejemplares/create                                           | ejemplares.create                 | App\Http\Controllers\EjemplarController@create                         | web
+                                    |
+|        | PUT|PATCH     | ejemplares/{ejemplare}                                      | ejemplares.update                 | App\Http\Controllers\EjemplarController@update                         | web
+                                    |
+|        | DELETE        | ejemplares/{ejemplare}                                      | ejemplares.destroy                | App\Http\Controllers\EjemplarController@destroy                        | web
+                                    |
+|        | GET|HEAD      | ejemplares/{ejemplare}                                      | ejemplares.show                   | App\Http\Controllers\EjemplarController@show                           | web
+                                    |
+|        | GET|HEAD      | ejemplares/{ejemplare}/edit                                 | ejemplares.edit                   | App\Http\Controllers\EjemplarController@edit                           | web
+                                    |
+|        | GET|HEAD      | empleados                                                   | empleados.index                   | App\Http\Controllers\EmpleadosController@index                         | web
+                                    |
+|        | POST          | empleados                                                   | empleados.store                   | App\Http\Controllers\EmpleadosController@store                         | web
+                                    |
+|        | GET|HEAD      | empleados/create                                            | empleados.create                  | App\Http\Controllers\EmpleadosController@create                        | web
+                                    |
+|        | GET|HEAD      | empleados/redireccionar                                     | empleados.redireccionar           | App\Http\Controllers\EmpleadosController@redireccionar                 | web
+                                    |
+|        | GET|HEAD      | empleados/redireccionarEmp/{empleado}                       | empleados.redireccionarEmp        | App\Http\Controllers\EmpleadosController@redireccionarEmp              | web
+                                    |
+|        | GET|HEAD      | empleados/{empleado}                                        | empleados.show                    | App\Http\Controllers\EmpleadosController@show                          | web
+                                    |
+|        | PUT|PATCH     | empleados/{empleado}                                        | empleados.update                  | App\Http\Controllers\EmpleadosController@update                        | web
+                                    |
+|        | DELETE        | empleados/{empleado}                                        | empleados.destroy                 | App\Http\Controllers\EmpleadosController@destroy                       | web
+                                    |
+|        | GET|HEAD      | empleados/{empleado}/edit                                   | empleados.edit                    | App\Http\Controllers\EmpleadosController@edit                          | web
+                                    |
+|        | GET|HEAD      | home                                                        | home                              | App\Http\Controllers\HomeController@index                              | web
+                                    |
+|        | GET|HEAD      | info                                                        | paginaInfo                        | App\Http\Controllers\PaginaController@info                             | web
+                                    |
+|        | GET|HEAD      | inicio                                                      |                                   | Closure                                                                | web
+                                    |
+|        | POST          | libros                                                      | libros.store                      | App\Http\Controllers\LibroController@store                             | web
+                                    |
+|        | GET|HEAD      | libros                                                      | libros.index                      | App\Http\Controllers\LibroController@index                             | web
+                                    |
+|        | GET|HEAD      | libros/create                                               | libros.create                     | App\Http\Controllers\LibroController@create                            | web
+                                    |
+|        | DELETE        | libros/{libro}                                              | libros.destroy                    | App\Http\Controllers\LibroController@destroy                           | web
+                                    |
+|        | PUT|PATCH     | libros/{libro}                                              | libros.update                     | App\Http\Controllers\LibroController@update                            | web
+                                    |
+|        | GET|HEAD      | libros/{libro}                                              | libros.show                       | App\Http\Controllers\LibroController@show                              | web
+                                    |
+|        | GET|HEAD      | libros/{libro}/edit                                         | libros.edit                       | App\Http\Controllers\LibroController@edit                              | web
+                                    |
+|        | GET|HEAD      | login                                                       | login                             | App\Http\Controllers\Auth\LoginController@showLoginForm                | web,guest
+                                    |
+|        | POST          | login                                                       |                                   | App\Http\Controllers\Auth\LoginController@login                        | web,guest
+                                    |
+|        | POST          | logout                                                      | logout                            | App\Http\Controllers\Auth\LoginController@logout                       | web
+                                    |
+|        | POST          | materiales                                                  | materiales.store                  | App\Http\Controllers\MaterialController@store                          | web
+                                    |
+|        | GET|HEAD      | materiales                                                  | materiales.index                  | App\Http\Controllers\MaterialController@index                          | web
+                                    |
+|        | GET|HEAD      | materiales/create                                           | materiales.create                 | App\Http\Controllers\MaterialController@create                         | web
+                                    |
+|        | GET|HEAD      | materiales/{materiale}                                      | materiales.show                   | App\Http\Controllers\MaterialController@show                           | web
+                                    |
+|        | PUT|PATCH     | materiales/{materiale}                                      | materiales.update                 | App\Http\Controllers\MaterialController@update                         | web
+                                    |
+|        | DELETE        | materiales/{materiale}                                      | materiales.destroy                | App\Http\Controllers\MaterialController@destroy                        | web
+                                    |
+|        | GET|HEAD      | materiales/{materiale}/edit                                 | materiales.edit                   | App\Http\Controllers\MaterialController@edit                           | web
+                                    |
+|        | POST          | password/email                                              | password.email                    | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web,guest
+                                    |
+|        | GET|HEAD      | password/reset                                              | password.request                  | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web,guest
+                                    |
+|        | POST          | password/reset                                              | password.update                   | App\Http\Controllers\Auth\ResetPasswordController@reset                | web,guest
+                                    |
+|        | GET|HEAD      | password/reset/{token}                                      | password.reset                    | App\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web,guest
+                                    |
+|        | GET|HEAD      | personas                                                    | personas.index                    | App\Http\Controllers\PersonaController@index                           | web
+                                    |
+|        | POST          | personas                                                    | personas.store                    | App\Http\Controllers\PersonaController@store                           | web,auth,admin
+                                    |
+|        | GET|HEAD      | personas/create                                             | personas.create                   | App\Http\Controllers\PersonaController@create                          | web,auth,admin
+                                    |
+|        | PUT|PATCH     | personas/{persona}                                          | personas.update                   | App\Http\Controllers\PersonaController@update                          | web,auth,admin
+                                    |
+|        | DELETE        | personas/{persona}                                          | personas.destroy                  | App\Http\Controllers\PersonaController@destroy                         | web,auth,admin
+                                    |
+|        | GET|HEAD      | personas/{persona}                                          | personas.show                     | App\Http\Controllers\PersonaController@show                            | web
+                                    |
+|        | GET|HEAD      | personas/{persona}/edit                                     | personas.edit                     | App\Http\Controllers\PersonaController@edit                            | web,auth,admin
+                                    |
+|        | POST          | prestamos                                                   | prestamos.store                   | App\Http\Controllers\PrestamoController@store                          | web
+                                    |
+|        | GET|HEAD      | prestamos                                                   | prestamos.index                   | App\Http\Controllers\PrestamoController@index                          | web
+                                    |
+|        | GET|HEAD      | prestamos/create                                            | prestamos.create                  | App\Http\Controllers\PrestamoController@create                         | web
+                                    |
+|        | DELETE        | prestamos/{prestamo}                                        | prestamos.destroy                 | App\Http\Controllers\PrestamoController@destroy                        | web
+                                    |
+|        | PUT|PATCH     | prestamos/{prestamo}                                        | prestamos.update                  | App\Http\Controllers\PrestamoController@update                         | web
+                                    |
+|        | GET|HEAD      | prestamos/{prestamo}                                        | prestamos.show                    | App\Http\Controllers\PrestamoController@show                           | web
+                                    |
+|        | GET|HEAD      | prestamos/{prestamo}/edit                                   | prestamos.edit                    | App\Http\Controllers\PrestamoController@edit                           | web
+                                    |
+|        | GET|HEAD      | register                                                    | register                          | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest
+                                    |
+|        | POST          | register                                                    |                                   | App\Http\Controllers\Auth\RegisterController@register                  | web,guest
+                                    |
++--------+---------------+-------------------------------------------------------------+-----------------------------------+------------------------------------------------------------------------+------------------------------------------------------+

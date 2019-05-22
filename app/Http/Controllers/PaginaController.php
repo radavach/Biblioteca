@@ -9,10 +9,11 @@ if(!isset($_SESSION)) session_start();
 
 class PaginaController extends Controller
 {
-    public function info()
+    public function info(Request $request)
     {
+        $parametro = $request->buscar;
         if(\Auth::user() !== null and Gate::denies('permisos_admin')){ $_SESSION['biblioteca'] = \Auth::user()->biblioteca_id;}
-        return view('paginas.info');
+        return view('paginas.info', compact('parametro'));
     }
     public function contacto()
     {

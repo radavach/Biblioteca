@@ -14,7 +14,7 @@ if(!isset($_SESSION)){
     @if(isset($_SESSION['biblioteca']))
 
     <li class="nav-item">
-      @if((\Auth::user() === null) || Gate::check('permisos_admin'))
+      @if(\Auth::user() === null || Gate::check('permisos_admin'))
         <a href="{{ route('bibliotecas.index') }}" class="nav-link active"><i class="fe fe-book-open"></i> Bibliotecas</a>
       @else
         <a href="{{ route('bibliotecas.unaBiblioteca.index', $_SESSION['biblioteca']) }}" class="nav-link active"><i class="fe fe-book-open"></i> Bibliotecas</a>
