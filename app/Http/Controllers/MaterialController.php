@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Biblioteca;
 use App\Material;
 use Illuminate\Http\Request;
 
@@ -80,7 +81,7 @@ class MaterialController extends Controller
         //
 
         $bibliotecas = Biblioteca::all();
-        return view('materiales.libroForm', compact('bibliotecas', 'material'));
+        return view('materiales.materialForm', compact('bibliotecas', 'material'));
         
     }
 
@@ -122,7 +123,7 @@ class MaterialController extends Controller
         //
         $material->delete();
         return redirect()->route('materiales.index')
-            >with([
+            ->with([
                 'mensaje' => 'Material Eliminado',
                 'alert-class' => 'alert-warning',
             ]);

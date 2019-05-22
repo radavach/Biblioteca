@@ -80,11 +80,7 @@ class BibliotecaController extends Controller
     {
         //
         // dd($biblioteca->id);
-        $_SESSION['biblioteca'] = $biblioteca;
-        // return view('bibliotecas.bibliotecaShow', compact('biblioteca'));
-        // return view('bibliotecas.Unabiblioteca.index', $biblioteca);
-        return redirect()->route('bibliotecas.unaBiblioteca.index', $biblioteca);
-        // return view('bibliotecas.unaBiblioteca.index', $biblioteca->id);
+        return redirect()->route('bibliotecas.bibliotecas.index', $biblioteca);
     }
 
     /**

@@ -13,12 +13,13 @@ class LibrosBController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($biblio)
+    public function index($biblioteca_id)
     {
         //
         // $libros = Libro::all();
-        $libros = Libro::where('biblioteca_id', $biblio)->get();
-        return view('libros.libroIndex', compact('libros'));
+        // dd($biblioteca_id);
+        $libros = Libro::where('biblioteca_id', $biblioteca_id)->get();
+        return view('libros.libroIndex', compact('biblioteca_id', 'libros'));
     }
 
     /**
@@ -26,12 +27,12 @@ class LibrosBController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($biblio)
+    public function create($biblioteca_id)
     {
         //
         // $bibliotecas = Biblioteca::all();
-        $bibliotecas = Biblioteca::where('id', $biblio)->get();
-        return view('libros.libroForm', compact('bibliotecas', 'biblio'));
+        $bibliotecas = Biblioteca::where('id', $biblioteca_id)->get();
+        return view('libros.libroForm', compact('bibliotecas', 'biblioteca_id'));
     }
 
     /**
@@ -40,7 +41,7 @@ class LibrosBController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($biblio, Request $request)
+    public function store($biblioteca_id, Request $request)
     {
         //
         $request->validate([
@@ -56,7 +57,7 @@ class LibrosBController extends Controller
 
         $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario'));
 
-        return redirect()->route('libros.index');
+        return redirect()->route('bibliotecas.libros.index', $biblioteca_id);
 
     }
 
@@ -66,10 +67,10 @@ class LibrosBController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function show($biblio, Libro $libro)
+    public function show($biblioteca_id, Libro $libro)
     {
         //
-        return view('libros.libroShow', compact('libro', 'biblio'));
+        return view('libros.libroShow', compact('libro', 'biblioteca_id'));
     }
 
     /**
@@ -78,12 +79,12 @@ class LibrosBController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function edit($biblio, Libro $libro)
+    public function edit($biblioteca_id, Libro $libro)
     {
         //
         $ejemplares = $libro->ejemplares();
         $bibliotecas = Biblioteca::all();
-        return view('libros.libroForm', compact('biblio', 'bibliotecas', 'ejemplares', 'libro'));
+        return view('libros.libroForm', compact('biblioteca_id', 'bibliotecas', 'ejemplares', 'libro'));
     }
 
     /**
@@ -93,7 +94,7 @@ class LibrosBController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function update($biblio, Request $request, Libro $libro)
+    public function update($biblioteca_id, Request $request, Libro $libro)
     {
         //
         $request->validate([
@@ -115,7 +116,7 @@ class LibrosBController extends Controller
 
        
 
-        return redirect()->route('bibliotecas.libros.index', $biblio);
+        return redirect()->route('bibliotecas.libros.index', $biblioteca_id);
     }
 
     /**
@@ -124,12 +125,12 @@ class LibrosBController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function destroy($biblio, Libro $libro)
+    public function destroy($biblioteca_id, Libro $libro)
     {
         //
         $libro->delete();
-        return redirect()->route('libros.index')
-            >with([
+        return redirect()->route('bibliotecas.libros.index', $biblioteca_id)
+            ->with([
                 'mensaje' => 'Libro Eliminado',
                 'alert-class' => 'alert-warning',
             ]);

@@ -14,9 +14,5 @@ $factory->define(App\Libro::class, function (Faker $faker) {
         'idioma'=>'español',
         'diasMaxPrestamo'=> '10',
 
-
-
-
-
     ];
 });

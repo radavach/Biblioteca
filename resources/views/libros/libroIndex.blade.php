@@ -13,15 +13,15 @@
             <div class="card-header">
                 <h3>Bienvenido al sistema compañero trabajador!</h3>
                 <div class="ml-auto">
-                    @cannot('bibliotecaAsig')
+                    @if(!isset($biblioteca_id))
                     <form class="input-icon my-3 my-lg-0" action="{{ route('libros.create') }}">
                         <button type="submit" class="btn ">Registrar Libros</button>
                     </form>
                     @else
-                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.libros.create', $_SESSION['biblioteca']) }}">
+                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.libros.create', $biblioteca_id) }}">
                         <button type="submit" class="btn ">Registrar Libros</button>
                     </form>
-                    @endcannot
+                    @endif
                 </div>
             </div>
 
@@ -40,7 +40,13 @@
                     <tbody>
                         @foreach ($libros as $libro)
                             <tr>
-                                <td><a href="{{ route('libros.show', $libro->id) }}">{{ $libro->id }}</a></td>
+                                <td>
+                                    @if(!isset($biblioteca_id))
+                                        <a href="{{ route('libros.show', $libro->id) }}">{{ $libro->id }}</a>
+                                    @else
+                                        <a href="{{ route('bibliotecas.libros.show', [$biblioteca_id, $libro->id]) }}">{{ $libro->id }}</a>
+                                    @endif
+                                </td>
                                 <td>{{ $libro->titulo }}</td>
                                 <td>{{ $libro->autor }}</td>
                                 <td>{{ $libro->isbn }}</td>
