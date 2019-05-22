@@ -1,10 +1,11 @@
 @extends('layouts.tabler')
 @section('contenido')
+@php if(!isset($_SESSION)) session_start(); @endphp
 <div class="page-header">
     <div class="page-title">
         INDEX BIBLIOTECAS
     </div>
-    @if(\Auth::user() === null || Gate::check('permisos_admin'))
+    @if((\Auth::user() === null || Gate::check('permisos_admin')) && (!isset($_SESSION['biblioteca'])))
     <div class="col-lg-3 ml-auto">
         <form action = " {{ route('bibliotecas.index') }}" class="input-icon my-3 my-lg-0" method="POST">
             @csrf
@@ -25,14 +26,14 @@
             <div class="card-header">
                 <h3>Bienvenido al sistema</h3>
 
-                @can('bibliotecaAsig')
+                @if(!isset($biblioteca_id))
                     <div class="ml-auto">
                         <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.create') }}">
                             @csrf
                             <button type="submit" class="btn ">Registrar Biblioteca</button>
                         </form>
                     </div>
-                @endcan
+                @endif
 
             </div>
 
@@ -53,18 +54,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($bibliotecas as $biblioteca)
+                        @foreach ($bibliotecas as $biblio)
                             <tr>
-                                <td><a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.show', $biblioteca->id) }}">{{ $biblioteca->id }}</a></td>
-                                <td>{{ $biblioteca->nombre }}</td>
-                                <td>{{ $biblioteca->horaApertura }}</td>
-                                <td>{{ $biblioteca->horaCierre }}</td>
-                                <td>{{ $biblioteca->dias }}</td>
-                                <td>{{ $biblioteca->telefono }}</td>
-                                <td>{{ $biblioteca->paginaWeb }}</td>
-                                <td>{{ $biblioteca->facebook }}</td>
-                                <td>{{ $biblioteca->email }}</td>
-                                <td><a href="{{ route('bibliotecas.edit', $biblioteca->id) }}" class="btn btn-sm btn-warning">Editar</a></td>
+                                <td>
+                                    @if(!isset($biblioteca_id))
+                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.show', $biblio->id) }}">{{ $biblio->id }}</a>
+                                    @else
+                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.bibliotecas.show', [$biblioteca_id, $biblio->id]) }}">{{ $biblio->id }}</a>
+                                    @endif
+                                </td>
+                                <td>{{ $biblio->nombre }}</td>
+                                <td>{{ $biblio->horaApertura }}</td>
+                                <td>{{ $biblio->horaCierre }}</td>
+                                <td>{{ $biblio->dias }}</td>
+                                <td>{{ $biblio->telefono }}</td>
+                                <td>{{ $biblio->paginaWeb }}</td>
+                                <td>{{ $biblio->facebook }}</td>
+                                <td>{{ $biblio->email }}</td>
+                                <td>
+                                    @if(isset($biblioteca_id))
+                                        <a href="{{ route('bibliotecas.bibliotecas.edit', [$biblioteca_id, $biblio->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                    @else
+                                        <a href="{{ route('bibliotecas.edit', $biblio->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

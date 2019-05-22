@@ -17,10 +17,11 @@ class UnaBibliotecaController extends Controller
     public function index($biblioteca_id)
     {
         //
+        // dd($biblioteca_id);
         $bibliotecas = Biblioteca::where('id', $biblioteca_id)
                ->get();
         $_SESSION['biblioteca'] = $biblioteca_id;
-        return view('bibliotecas.bibliotecaIndex', compact('bibliotecas'));
+        return view('bibliotecas.bibliotecaIndex', compact('biblioteca_id','bibliotecas'));
     }
 
     /**
@@ -39,7 +40,7 @@ class UnaBibliotecaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($biblioteca_id, Request $request)
+    public function store(Request $request, $biblioteca_id)
     {
         //
     }
@@ -53,6 +54,7 @@ class UnaBibliotecaController extends Controller
     public function show($biblioteca_id, Biblioteca $biblioteca)
     {
         //
+        return view('bibliotecas.bibliotecaShow', compact('biblioteca_id', 'biblioteca'));
     }
 
     /**
@@ -64,6 +66,7 @@ class UnaBibliotecaController extends Controller
     public function edit($biblioteca_id, Biblioteca $biblioteca)
     {
         //
+        dd($biblioteca);
     }
 
     /**
@@ -73,7 +76,7 @@ class UnaBibliotecaController extends Controller
      * @param  \App\Biblioteca  $biblioteca
      * @return \Illuminate\Http\Response
      */
-    public function update($biblioteca_id, Request $request, Biblioteca $biblioteca)
+    public function update(Request $request, $biblioteca_id, Biblioteca $biblioteca)
     {
         //
     }

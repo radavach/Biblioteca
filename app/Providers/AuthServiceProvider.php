@@ -40,9 +40,5 @@ class AuthServiceProvider extends ServiceProvider
             return $user === null;
             
         });
-
-        Gate::define('bibliotecaAsig', function(){
-            return isset($_SESSION['biblioteca']);
-        });
     }
 }

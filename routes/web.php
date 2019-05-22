@@ -32,32 +32,39 @@ Route::get('/inicio', function()
     return view('inicio');
 });
 
-// Route::get('/empleados/create', 'EmpleadosController@create');
-// Route::get('/empleados/edit', 'EmpleadosController@edit');
-// Route::get('/empleados/show', 'EmpleadosController@show');
-// Route::get('/empleados/update', 'EmpleadosController@update');
-// Route::get('/empleados/delete', 'EmpleadosController@delete');
-
 Route::get('/empleados/redireccionar', 'EmpleadosController@redireccionar')->name('empleados.redireccionar');
 Route::get('/empleados/redireccionarEmp/{empleado}', 'EmpleadosController@redireccionarEmp')->name('empleados.redireccionarEmp');
 // Route::post('/empleados/crearEmpleado', 'EmpleadosController@crearEmp')->name('empleados.crearEmp');
 
-// Route::resource('/bibliotecas', 'BibliotecaController');
 Route::match(['GET', 'POST'], '/bibliotecas/listado', 'BibliotecaController@index')->name('bibliotecas.index');
-Route::post('/bibliotecas', 'BibliotecaController@store')->name('bibliotecas.store');
-Route::get('/bibliotecas/create', 'BibliotecaController@create')->name('bibliotecas.create');
-Route::get('/bibliotecas/{biblioteca}', 'BibliotecaController@show')->name('bibliotecas.show');
-Route::delete('/bibliotecas/{biblioteca}', 'BibliotecaController@destroy')->name('bibliotecas.destroy');
-Route::match(['put', 'patch'], '/bibliotecas/{biblioteca}', 'BibliotecaController@update')->name('bibliotecas.update');
-Route::get('/bibliotecas/{biblioteca}/edit', 'BibliotecaController@edit')->name('bibliotecas.edit');
+Route::resource('/bibliotecas', 'BibliotecaController');
 
-Route::resource('/bibliotecas.unaBiblioteca', 'UnaBibliotecaController');
+Route::match(['GET', 'POST'], '/bibliotecas/{biblioteca_id}/bibliotecas/listado', 'UnaBibliotecaController@index')->name('bibliotecas.bibliotecas.index');
+Route::post('/bibliotecas/{biblioteca_id}/bibliotecas', 'UnaBibliotecaController@store')->name('bibliotecas.bibliotecas.store');
+Route::get('/bibliotecas/{biblioteca_id}/bibliotecas/create', 'UnaBibliotecaController@create')->name('bibliotecas.bibliotecas.create');
+Route::get('/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}', 'UnaBibliotecaController@show')->name('bibliotecas.bibliotecas.show');
+Route::delete('/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}', 'UnaBibliotecaController@destroy')->name('bibliotecas.bibliotecas.destroy');
+Route::match(['put', 'patch'], '/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}', 'UnaBibliotecaController@update')->name('bibliotecas.bibliotecas.update');
+Route::get('/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}/edit', 'UnaBibliotecaController@edit')->name('bibliotecas.bibliotecas.edit');
+
+// Route::resource('/bibliotecas.bibliotecas', 'UnaBibliotecaController');
 Route::resource('/clientes', 'ClienteController');
 Route::resource('/ejemplares', 'EjemplarController');
 Route::resource('/empleados', 'EmpleadosController');
+
+
+Route::match(['GET', 'POST'], '/libros/listado', 'LibroController@index')->name('libros.index');
 Route::resource('/libros', 'LibroController');
-Route::resource('/bibliotecas.libros', 'LibrosBController');
-Route::resource('/materiales', 'MaterialController');
+
+Route::match(['GET','POST'], '/bibliotecas/{biblioteca_id}/libros/listado', 'LibroController@index')->name('bibliotecas.libros.index');
+Route::resource('/bibliotecas.libros', 'LibrosBController')->parameters(['bibliotecas' => 'biblitoeca_id']);
+
+Route::resource('/materiales', 'MaterialController')->parameters(['materiales' => 'material']);
+Route::resource('/bibliotecas.materiales', 'MaterialesBController')->parameters([
+    'bibliotecas' => 'biblioteca_id',
+    'materiales' => 'material'
+]);
+
 Route::resource('/personas', 'PersonaController');
 Route::resource('/prestamos', 'PrestamoController');
 // Route::resource('/usuarios', 'UsuarioController');

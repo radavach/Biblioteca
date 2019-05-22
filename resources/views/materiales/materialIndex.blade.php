@@ -1,95 +1,80 @@
 @extends('layouts.tabler')
 @section('contenido')
+@php if(!isset($_SESSION)) session_start(); @endphp
 <div class="page-header">
     <div class="page-title">
-        AGREGAR MATERIAL
+        INDEX MATERIALES
     </div>
+    <!-- @if((\Auth::user() === null || Gate::check('permisos_admin')) && (!isset($_SESSION['biblioteca'])))
+    <div class="col-lg-3 ml-auto">
+        <form action = " {{ route('materiales.index') }}" class="input-icon my-3 my-lg-0" method="POST">
+            @csrf
+            <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1" name="buscar">
+            <div class="input-icon-addon">
+            <i class="fe fe-search"></i>
+            </div>
+        </form>
+    </div>
+    @endif -->
 </div>
+
+@include('extra.mensajes')  
+
 <div class="row">
-    <div class="col-md-10 offset-1">
+    <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Capturar Material</h3>
-            <div class="ml-auto">
-                    <form class="input-icon my-3 my-lg-0" action="{{ route('materiales.create') }}">
-                        <button type="submit" class="btn ">Registrar Material</button>
-                    </form>
+            <div class="card-header">
+                <h3>Bienvenido al sistema</h3>
+
+                <div class="ml-auto">
+                    @if(!isset($biblioteca_id))
+                        <form class="input-icon my-3 my-lg-0" action="{{ route('materiales.create') }}">
+                            <button type="submit" class="btn ">Registrar Material</button>
+                        </form>
+                    @else
+                        <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.materiales.create', $biblioteca_id) }}">
+                            <button type="submit" class="btn ">Registrar Material</button>
+                        </form>
+                    @endif
                 </div>
-          </div>
+
+            </div>
 
             <div class="card-body">
-          
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                @if(isset($material))
-                    <form action="{{ route('materiales.update', $material->id) }}" method="POST">
-                        <input type="hidden" name="_method" value="PATCH">
-                @else
-                    <form action="{{ route('material.store') }}" method="POST">
-                @endif
-                    @csrf
-                    
-                    <div class="form-group">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="titulo" value="{{ isset($libro) ? $libro->titulo : '' }}{{ old('titulo') }}" placeholder="Titulo del libro">
-                            @if ($errors->has('titulo'))
-                                <span class="alert alert-danger">
-                                    <strong>{{ $errors->first('titulo') }}</strong>
-                                </span>
-                            @endif
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Seccion</label>
-                        <input type="text" class="form-control" name="subtitulo" value="{{ isset($libro) ? $libro->subtitulo : '' }}" placeholder="Subtitulo del libro">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Tipo</label>
-                        <input type="text" class="form-control" name="isbn" value="{{ isset($libro) ? $libro->isbn : '' }}" placeholder="ISBN del libro">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Ejemplar</label>
-                        <input type="text" class="form-control" name="autor" value="{{ isset($libro) ? $libro->autor : '' }}" placeholder="Autor del libro">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Link Imagen</label>
-                        <input type="text" class="form-control" name="editorial" value="{{ isset($libro) ? $libro->editorial : '' }}" placeholder="Editorial del libro">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Autor</label>
-                        <input type="text" class="form-control" name="anio" value="{{ isset($libro) ? $libro->anio : '' }}" placeholder="Año del libro">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Año</label>
-                        <input type="text" class="form-control" name="genero" value="{{ isset($libro) ? $libro->genero : '' }}" placeholder="Genero del libro">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Bibliotecas</label>
-                        <select name="biblioteca_id" class="form-control">
-                            @foreach($bibliotecas as $biblioteca)
-                                <option value="{{ $biblioteca->id }}" {{ isset($libro) && ($libro->biblioteca_id == $biblioteca->id) !== false ? 'selected' : ''}}>{{ $biblioteca->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary ml-auto">Aceptar</button>
-
-                </form>
-
+                <table class="table table-hover table-dark" >
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Seccion</th>
+                            <th>Autor</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($materiales as $material)
+                            <tr>
+                                <td>
+                                    @if(!isset($biblioteca_id))
+                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('materiales.show', $material->id) }}">{{ $material->id }}:((</a>
+                                    @else
+                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.materiales.show', [$biblioteca_id, $material->id]) }}">{{ $material->id }}</a>
+                                    @endif
+                                </td>
+                                <td>{{ $material->nombre }}</td>
+                                <td>{{ $material->seccion }}</td>
+                                <td>{{ $material->autor }}</td>
+                                <td>
+                                    @if(isset($biblioteca_id))
+                                        <a href="{{ route('bibliotecas.materiales.edit', [$biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                    @else
+                                        <a href="{{ route('materiales.edit', $material->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                 </table>
             </div>
         </div>
     </div>
