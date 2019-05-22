@@ -56,7 +56,7 @@ Route::resource('/clientes', 'ClienteController');
 Route::resource('/ejemplares', 'EjemplarController');
 Route::resource('/empleados', 'EmpleadosController');
 Route::resource('/libros', 'LibroController');
-Route::resource('/bibliotecas.librosB', 'LibrosBController');
+Route::resource('/bibliotecas.libros', 'LibrosBController');
 Route::resource('/materiales', 'MaterialController');
 Route::resource('/personas', 'PersonaController');
 Route::resource('/prestamos', 'PrestamoController');

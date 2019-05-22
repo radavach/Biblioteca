@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Material extends Model
 {
     //
+    protected $table = 'Materiales';
+    protected $guarded = ['id'];
 }

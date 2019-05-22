@@ -17,5 +17,18 @@ class UsuarioSeeder extends Seeder
             'email' => 'danielophj@hotmail.com',
             'esAdmin' => TRUE
         ]);
+        
+        $nombre = 'Michellin';
+        $apellidoPat = 'Micho';
+        $apellidoMat = 'Michel';
+        factory(App\User::class)->create([
+
+            'nombre' => $nombre,
+            'apellidoPaterno' => $apellidoPat,
+            'apellidoMaterno' => $apellidoMat,
+            'name' => $nombre . ' ' . $apellidoPat . ' ' . $apellidoMat,
+            'email' => 'michelleamador4@gmail.com',
+            'esAdmin' => TRUE
+        ]);
     }
 }
