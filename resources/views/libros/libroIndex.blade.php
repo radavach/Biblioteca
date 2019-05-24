@@ -49,6 +49,7 @@
                             <th>Titulo</th> 
                             <th>Autor</th>
                             <th>ISBN</th> 
+                            <th>Ejemplares</th>
                             @if(\Auth::user() !== null)<th>Acciones</th>@endif
                         </tr>
                     </thead>
@@ -65,6 +66,13 @@
                                 <td>{{ $libro->titulo }}</td>
                                 <td>{{ $libro->autor }}</td>
                                 <td>{{ $libro->isbn }}</td>
+                                <td>
+                                    @foreach($libro->ejemplares as $ejemplar)
+                                    <ul class="nav nav-tabs border-0 ">
+                                        <li class="nav-item a-ESE-ENLACE-ES-MIO">{{ ($ejemplar->numEjemp)? $ejemplar->numEjemplar : $ejemplar->id }} - {{ $ejemplar->nombre }} {{ ($ejemplar->estado)? 'Disponible' : '' }}</li>
+                                    </ul>
+                                    @endforeach
+                                </td>
                                 @if(\Auth::user() !== null)
                                     <td>
                                             <a href="{{ route('libros.edit', $libro->id) }}" class = "btn btn-sm btn-warning">Editar</a>

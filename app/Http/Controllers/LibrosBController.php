@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Libro;
 use App\Biblioteca;
+use App\EjemplarL;
 use Illuminate\Http\Request;
 
 class LibrosBController extends Controller
@@ -21,13 +22,16 @@ class LibrosBController extends Controller
         if(!empty($request->buscar)){
             $libros = Libro::where('biblioteca_id', $biblioteca_id)
                     ->where('nombre', 'like', '%'.$request->buscar.'%')
+                    ->with('ejemplares')
                     ->orderBy('nombre')
                     ->paginate(5);
         }
         else{
             $libros = Libro::where('biblioteca_id', $biblioteca_id)
-                ->paginate(5);
+                    ->with(['ejemplares'])
+                    ->paginate(5);
         }
+
         return view('libros.libroIndex', compact('biblioteca_id', 'libros'));
     }
 

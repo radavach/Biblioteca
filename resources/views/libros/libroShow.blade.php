@@ -70,6 +70,51 @@
                 </table>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Ejemplares</h3>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-hover table-dark" >
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Origen</th> 
+                            <th>Estado</th> 
+                            @if(\Auth::user())<th>Acciones</th>@endif
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($libro->ejemplares as $ejemplar)
+                            <tr>
+                                <td><a class="a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.libros.show', [$libro->biblioteca_id, $libro->id]) }}">{{ $ejemplar->numEjemp? $ejemplar->numEjemp : $ejemplar->id }}</a></td>
+                                <td>{{ $ejemplar->origen}}</td>
+                                <td>{{ $ejemplar->estado? 'DISPONIBLE' : 'PRESTADO'}}</td>
+                                
+                                <td>
+                                    @if(\Auth::user() !== null)
+                                        <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
+                                            Editar
+                                        </a>
+                                        <form action="{{ route('bibliotecas.libros.destroy', [$libro->biblioteca_id, $libro->id]) }}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE"> 
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                Borrar
+                                                </button>
+                                        </form>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

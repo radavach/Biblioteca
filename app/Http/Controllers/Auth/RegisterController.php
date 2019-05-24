@@ -82,7 +82,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $esAdmin = false;
+        $esAdmin = FALSE;
         if(isset($data['esAdmin']))
         {
             $data['esAdmin'] === 'TRUE' ? $esAdmin = true :  $esAdmin = false;
