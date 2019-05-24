@@ -26,7 +26,7 @@ class CreaTablaBibliotecas extends Migration
             $table->string('telefono')->nullable();
             $table->string('paginaWeb')->nullable();
             $table->string('facebook')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class BibliotecaSeeder extends Seeder
     {
         $fecha = new DateTime('2019-10-01');
         Biblioteca::create([
-            'nombre' => 'Juan Jose Arreola',
+            'nombre' => 'Juan José Arreola',
             'horaApertura' => date("H:i:s", mktime(8,00)),
             'horaCierre' => date("H:i:s", mktime(19,00)),
             'dias' => $fecha,

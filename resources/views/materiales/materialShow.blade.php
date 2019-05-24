@@ -23,7 +23,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Seccion</th>
+                            <th>Sección</th>
                             <th>Tipo</th>
                             <th>Ejemplar</th>
                             <th>Autor</th>
