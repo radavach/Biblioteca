@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+
 class RegisterController extends Controller
 {
     /*
@@ -23,13 +27,6 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
-
-    public function showRegistrationForm()
-    {
-        $bibliotecas = Biblioteca::all();
-        return view('auth.register', compact('bibliotecas'));
-    }
 
     /**
      * Where to redirect users after registration.
@@ -46,8 +43,16 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('esAdminMw');
     }
+
+
+    public function showRegistrationForm()
+    {
+        $bibliotecas = Biblioteca::all();
+        return view('auth.register', compact('bibliotecas'));
+    }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -86,13 +91,11 @@ class RegisterController extends Controller
         $name = $data['nombre'] . " " . $data['apellidoPaterno'] . " " . $data['apellidoMaterno'];
 
         return User::create([
-            // 'name' => $data['name'],
             'name' => $name,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'nombre' => $data['nombre'],
             'apellidoPaterno' => $data['apellidoPaterno'],
-            // if(isset($data['apellidoMaterno']))'apellidoPaterno' => $data['apellidoPAterno'],
             'apellidoMaterno' => $data['apellidoMaterno'],
             'nombreUsuario' => $data['nombreUsuario'],
             'telefono' => $data['telefono'],
@@ -101,5 +104,19 @@ class RegisterController extends Controller
             'biblioteca_id' => $data['biblioteca_id'],
             'esAdmin' => $esAdmin,
         ]);
+
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        // $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
+
 }

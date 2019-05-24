@@ -28,7 +28,7 @@
                             <th>Página Web</th> 
                             <th>Facebook</th> 
                             <th>Correo Electrónico</th>
-                            <th>Acciones</th>
+                            @if(\Auth::user())<th>Acciones</th>@endif
                         </tr>
                     </thead>
                     <tbody>
@@ -43,17 +43,19 @@
                                 <td>{{ $biblioteca->facebook }}</td>
                                 <td>{{ $biblioteca->email }}</td>
                                 <td>
-                                    @if(\Auth::user() !== null && can('permisos_admin', $biblioteca))
-                                    <a href="{{ route('bibliotecas.edit', $biblioteca->id) }}" class="btn btn-sm btn-warning">
-                                        Editar
-                                    </a>
-                                    <form action="{{ route('bibliotecas.destroy', $biblioteca->id) }}" method="POST">
-                                        <input type="hidden" name="_method" value="DELETE"> 
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            Borrar
-                                            </button>
-                                    </form>
+                                    @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca_id)))
+                                            <a href="{{ route('bibliotecas.edit', $biblioteca->id) }}" class="btn btn-sm btn-warning">
+                                                Editar
+                                            </a>
+                                        @can('permisos_admin')
+                                            <form action="{{ route('bibliotecas.destroy', $biblioteca->id) }}" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE"> 
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    Borrar
+                                                </button>
+                                            </form>
+                                        @endcan
                                     @endif
                                 </td>
                             </tr>

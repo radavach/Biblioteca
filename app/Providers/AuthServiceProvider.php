@@ -3,9 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
-if(!isset($_SESSION)) session_start();
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,18 +26,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        $icon_num = rand(0,80);
+        View::share('icon_num', $icon_num);
+
         //
         Gate::define('permisos_admin', function($user){
             return $user->esAdmin == 1;
         });
 
-        Gate::define('inicioSesion', function($user){
-            return $user !== null;
-        });
-
-        Gate::define('noInicioSesion', function($user){
-            return $user === null;
-            
-        });
     }
 }

@@ -37,8 +37,9 @@ Route::get('/empleados/redireccionarEmp/{empleado}', 'EmpleadosController@redire
 // Route::post('/empleados/crearEmpleado', 'EmpleadosController@crearEmp')->name('empleados.crearEmp');
 
 Route::match(['GET', 'POST'], '/bibliotecas/listado', 'BibliotecaController@index')->name('bibliotecas.index');
-Route::resource('/bibliotecas', 'BibliotecaController');
+Route::resource('/bibliotecas', 'BibliotecaController')->except(['index']);
 
+//Esta parte se puede hacer con de otra manera pero me empeñe en crear las rutas una por una así que asi se quedan :3
 Route::match(['GET', 'POST'], '/bibliotecas/{biblioteca_id}/bibliotecas/listado', 'UnaBibliotecaController@index')->name('bibliotecas.bibliotecas.index');
 Route::post('/bibliotecas/{biblioteca_id}/bibliotecas', 'UnaBibliotecaController@store')->name('bibliotecas.bibliotecas.store');
 Route::get('/bibliotecas/{biblioteca_id}/bibliotecas/create', 'UnaBibliotecaController@create')->name('bibliotecas.bibliotecas.create');
@@ -50,20 +51,33 @@ Route::get('/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}/edit', 'UnaBib
 // Route::resource('/bibliotecas.bibliotecas', 'UnaBibliotecaController');
 Route::resource('/clientes', 'ClienteController');
 Route::resource('/ejemplares', 'EjemplarController');
+
 Route::resource('/empleados', 'EmpleadosController');
 
-
+///Mostrar todos los libros
 Route::match(['GET', 'POST'], '/libros/listado', 'LibroController@index')->name('libros.index');
-Route::resource('/libros', 'LibroController');
+Route::resource('/libros', 'LibroController')->except(['index']);
 
-Route::match(['GET','POST'], '/bibliotecas/{biblioteca_id}/libros/listado', 'LibroController@index')->name('bibliotecas.libros.index');
-Route::resource('/bibliotecas.libros', 'LibrosBController')->parameters(['bibliotecas' => 'biblitoeca_id']);
+///Mostrar los libros de exclusivamente una biblioteca
+Route::match(['GET','POST'], '/bibliotecas/{biblioteca_id}/libros/listado', 'LibrosBController@index')->name('bibliotecas.libros.index');
+Route::resource('/bibliotecas.libros', 'LibrosBController')
+        ->except(['index'])
+        ->parameters(['bibliotecas' => 'biblitoeca_id']);
 
-Route::resource('/materiales', 'MaterialController')->parameters(['materiales' => 'material']);
-Route::resource('/bibliotecas.materiales', 'MaterialesBController')->parameters([
-    'bibliotecas' => 'biblioteca_id',
-    'materiales' => 'material'
-]);
+Route::match(['GET','POST'], '/materiales/listado', 'MaterialController@index')->name('materiales.index');
+Route::resource('/materiales', 'MaterialController')
+        ->except(['index'])
+        ->parameters(['materiales' => 'material']);
+
+///Mostrar todos los materiales de una biblioteca
+Route::match(['GET', 'POST'], '/bibliotecas/{biblioteca_id}/materiales/listado', 'MaterialesBController@index')->name('bibliotecas.materiales.index');
+Route::resource('/bibliotecas.materiales', 'MaterialesBController')
+    ->except(['index'])
+    ->parameters([
+        'bibliotecas' => 'biblioteca_id',
+        'materiales' => 'material'
+    ]
+);
 
 Route::resource('/personas', 'PersonaController');
 Route::resource('/prestamos', 'PrestamoController');

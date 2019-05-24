@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Biblioteca;
 use Illuminate\Http\Request;
 
-if(!isset($_SESSION)) session_start();
-
 class BibliotecaController extends Controller
 {
     public function __construct()
@@ -24,7 +22,6 @@ class BibliotecaController extends Controller
     public function index(Request $request)
     {
         //
-        unset($_SESSION['biblioteca']);
 
         if (!empty($request->buscar)) {
             $bibliotecas = Biblioteca::where('nombre', 'like', '%'.$request->buscar.'%')

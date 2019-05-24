@@ -13,12 +13,21 @@ class LibrosBController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($biblioteca_id)
+    public function index(Request $request, $biblioteca_id)
     {
         //
         // $libros = Libro::all();
-        // dd($biblioteca_id);
-        $libros = Libro::where('biblioteca_id', $biblioteca_id)->get();
+        // dd($request);
+        if(!empty($request->buscar)){
+            $libros = Libro::where('biblioteca_id', $biblioteca_id)
+                    ->where('nombre', 'like', '%'.$request->buscar.'%')
+                    ->orderBy('nombre')
+                    ->paginate(5);
+        }
+        else{
+            $libros = Libro::where('biblioteca_id', $biblioteca_id)
+                ->paginate(5);
+        }
         return view('libros.libroIndex', compact('biblioteca_id', 'libros'));
     }
 
