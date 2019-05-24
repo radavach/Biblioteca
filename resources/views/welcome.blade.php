@@ -1,15 +1,5 @@
 <!doctype html>
 
-@php 
-    if(isset($_SESSION))
-    {
-        session_destroy();
-        session_start();
-        $_SESSION['icon_num'] = rand(1, 7);
-    }
-@endphp
-    
-
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -83,17 +73,13 @@
                     @else
                         <a href="{{ route('login') }}">Ingreso</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Registrar</a>
-                        @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Biblioteca U DE G
-                    <!-- @php isset($_SESSION['icon_num']) ? print $_SESSION['icon_num'] : print ':)'; @endphp -->
+                    Biblioteca U DE G 
                 </div>
 
                 <div class="links">

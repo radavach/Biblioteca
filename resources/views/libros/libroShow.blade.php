@@ -32,7 +32,7 @@
                             <th>Ejemplar</th>
                             <th>Días Maximos de Préstamo</th>
                             <th>Imagen</th>
-                            <th>Acciones</th>
+                            @if(\Auth::user())<th>Acciones</th>@endif
                         </tr>
                     </thead>
                     <tbody>
@@ -52,16 +52,18 @@
                             <td>{{ $libro->linkImagen}}</td>
                             
                             <td>
-                                <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
-                                    Editar
-                                </a>
-                                <form action="{{ route('bibliotecas.libros.destroy', [$libro->biblioteca_id, $libro->id]) }}" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE"> 
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        Borrar
-                                        </button>
-                                </form>
+                                @if(\Auth::user() !== null)
+                                    <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
+                                        Editar
+                                    </a>
+                                    <form action="{{ route('bibliotecas.libros.destroy', [$libro->biblioteca_id, $libro->id]) }}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE"> 
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            Borrar
+                                            </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     </tbody>

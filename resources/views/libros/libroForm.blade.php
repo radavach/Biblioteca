@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Subtitulo</label>
+                        <label class="form-label">{{ __('Subtitulo del Libro') }}</label>
                         <input type="text" class="form-control" name="subtitulo" value="{{ isset($libro) ? $libro->subtitulo : '' }}" placeholder="Subtitulo del libro">
                     </div>
 

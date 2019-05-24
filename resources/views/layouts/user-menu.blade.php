@@ -1,8 +1,3 @@
-<?php 
-    if(!isset($_SESSION)){
-        session_start();
-    } 
-?>
 <div class="dropdown">
     <a href="#" class="nav-link pr-0 leading-none clas-esp" data-toggle="dropdown">
     <span class="avatar" style="background-image: <?php 
@@ -12,7 +7,7 @@
                     print 'url(./assets/images/imagenes/'.((Auth::user()->id % 80) + 1).'.jpg)';
             else: 
                 isset($_SESSION['icon_num'])? 
-                    print 'url(./assets/images/imagenes/'.$_SESSION['icon_num'].'.jpg)' : 
+                    print 'url(./assets/images/imagenes/'.$icon_num.'.jpg)' : 
                     print 'url(./assets/images/imagenes/3.jpg)'; 
             endif; ?> ">
     </span>
@@ -26,24 +21,22 @@
     <div id="menu-user-dropdown" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
         
         @if(\Auth::user() !== null)
-        @can('inicioSesion')
-        <a class="dropdown-item" href="#">
-            <i class="dropdown-icon fe fe-lock"></i> Profile
-        </a>
-        <a class="dropdown-item" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">
-            <i class="dropdown-icon fe fe-log-out"></i> Sign out
-        </a>
-        
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-        @endcan
+            <a class="dropdown-item" href="#">
+                <i class="dropdown-icon fe fe-lock"></i> Profile
+            </a>
+            <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                <i class="dropdown-icon fe fe-log-out"></i> Sign out
+            </a>
+            
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
         @else
-        <a class="dropdown-item" href="{{ route('login') }}">
-            <i class="dropdown-icon fe fe-lock"></i> Iniciar sesion
-        </a>
+            <a class="dropdown-item" href="{{ route('login') }}">
+                <i class="dropdown-icon fe fe-lock"></i> Iniciar sesion
+            </a>
         @endif
     </div>
 </div>

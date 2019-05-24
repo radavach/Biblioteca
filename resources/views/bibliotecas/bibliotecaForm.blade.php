@@ -77,7 +77,11 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary ml-auto">Aceptar</button>
-                <a href="{{ route('bibliotecas.index') }}" class="btn btn-danger">Cancelar</a>
+                @can('permisos_admin')
+                  <a href="{{ route('bibliotecas.index') }}" class="btn btn-danger">Cancelar</a>
+                @else
+                  <a href="{{ route('bibliotecas.unaBiblioteca.index', \Auth::user()->biblioteca_id) }}" class="btn btn-danger">Cancelar</a>
+                @endcan
 
             </form>
 
