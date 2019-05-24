@@ -31,7 +31,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Titulo</th> 
+                            <th>Título</th> 
                             <th>Autor</th>
                             <th>ISBN</th> 
                             <th>Acciones</th>

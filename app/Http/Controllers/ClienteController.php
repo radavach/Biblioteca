@@ -45,7 +45,7 @@ class ClienteController extends Controller
         $request->validate([
             'nombre' => 'required|min:3',
             'apellidoPaterno' => 'required|min:3',
-            'apellidoMaterno' => 'nullable|min:3',
+            'apellidoMaterno' => 'required|min:3',
             'nombreUsuario' => 'required|min:3',
             'email' => 'required|min:3',
             'biblioteca_id' => 'required',

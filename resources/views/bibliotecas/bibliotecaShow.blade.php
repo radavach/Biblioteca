@@ -23,11 +23,11 @@
                             <th>Nombre</th> 
                             <th>Hora de Apertura</th> 
                             <th>Hora de Cierre</th> 
-                            <th>Dias</th> 
-                            <th>Telefono</th> 
-                            <th>Pagina Web</th> 
+                            <th>Días</th> 
+                            <th>Teléfono</th> 
+                            <th>Página Web</th> 
                             <th>Facebook</th> 
-                            <th>Email</th>
+                            <th>Correo Electrónico</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>

@@ -46,7 +46,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Seccion</th>
+                            <th>Sección</th>
                             <th>Autor</th>
                             <th>Acciones</th>
                         </tr>

@@ -9,7 +9,7 @@
     <div class="col-lg-3 ml-auto">
         <form action = " {{ route('bibliotecas.index') }}" class="input-icon my-3 my-lg-0" method="POST">
             @csrf
-            <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1" name="buscar">
+            <input type="search" class="form-control header-search" placeholder="Buscar&hellip;" tabindex="1" name="buscar">
             <div class="input-icon-addon">
             <i class="fe fe-search"></i>
             </div>
@@ -45,11 +45,11 @@
                             <th>Nombre</th> 
                             <th>Hora de Apertura</th> 
                             <th>Hora de Cierre</th> 
-                            <th>Dias</th> 
-                            <th>Telefono</th> 
-                            <th>Pagina Web</th> 
+                            <th>Días</th> 
+                            <th>Teléfono</th> 
+                            <th>Página Web</th> 
                             <th>Facebook</th> 
-                            <th>Email</th>
+                            <th>Correo Electrónico</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>

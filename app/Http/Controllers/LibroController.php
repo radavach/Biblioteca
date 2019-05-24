@@ -44,16 +44,16 @@ class LibroController extends Controller
         $request->validate([
             'isbn' => 'required',
             'titulo' => 'required',
-            'subtitulo' => 'required',
+            'subtitulo' => 'nullable',
             'autor' => 'required',
             'editorial' => 'required',
             'anio' => 'required',
-            'genero' => 'required',
+            'genero' => 'nullable',
             'idioma' => 'required',
-            'seccion' => 'required',
-            'ejemplar' => 'required',
+            'seccion' => 'nullable',
+            'ejemplar' => 'nullable',
             'diasMaxPrestamo' => 'required',
-            'linkImagen' => 'required',
+            'linkImagen' => 'nullable',
             'biblioteca_id' => 'required',
         ]);
 
@@ -105,16 +105,16 @@ class LibroController extends Controller
         $request->validate([
             'isbn' => 'required',
             'titulo' => 'required',
-            'subtitulo' => 'required',
+            // 'subtitulo' => 'nullable',
             'autor' => 'required',
             'editorial' => 'required',
             'anio' => 'required',
-            'genero' => 'required',
+            'genero' => 'nullable',
             'idioma' => 'required',
-            'seccion' => 'required',
-            'ejemplar' => 'required',
+            'seccion' => 'nullable',
+            'ejemplar' => 'nullable',
             'diasMaxPrestamo' => 'required',
-            'linkImagen' => 'required',
+            'linkImagen' => 'nullable',
             'biblioteca_id' => 'required',
         ]);
 
