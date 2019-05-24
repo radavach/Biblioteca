@@ -46,7 +46,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Titulo</th> 
+                            <th>Título</th> 
                             <th>Autor</th>
                             <th>ISBN</th> 
                             @if(\Auth::user() !== null)<th>Acciones</th>@endif

@@ -20,17 +20,17 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Titulo</th> 
-                            <th>Subtitulo</th> 
+                            <th>Título</th> 
+                            <th>Subtítulo</th> 
                             <th>ISBN</th> 
                             <th>Autor</th> 
                             <th>Editorial </th> 
                             <th>Año</th> 
-                            <th>Genero</th>
+                            <th>Género</th>
                             <th>Idioma</th>
                             <th>Sección</th>
                             <th>Ejemplar</th>
-                            <th>Días Maximos de Préstamo</th>
+                            <th>Días Máximos de Préstamo</th>
                             <th>Imagen</th>
                             @if(\Auth::user())<th>Acciones</th>@endif
                         </tr>

@@ -49,7 +49,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Seccion</th>
+                            <th>Sección</th>
                             <th>Autor</th>
                             @if(\Auth::user() !== null)<th>Acciones</th>@endif
                         </tr>

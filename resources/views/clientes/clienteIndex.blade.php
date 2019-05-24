@@ -25,7 +25,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre Usuario</th> 
-                            <th>Correo Electronico</th> 
+                            <th>Correo Electrónico</th> 
                             <th>Acciones</th>
                         </tr>
                     </thead>

@@ -43,8 +43,8 @@
                     @csrf
                     
                     <div class="form-group">
-                        <label class="form-label">{{ __('Identificador del Articulo') }}</label>
-                        <input type="text" class="form-control{{ $errors->has('idArticulo') ? ' is-invalid' : '' }}" name="idArticulo" value="{{ isset($material) ? $material->idArticulo : old('idArticulo') }}" placeholder="Id Articulo">
+                        <label class="form-label">{{ __('Identificador del Artículo') }}</label>
+                        <input type="text" class="form-control{{ $errors->has('idArticulo') ? ' is-invalid' : '' }}" name="idArticulo" value="{{ isset($material) ? $material->idArticulo : old('idArticulo') }}" placeholder="Id Artículo">
                         @if ($errors->has('idArticulo'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('idArticulo') }}</strong>
@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                         <label class="form-label">{{ __('Nombre') }}</label>
-                        <input type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ isset($material) ? $material->nombre : '' }}{{ old('nombre') }}" placeholder="Nombre del material">
+                        <input type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ isset($material) ? $material->nombre : old('nombre') }}" placeholder="Nombre del material">
                         @if ($errors->has('nombre'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('nombre') }}</strong>
@@ -64,8 +64,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">{{ __('Seccion') }}</label>
-                        <input type="text" class="form-control{{ $errors->has('seccion') ? ' is-invalid' : '' }}" name="seccion" value="{{ isset($material) ? $material->seccion : old('seccion') }}" placeholder="Seccion del material">
+                        <label class="form-label">{{ __('Sección') }}</label>
+                        <input type="text" class="form-control{{ $errors->has('seccion') ? ' is-invalid' : '' }}" name="seccion" value="{{ isset($material) ? $material->seccion : old('seccion') }}" placeholder="Sección del material">
                         @if ($errors->has('seccion'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('seccion') }}</strong>
@@ -85,7 +85,7 @@
 
                     <div class="form-group">
                         <label class="form-label">{{ __('Ejemplar') }}</label>
-                        <input type="text" class="form-control{{ $errors->has('ejemplar') ? ' is-invalid' : '' }}" name="ejemplar" value="{{ isset($material) ? $material->ejemplar : old('ejemplar') }}" placeholder="Numero de ejemplar">
+                        <input type="text" class="form-control{{ $errors->has('ejemplar') ? ' is-invalid' : '' }}" name="ejemplar" value="{{ isset($material) ? $material->ejemplar : old('ejemplar') }}" placeholder="Número de ejemplar">
                         @if ($errors->has('ejemplar'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('ejemplar') }}</strong>
@@ -95,7 +95,7 @@
 
                     <div class="form-group">
                         <label class="form-label">{{ __('Link Imagen') }}</label>
-                        <input type="text" class="form-control{{ $errors->has('linkImagen') ? ' is-invalid' : '' }}" name="linkImagen" value="{{ isset($material) ? $material->linkImagen : old('ejemplar') }}" placeholder="El link bro">
+                        <input type="text" class="form-control{{ $errors->has('linkImagen') ? ' is-invalid' : '' }}" name="linkImagen" value="{{ isset($material) ? $material->linkImagen : old('ejemplar') }}" placeholder="El link de la imagen">
                         @if ($errors->has('linkImagen'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('linkImagen') }}</strong>
@@ -105,7 +105,7 @@
 
                     <div class="form-group">
                         <label class="form-label">{{ __('Autor') }}</label>
-                        <input type="text" class="form-control{{ $errors->has('autor') ? ' is-invalid' : '' }}" name="autor" value="{{ isset($material) ? $material->autor : old('autor') }}" placeholder="Autor?">
+                        <input type="text" class="form-control{{ $errors->has('autor') ? ' is-invalid' : '' }}" name="autor" value="{{ isset($material) ? $material->autor : old('autor') }}" placeholder="Autor">
                         @if ($errors->has('autor'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('autor') }}</strong>
@@ -115,7 +115,7 @@
 
                     <div class="form-group">
                         <label class="form-label">{{ __('Año') }}</label>
-                        <input type="text" class="form-control{{ $errors->has('anio') ? ' is-invalid' : '' }}" name="anio" value="{{ isset($material) ? $material->anio : old('anio') }}" placeholder="Anio en que fue agregado supongo    ">
+                        <input type="text" class="form-control{{ $errors->has('anio') ? ' is-invalid' : '' }}" name="anio" value="{{ isset($material) ? $material->anio : old('anio') }}" placeholder="Año de creación ">
                         @if ($errors->has('anio'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('anio') }}</strong>

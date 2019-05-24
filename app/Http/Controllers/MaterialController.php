@@ -44,12 +44,12 @@ class MaterialController extends Controller
         $request->validate([
             'idArticulo' => 'required',
             'nombre' => 'required',
-            'seccion' => 'required',
-            'tipo' => 'required',
-            'ejemplar' => 'required',
-            'linkImagen' => 'required',
-            'autor' => 'required',
-            'anio' => 'required',
+            'seccion' => 'nullable',
+            'tipo' => 'nullable',
+            'ejemplar' => 'nullable',
+            'linkImagen' => 'nullable',
+            'autor' => 'nullable',
+            'anio' => 'nullable',
             'biblioteca_id' => 'required',
         ]);
 
@@ -98,12 +98,12 @@ class MaterialController extends Controller
         $request->validate([
             'idArticulo' => 'required',
             'nombre' => 'required',
-            'seccion' => 'required',
-            'tipo' => 'required',
-            'ejemplar' => 'required',
-            'linkImagen' => 'required',
-            'autor' => 'required',
-            'anio' => 'required',
+            'seccion' => 'nullable',
+            'tipo' => 'nullable',
+            'ejemplar' => 'nullable',
+            'linkImagen' => 'nullable',
+            'autor' => 'nullable',
+            'anio' => 'nullable',
             'biblioteca_id' => 'required',
         ]);
 
