@@ -13,10 +13,18 @@ class LibroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $libros = Libro::all();
+        // dd($request->buscar);
+        if(!empty($request->buscar)){
+            $libros = Libro::where('titulo', 'like', '%'.$request->buscar.'%')
+            ->orderBy('titulo')
+            ->paginate(5);
+        }
+        else{
+            $libros = Libro::paginate(5);
+        }
         return view('libros.libroIndex', compact('libros'));
     }
 

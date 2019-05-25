@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-if(!isset($_SESSION)){session_start();}
-
 class LoginController extends Controller
 {
     /*

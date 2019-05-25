@@ -13,11 +13,20 @@ class MaterialesBController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($biblioteca_id)
+    public function index($biblioteca_id, Request $request)
     {
         //
         // dd($biblio);
-        $materiales = Material::where('biblioteca_id', $biblioteca_id)->get();
+        if(!empty($request)){
+            $materiales = Material::where('biblioteca_id', $biblioteca_id)
+                    ->where('nombre', 'like', '%'.$request->buscar.'%')
+                    ->orderBy('nombre')
+                    ->paginate(5);
+        }
+        else{
+            $materiales = Material::where('biblioteca_id', $biblioteca_id)
+                    ->paginate(5);
+        }
         return view('materiales.materialIndex', compact('biblioteca_id', 'materiales'));
     }
 

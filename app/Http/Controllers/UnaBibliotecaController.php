@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Biblioteca;
 use Illuminate\Http\Request;
 
-if(!isset($_SESSION)) session_start();
 
 class UnaBibliotecaController extends Controller
 {
@@ -19,8 +18,8 @@ class UnaBibliotecaController extends Controller
         //
         // dd($biblioteca_id);
         $bibliotecas = Biblioteca::where('id', $biblioteca_id)
-               ->get();
-        $_SESSION['biblioteca'] = $biblioteca_id;
+                ->orderBy('nombre')
+               ->paginate();
         return view('bibliotecas.bibliotecaIndex', compact('biblioteca_id','bibliotecas'));
     }
 
