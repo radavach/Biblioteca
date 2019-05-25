@@ -28,7 +28,7 @@
                             <th>Página Web</th> 
                             <th>Facebook</th> 
                             <th>Correo Electrónico</th>
-                            @if(\Auth::user())<th>Acciones</th>@endif
+                            @if(\Auth::user() !== null)<th>Acciones</th>@endif
                         </tr>
                     </thead>
                     <tbody>

@@ -5,21 +5,6 @@
     <div class="page-title">
         INDEX LIBRO
     </div>
-
-    <div class="col-lg-3 ml-auto">
-        @if(!isset($biblioteca_id))
-            <form action = " {{ route('libros.index') }}" class="input-icon my-3 my-lg-0" method="POST">
-        @else        
-            <form action = " {{ route('bibliotecas.libros.index', $biblioteca_id) }}" class="input-icon my-3 my-lg-0" method="POST">
-        @endif
-            @csrf
-            <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1" name="buscar">
-            <div class="input-icon-addon">
-            <i class="fe fe-search"></i>
-            </div>
-        </form>
-    </div>
-    
 </div>
 
 <div class="row">
@@ -69,7 +54,7 @@
                                 <td>
                                     @foreach($libro->ejemplares as $ejemplar)
                                     <ul class="nav nav-tabs border-0 ">
-                                        <li class="nav-item a-ESE-ENLACE-ES-MIO">{{ ($ejemplar->numEjemp)? $ejemplar->numEjemplar : $ejemplar->id }} - {{ $ejemplar->nombre }} {{ ($ejemplar->estado)? 'Disponible' : 'Ocupado' }}</li>
+                                        <li class="nav-item a-ESE-ENLACE-ES-MIO">{{ ($ejemplar->numEjemp)? $ejemplar->numEjemplar : $ejemplar->id }} - {{ $ejemplar->nombre }} {{ ($ejemplar->estado)? 'Disponible' : '' }}</li>
                                     </ul>
                                     @endforeach
                                 </td>
