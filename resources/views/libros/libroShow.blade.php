@@ -7,6 +7,8 @@
     </div>
 </div>
 
+@include('extra.mensajes')
+
 <div class="row">
     <div class="col-md-10 offset-md-1">
         <div class="card">
@@ -47,18 +49,24 @@
                             <p>{{ $libro->linkImagen ?? 'No disponible'}}</p>
                             @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca_id)))
                                 <p>
-                                    <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
-                                        Editar
-                                    </a>
-                                    @can('permisos_admin')
-                                        <form action="{{ route('bibliotecas.libros.destroy', [$libro->biblioteca_id, $libro->id]) }}" method="POST">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                Borrar
-                                            </button>
-                                        </form>
-                                    @endcan
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
+                                                Editar
+                                            </a>
+                                        </div>
+                                        @can('permisos_admin')
+                                            <div class="col-md-2">
+                                                <form action="{{ route('bibliotecas.libros.destroy', [$libro->biblioteca_id, $libro->id]) }}" method="POST">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        Borrar
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        @endcan
+                                    </div>
                                 </p>
                             @endif
                         <h5>
@@ -78,7 +86,7 @@
                             <th>Número de ejemplar</th>
                             <th>Origen</th>
                             <th>Estado</th>
-                            @if(\Auth::user())<th>Acciones</th>@endif
+                            @if(\Auth::user() !== null)<th>Acciones</th>@endif
                         </tr>
                     </thead>
                     <tbody>
@@ -91,6 +99,11 @@
                                 </td>
                                 <td>{{ $ejemplar->origen ?? 'No disponible' }}</td>
                                 <td>{{ $ejemplar->estado? 'Disponible' : 'Prestado' }}</td>
+                                @if(\Auth::user() !== null && (\Auth::user()->biblioteca_id == $biblioteca_id || Gate::check('permisos_admin')))
+                                    <td>
+                                        <a href="{{ route('bibliotecas.libros.ejemplares.create', [$biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

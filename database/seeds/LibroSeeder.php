@@ -33,6 +33,16 @@ class LibroSeeder extends Seeder
         factory(App\Libro::class)->create(['titulo'=> '1984', 'autor'=> 'Anonimo']);
         factory(App\Libro::class)->create(['titulo'=> 'Un mundo Feliz']);
         factory(App\Libro::class)->create(['titulo'=> 'Paco el Chato']);
+        
+        factory(App\Libro::class)->create(['titulo'=> 'El retrato de Dorian Gray','autor'=> 'Mexicanos Unidos', 'biblioteca_id' => '2']);
+        factory(App\Libro::class)->create(['titulo'=> 'Las Batallas en el desierto', 'autor'=> 'Mexicanos Unidos', 'biblioteca_id' => '2']);
+        factory(App\Libro::class)->create(['titulo'=> 'El Principito', 'autor'=> 'Mexicanos Unidos', 'biblioteca_id' => '2']);
+        factory(App\Libro::class)->create(['titulo'=> 'Sherlock Holmes', 'autor'=> 'Anonimo', 'biblioteca_id' => '2']);
+        factory(App\Libro::class)->create(['titulo'=> 'El niño con el pijama de rayas', 'autor'=> 'Anonimo', 'biblioteca_id' => '2']);
+        factory(App\Libro::class)->create(['titulo'=> 'Salomé', 'autor'=> 'Oscar Wilde', 'biblioteca_id' => '2']);
+        factory(App\Libro::class)->create(['titulo'=> '1984', 'autor'=> 'Anonimo', 'biblioteca_id' => '2']);
+        factory(App\Libro::class)->create(['titulo'=> 'Un mundo Feliz', 'biblioteca_id' => '2']);
+        factory(App\Libro::class)->create(['titulo'=> 'Paco el Chato', 'biblioteca_id' => '2']);
 
     }
 }

@@ -16,23 +16,24 @@ class LibrosBController extends Controller
      */
     public function index(Request $request, $biblioteca_id)
     {
-        //
-        // $libros = Libro::all();
-        // dd($request);
+        
         if(!empty($request->buscar)){
-            $libros = Libro::where('biblioteca_id', $biblioteca_id)
-                    ->where('nombre', 'like', '%'.$request->buscar.'%')
-                    ->with('ejemplares')
-                    ->orderBy('nombre')
-                    ->paginate(5);
+            $libros = Libro::where([
+                ['biblioteca_id', $biblioteca_id],
+                ['titulo', 'like', '%'.$request->buscar.'%'],])
+                ->with('ejemplares')
+                ->orderBy('titulo')
+                ->paginate(5);
+            return view('libros.libroIndex', compact('biblioteca_id', 'libros', 'buscar'));
         }
         else{
+            // dd($request);
             $libros = Libro::where('biblioteca_id', $biblioteca_id)
-                    ->with(['ejemplares'])
-                    ->paginate(5);
+                ->with(['ejemplares'])
+                ->paginate(5);
+            return view('libros.libroIndex', compact('biblioteca_id', 'libros'));
         }
 
-        return view('libros.libroIndex', compact('biblioteca_id', 'libros'));
     }
 
     /**

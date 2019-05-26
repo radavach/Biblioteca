@@ -16,15 +16,17 @@ class MaterialesBController extends Controller
     public function index($biblioteca_id, Request $request)
     {
         //
-        // dd($biblio);
-        if(!empty($request)){
+        if(!empty($request->buscar)){
+            // dd($request);
             $materiales = Material::where('biblioteca_id', $biblioteca_id)
                     ->where('nombre', 'like', '%'.$request->buscar.'%')
+                    ->with('ejemplares')
                     ->orderBy('nombre')
                     ->paginate(5);
         }
         else{
             $materiales = Material::where('biblioteca_id', $biblioteca_id)
+                    ->with('ejemplares')
                     ->paginate(5);
         }
         return view('materiales.materialIndex', compact('biblioteca_id', 'materiales'));

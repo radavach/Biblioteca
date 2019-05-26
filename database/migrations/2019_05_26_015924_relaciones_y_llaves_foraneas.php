@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ActualizarRelacionesYLlavesForanes extends Migration
+class RelacionesYLLavesForaneas extends Migration
 {
     /**
      * Run the migrations.
@@ -48,12 +48,6 @@ class ActualizarRelacionesYLlavesForanes extends Migration
         });
         
         Schema::table('movimientoL', function(Blueprint $table){
-            $table->unsignedInteger('ejemplarL_id');
-            $table->foreign('ejemplarL_id')
-                ->references('id')
-                ->on('ejemplarL')
-                ->onDelete('cascade');        
-
             $table->unsignedInteger('cliente_id');
             $table->foreign('cliente_id')
                 ->references('id')
@@ -65,6 +59,20 @@ class ActualizarRelacionesYLlavesForanes extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+        });
+
+        Schema::table('ejemplarL_movimientoL', function(Blueprint $table){
+            $table->unsignedInteger('ejemplar_id');
+            $table->foreign('ejemplar_id')
+                ->references('id')
+                ->on('ejemplarL')
+                ->onDelete('cascade');  
+                
+            $table->unsignedInteger('movimiento_id');
+            $table->foreign('movimiento_id')
+                ->references('id')
+                ->on('movimientoL')
+                ->onDelete('cascade');        
         });
         
         Schema::table('materiales', function(Blueprint $table){
@@ -132,6 +140,11 @@ class ActualizarRelacionesYLlavesForanes extends Migration
             $table->dropColumn('ejemplarL_id');
             $table->dropColumn('cliente_id');
             $table->dropColumn('user_id');
+        });
+        
+        Schema::table('ejemplarL_movimientoL', function(Blueprint $table){
+            $table->dropColumn('ejemplar_id');
+            $table->dropColumn('movimiento_id');
         });
         
         Schema::table('materiales', function(Blueprint $table){

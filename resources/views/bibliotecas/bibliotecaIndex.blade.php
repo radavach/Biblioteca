@@ -45,13 +45,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th> 
-                            <th>Hora de Apertura</th> 
-                            <th>Hora de Cierre</th> 
-                            <th>Días</th> 
                             <th>Teléfono</th> 
                             <th>Página Web</th> 
-                            <th>Facebook</th> 
-                            <th>Correo Electrónico</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>

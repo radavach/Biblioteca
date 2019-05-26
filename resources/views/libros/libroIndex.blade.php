@@ -8,19 +8,20 @@
 
     <div class="col-lg-3 ml-auto">
         @if(!isset($biblioteca_id))
-            <form action = " {{ route('libros.index') }}" class="input-icon my-3 my-lg-0" method="POST">
+            <form action = " {{ route('libros.index') }}" class="input-icon my-3 my-lg-0" method="GET">
         @else        
-            <form action = " {{ route('bibliotecas.libros.index', $biblioteca_id) }}" class="input-icon my-3 my-lg-0" method="POST">
+            <form action = " {{ route('bibliotecas.libros.index', $biblioteca_id) }}" class="input-icon my-3 my-lg-0" method="GET">
         @endif
-            @csrf
+            
             <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1" name="buscar">
             <div class="input-icon-addon">
             <i class="fe fe-search"></i>
             </div>
         </form>
-    </div>
-    
+    </div>    
 </div>
+
+@include('extra.mensajes')
 
 <div class="row">
     <div class="col-md-12">
@@ -67,11 +68,15 @@
                                 <td>{{ $libro->autor }}</td>
                                 <td>{{ $libro->isbn }}</td>
                                 <td>
-                                    @foreach($libro->ejemplares as $ejemplar)
-                                    <ul class="nav nav-tabs border-0 ">
-                                        <li class="nav-item a-ESE-ENLACE-ES-MIO">{{ ($ejemplar->numEjemp)? $ejemplar->numEjemplar : $ejemplar->id }} - {{ $ejemplar->nombre }} {{ ($ejemplar->estado)? 'Disponible' : 'Ocupado' }}</li>
-                                    </ul>
-                                    @endforeach
+                                    @if(count($libro->ejemplares))
+                                        @foreach($libro->ejemplares as $ejemplar)
+                                        <ul class="nav nav-tabs border-0 ">
+                                            <li class="nav-item a-ESE-ENLACE-ES-MIO">{{ ($ejemplar->numEjemp)? $ejemplar->numEjemp : $ejemplar->id }} - {{ $ejemplar->nombre }} {{ ($ejemplar->estado)? 'Disponible' : 'Ocupado' }}</li>
+                                        </ul>
+                                        @endforeach
+                                    @else
+                                        <h6>No hay ejemplares</h6>
+                                    @endif
                                 </td>
                                 @if(\Auth::user() !== null)
                                     <td>

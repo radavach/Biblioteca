@@ -1,10 +1,11 @@
 @extends('layouts.tabler')
 @section('contenido')
-@php if(!isset($_SESSION)) session_start(); @endphp
+
 <div class="page-header">
     <div class="page-title">
         INDEX MATERIALES
     </div>
+
     <div class="col-lg-3 ml-auto">
         @if(!isset($biblioteca_id))
             <form action = " {{ route('materiales.index') }}" class="input-icon my-3 my-lg-0" method="POST">
@@ -34,7 +35,7 @@
                             <form class="input-icon my-3 my-lg-0" action="{{ route('materiales.create') }}">
                                 <button type="submit" class="btn ">Registrar Material</button>
                             </form>
-                        @elseif(\Auth::user()->$biblioteca_id == $biblioteca_id || Gate::check('permisos_admin'))
+                        @elseif(\Auth::user()->biblioteca_id == $biblioteca_id || Gate::check('permisos_admin'))
                             <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.materiales.create', $biblioteca_id) }}">
                                 <button type="submit" class="btn ">Registrar Material</button>
                             </form>
@@ -51,6 +52,7 @@
                             <th>Nombre</th>
                             <th>Sección</th>
                             <th>Autor</th>
+                            <th>Ejemplares</th>
                             @if(\Auth::user() !== null)<th>Acciones</th>@endif
                         </tr>
                     </thead>
@@ -67,6 +69,17 @@
                                 <td>{{ $material->nombre }}</td>
                                 <td>{{ $material->seccion }}</td>
                                 <td>{{ $material->autor }}</td>
+                                <td>
+                                    @if(count($material->ejemplares))
+                                        @foreach($material->ejemplares as $ejemplar)
+                                            <ul class="nav nav-tabs border-0">
+                                                <li class="nav-item a-ESE-ENLACE-ES-MIO">{{ ($ejemplar->numEjemp)? $ejemplar->numEjemp : $ejemplar->id }} - {{ $ejemplar->nombre }} {{ ($ejemplar->estado)? 'Disponible' : 'Ocupado' }}</li>
+                                            </ul>
+                                        @endforeach
+                                    @else
+                                        <h6>No hay ejemplares<h6>
+                                    @endif
+                                </td>
                                 @if(\Auth::user() !== null)
                                     <td>
                                         @if(isset($biblioteca_id))

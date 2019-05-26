@@ -6,7 +6,7 @@
                     print 'url(./assets/images/imagenes/'.Auth::user()->imagen.'.jpg)' : 
                     print 'url(./assets/images/imagenes/'.((Auth::user()->id % 80) + 1).'.jpg)';
             else: 
-                isset($_SESSION['icon_num'])? 
+                isset($icon_num)? 
                     print 'url(./assets/images/imagenes/'.$icon_num.'.jpg)' : 
                     print 'url(./assets/images/imagenes/3.jpg)'; 
             endif; ?> ">

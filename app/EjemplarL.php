@@ -14,4 +14,9 @@ class EjemplarL extends Model
     {
         return $this->belongsTo(Libro::class);
     }
+
+    public function movimientos()
+    {
+        return $this->belongsToMany(EjemplarL_MovimientoL::class);
+    }
 }

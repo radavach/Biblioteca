@@ -53,13 +53,13 @@ Route::resource('/libros', 'LibroController')->except(['index']);
 Route::match(['GET','POST'], '/bibliotecas/{biblioteca_id}/libros/listado', 'LibrosBController@index')->name('bibliotecas.libros.index');
 Route::resource('/bibliotecas.libros', 'LibrosBController')
         ->except(['index'])
-        ->parameters(['bibliotecas' => 'biblitoeca_id']
+        ->parameters(['bibliotecas' => 'biblioteca_id']
 );
 
 
 //Manejar los ejemplares de los libros
 Route::resource('/bibliotecas.libros.ejemplares', 'EjemplarLibroController')
-        ->parameters(['bibliotecas' => 'biblioteca_id', 'ejemplares' => 'ejemplar']);
+        ->parameters(['bibliotecas' => 'biblioteca_id', 'libros' => 'libro_id', 'ejemplares' => 'ejemplar']);
 
 
 //Manejar los movimientos de un ejemplar Libros
