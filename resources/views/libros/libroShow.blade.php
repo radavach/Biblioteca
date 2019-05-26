@@ -94,7 +94,7 @@
                         @foreach($libro->ejemplares as $ejemplar)
                             <tr>
                                 <td>
-                                    <a class="a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.libros.ejemplares.index', [$libro->biblioteca_id, $libro->id]) }}"> 
+                                    <a class="a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.libros.ejemplares.show', [$libro->biblioteca_id, $libro->id, $ejemplar]) }}"> 
                                         {{ $ejemplar->numEjemp ?? $ejemplar->id }}
                                     </a>
                                 </td>
@@ -102,7 +102,7 @@
                                 <td>{{ $ejemplar->estado? 'Disponible' : 'Prestado' }}</td>
                                 @if(\Auth::user() !== null && (\Auth::user()->biblioteca_id == $biblioteca_id || Gate::check('permisos_admin')))
                                     <td>
-                                        <a href="{{ route('bibliotecas.libros.ejemplares.create', [$biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                        <a href="{{ route('bibliotecas.libros.ejemplares.edit', [$biblioteca_id, $libro->id, $ejemplar->id]) }}" class="btn btn-sm btn-warning">Editar</a>
                                     </td>
                                 @endif
                             </tr>

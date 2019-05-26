@@ -8,11 +8,11 @@
 
     <div class="col-lg-3 ml-auto">
         @if(!isset($biblioteca_id))
-            <form action = " {{ route('libros.index') }}" class="input-icon my-3 my-lg-0" method="GET">
+            <form action = " {{ route('libros.index') }}" class="input-icon my-3 my-lg-0" method="POST">
         @else        
-            <form action = " {{ route('bibliotecas.libros.index', $biblioteca_id) }}" class="input-icon my-3 my-lg-0" method="GET">
+            <form action = " {{ route('bibliotecas.libros.index', $biblioteca_id) }}" class="input-icon my-3 my-lg-0" method="POST">
         @endif
-            
+            @csrf
             <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1" name="buscar">
             <div class="input-icon-addon">
             <i class="fe fe-search"></i>
@@ -59,11 +59,7 @@
                         <!-- ///<img class="group list-group-image" src="images-database/{{$libro->link}}" alt=" "> -->
                             <tr>
                                 <td>
-                                    @if(!isset($biblioteca_id))
-                                        <a class="a-ESE-ENLACE-ES-MIO" href="{{ route('libros.show', $libro->id) }}">{{ $libro->id }}</a>
-                                    @else
-                                        <a class="a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.libros.show', [$biblioteca_id, $libro->id]) }}">{{ $libro->id }}</a>
-                                    @endif
+                                    <a class="a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.libros.show', [$libro->biblioteca_id, $libro->id]) }}">{{ $libro->id }}</a>
                                 </td>
                                 <td>{{ $libro->titulo }}</td>
                                 <td>{{ $libro->autor }}</td>
@@ -89,7 +85,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-2 ml-auto">
+            <div class="col-lg-3 ml-auto">
                 {{ $libros->links() }}
             </div>
         </div>

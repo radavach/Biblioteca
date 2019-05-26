@@ -21,8 +21,8 @@ class CreaTablaClientes extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('apellidoPaterno');
-            $table->string('apellidoMaterno');
-            $table->string('nombreUsuario');
+            $table->string('apellidoMaterno')->nullable();
+            $table->string('nombreUsuario')->nullable();
             $table->string('telefono')->nullable();
             $table->string('direccion');
             $table->string('email');

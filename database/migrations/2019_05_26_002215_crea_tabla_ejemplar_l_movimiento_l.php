@@ -13,14 +13,14 @@ class CreaTablaEjemplarLMovimientoL extends Migration
      */
     public function up()
     {
-        Schema::create('ejemplarL_movimientoL', function (Blueprint $table) {
+        Schema::create('ejemplar_l_movimiento_l', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
             $table->softDeletes();
 
             $table->increments('id');
-            $table->dateTime('fechaPrestamo');
-            $table->dateTime('fechaDevolucion')->nullable();
+            $table->date('fechaPrestamo');
+            $table->date('fechaDevolucion')->nullable();
             $table->double('comision');
             $table->string('isbnLibro')->nullable();
             $table->integer('numEjemplar')->nullable();

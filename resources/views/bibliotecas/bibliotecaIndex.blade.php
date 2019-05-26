@@ -47,7 +47,7 @@
                             <th>Nombre</th> 
                             <th>Teléfono</th> 
                             <th>Página Web</th> 
-                            <th>Acciones</th>
+                            @if(\Auth::user() !== null)<th>Acciones</th>@endif
                         </tr>
                     </thead>
                     <tbody>

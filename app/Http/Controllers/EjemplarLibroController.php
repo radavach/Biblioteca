@@ -16,16 +16,8 @@ class EjemplarLibroController extends Controller
      */
     public function index(Request $request, $biblioteca_id, $libro_id)
     {
-        if(!empty($request->buscar)){
-            $libros = Libro::where('titulo', 'like', '%'.$request->buscar.'%')
-                ->orderBy('titulo')
-                ->paginate(15);
-            return view('libros.libroIndex', compact('libros', 'buscar'));
-        }
-        else{
-            $libros = Libro::paginate(15);
-            return view('libros.libroIndex', compact('libros'));
-        }
+        $libro = Libro::where('id', $libro_id);
+        return view('ejemplaresL.ejemplarIndex', compact('bilbioteca_id', 'libros', 'libro', 'ejemplar'));
     }
 
     /**
@@ -69,10 +61,15 @@ class EjemplarLibroController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function show($biblioteca_id, $libro_id, Libro $libro)
+    public function show($biblioteca_id, $libro_id, EjemplarL $ejemplar)
     {
         //
-        return view('libros.libroShow', compact('libro'));
+        $ejemp = EjemplarL::where('id', $ejemplar->id)
+            ->with(['movimientos' => function($query){
+                 $query->where('devuelto', '0');
+            }])->first();
+        $ejemplar = $ejemp;
+        return view('ejemplaresL.ejemplarIndex', compact('biblioteca_id', 'libro_id', 'ejemplar'));
     }
 
     /**
@@ -81,15 +78,10 @@ class EjemplarLibroController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function edit($biblioteca_id, $libro_id, Libro $libro)
+    public function edit($biblioteca_id, $libro_id, EjemplarL $ejemplar)
     {
-        //
-        // $ejemplares = $libro->ejemplares();
-        // $bibliotecas = Biblioteca::all();
-        // return view('libros.libroForm', compact('bibliotecas', 'ejemplares', 'libro'));
-
-        // return view('bibliotecas.librosB.edit', [$libro->biblioteca_id, $libro]);
-        return redirect()->route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro]);
+        $libro = Libro::where('id', $libro_id)->first();
+        return view('ejemplaresL.ejemplarForm', compact('biblioteca_id', 'libro_id', 'libro', 'ejemplar'));
     }
 
     /**
@@ -99,7 +91,7 @@ class EjemplarLibroController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $biblioteca_id, $libro_id, Libro $libro)
+    public function update(Request $request, $biblioteca_id, $libro_id, EjemplarL $ejemplar)
     {
         //
         $request->validate([
@@ -131,7 +123,7 @@ class EjemplarLibroController extends Controller
      * @param  \App\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function destroy($biblioteca_id, $libro_id, Libro $libro)
+    public function destroy($biblioteca_id, $libro_id, EjemplarL $libro)
     {
         //
         $libro->delete();
