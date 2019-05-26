@@ -39,7 +39,7 @@
                     @endif
                 </div>
             </div>
-
+            
             <div class="card-body">
                 <table class="table table-hover table-dark" >
 
@@ -55,6 +55,7 @@
                     </thead>
                     <tbody>
                         @foreach ($libros as $libro)
+                        <!-- ///<img class="group list-group-image" src="images-database/{{$libro->link}}" alt=" "> -->
                             <tr>
                                 <td>
                                     @if(!isset($biblioteca_id))

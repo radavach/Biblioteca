@@ -64,8 +64,16 @@ class LibroController extends Controller
             'linkImagen' => 'nullable',
             'biblioteca_id' => 'required',
         ]);
+        if($request->hasFile('link'))
+        {
+            $file = $request->file('link');
+            ///No se repetira el nombre del archivo
+            $nombre = time().$file->getLibroOrigialName();
+        //  Es en la carpeta public ahí se almacenarán las imagenes 
+            $file->move(public_path().'/images-database/', $nombre);
+        }
 
-        $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario'));
+        $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario') + ['link' => $request->linkImagen]);
 
         return redirect()->route('libros.index');
 
