@@ -15,7 +15,7 @@
             <div class="card-header">
                 <h3>{{ $libro->titulo }}</h3>
             </div>
-
+            <img class="card-img-top" src="images-database/{{$libro->linkImagen}}" alt="">
             <div class="card-body">
                 <div class="row" >
                     <div class="col-md-3">
@@ -34,6 +34,7 @@
                             @if(\Auth::user())<p>Acciones</p>@endif
                         </h5>
                     </div>
+                    
                     <div class="col-md-6">
                         <h5>
                             <p>{{ $libro->subtitulo ?? 'No disponible'}}</p>
@@ -46,7 +47,7 @@
                             <p>{{ $libro->seccion ?? 'No disponible'}}</p>
                             <p>{{ $libro->ejemplar ?? 'No disponible'}}</p>
                             <p>{{ $libro->diasMaxPrestamo ?? 'No disponible'}}</p>
-                            <p>{{ $libro->linkImagen ?? 'No disponible'}}</p>
+                            <p >{{ $libro->linkImagen ?? 'No disponible'}}</p>
                             @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca_id)))
                                 <p>
                                     <div class="row">
