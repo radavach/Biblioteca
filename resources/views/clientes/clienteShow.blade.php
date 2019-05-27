@@ -31,19 +31,19 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ $persona->id }}</td>
-                            <td>{{ $persona->nombre }}</td>
-                            <td>{{ $persona->apellidoPaterno }}</td>
-                            <td>{{ $persona->apellidoMaterno }}</td>
-                            <td>{{ $persona->nombreUsuario }}</td>
-                            <td>{{ $persona->telefono }}</td>
-                            <td>{{ $persona->direccion }}</td>
-                            <td>{{ $persona->email }}</td>
+                            <td>{{ $cliente->id }}</td>
+                            <td>{{ $cliente->nombre }}</td>
+                            <td>{{ $cliente->apellidoPaterno }}</td>
+                            <td>{{ $cliente->apellidoMaterno }}</td>
+                            <td>{{ $cliente->nombreUsuario }}</td>
+                            <td>{{ $cliente->telefono }}</td>
+                            <td>{{ $cliente->direccion }}</td>
+                            <td>{{ $cliente->email }}</td>
                             <td>
-                                <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-sm btn-warning">
+                                <a href="{{ route('bibliotecas.clientes.edit', [$biblioteca_id, $cliente->id]) }}" class="btn btn-sm btn-warning">
                                     Editar
                                 </a>
-                                <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST">
+                                <form action="{{ route('bibliotecas.clientes.destroy', [$biblioteca_id, $cliente->id]) }}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE"> 
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger">

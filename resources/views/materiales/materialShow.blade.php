@@ -34,11 +34,11 @@
                             <p>{{ $material->autor ?? 'No disponible' }}</p>
                             <p>{{ $material->anio ?? 'No disponible' }}</p>
                             <p>{{ $material->imagen ?? 'No disponible' }}</p>
-                            @if(\Auth::user() !== null && (\Auth::user()->biblioteca_id == $biblioteca_id || Gate::check('permisos_admin')))
+                            @if(\Auth::user() !== null && (\Auth::user()->biblioteca_id == $material->biblioteca_id || Gate::check('permisos_admin')))
                                 <p>     
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <a href="{{ route('bibliotecas.materiales.edit', [$biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                            <a href="{{ route('bibliotecas.materiales.edit', [$material->biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning">Editar</a>
                                         </div>
                                         @can('permisos_admin')
                                         <div class="col-md-2">
@@ -87,7 +87,7 @@
                                 @if(\Auth::user() !== null && (Gate::check('permisos_admin') || \Auth::user()->biblioteca_id == $biblioteca_id))
                                     <td>
                                         @if(isset($biblioteca_id))
-                                            <a href="{{ route('bibliotecas.materiales.edit', [$biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                            <a href="{{ route('bibliotecas.materiales.edit', [$material->biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning">Editar</a>
                                         @else
                                             <a href="{{ route('materiales.edit', $material->id) }}" class="btn btn-sm btn-warning">Editar</a>
                                         @endif

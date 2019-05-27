@@ -3,7 +3,7 @@
 
 <div class="page-header">
     <div class="page-title">
-        INDEX CLIENTES
+        INDEX CLIENTE
     </div>
 </div>
 
@@ -12,43 +12,64 @@
         <div class="card">
             <div class="card-header">
                 <h3>Bienvenido al sistema compañero trabajador!</h3>
-                <!-- <div class="ml-auto">
-                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.clientes.create', $biblioteca_id) }}">
+                
+                <div class="ml-auto">
+                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.clientes.create', $biblioteca_id) }}" method="GET">
                         <button type="submit" class="btn btn-primary">Registrar Cliente</button>
                     </form>
-                </div> -->
+                </div>
+                
+                <div class="ml-auto">
+                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.clientes.adeudos', $biblioteca_id) }}" method="GET">
+                        <button type="submit" class="btn btn-primary">Clientes con pendientes</button>
+                    </form>
+                </div>
             </div>
 
             <div class="card-body">
                 <table class="table table-hover table-dark" >
+
                     <thead>
                         <tr>
-                            <th>Nombre</th>
+                            <th>ID</th>
+                            <th>Nombre</th> 
+                            <th colspan="2">Apellido</th> 
                             <th>Nombre Usuario</th> 
-                            <th>Correo Electrónico</th> 
-                            <th>Libro</th>
-                            <th>Fecha Prestamo</th>
-                            <th>Fecha Limite</th>
+                            <th>Telefono</th> 
+                            <th>Direccion</th> 
+                            <th>Correo Electronico</th> 
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for ($i = 0; $i < count($clientes); ++$i)
-                            <tr>                
-                                <th>{{ $clientes[$i]->nombre_apellidos }}</th>                
-                                <td>{{ $clientes[$i]->nombreUsuario }}</td>
-                                <td>{{ $clientes[$i]->email }}</td>
-                                <td>{{ $deudas[$i]->ejemplar_l->libro->titulo }}</td>
-                                <td>{{ $deudas[$i]->fechaPrestamo }}</td>
-                                <td>{{ date ( 'Y-m-j' , strtotime($deudas[$i]->fechaPrestamo. "+ ".$deudas[$i]->ejemplar_l->libro->diasMaxPrestamo." days")) }}</td>
-                                <td><a href="{{ route('bibliotecas.clientes.edit', [$biblioteca_id, $clientes[$i]->id]) }}" class = "btn btn-sm btn-warning">Editar</a></td>
+                        @foreach($clientes as $cliente)
+                            <tr>
+                                <td>{{ $cliente->id }}</td>
+                                <td>{{ $cliente->nombre }}</td>
+                                <td>{{ $cliente->apellidoPaterno }}</td>
+                                <td>{{ $cliente->apellidoMaterno }}</td>
+                                <td>{{ $cliente->nombreUsuario }}</td>
+                                <td>{{ $cliente->telefono }}</td>
+                                <td>{{ $cliente->direccion }}</td>
+                                <td>{{ $cliente->email }}</td>
+                                <td>
+                                    <a href="{{ route('bibliotecas.clientes.edit', [$biblioteca_id, $cliente->id]) }}" class="btn btn-sm btn-warning">
+                                        Editar
+                                    </a>
+                                    <form action="{{ route('bibliotecas.clientes.destroy', [$biblioteca_id, $cliente->id]) }}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE"> 
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            Borrar
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
-                        @endfor
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
 @endsection

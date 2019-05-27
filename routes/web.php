@@ -96,8 +96,8 @@ Route::resource('/bibliotecas.materiales.ejemplares.movimientos', 'MovimientoMat
         ->parameters(['bibliotecas' => 'biblioteca_id', 'materiales' => 'material', 'ejemplares' => 'ejemplar']);
 
 
+Route::get('/bibliotecas/{biblioteca_id}/clientes/adeudos', 'ClienteController@adeudos')->name('bibliotecas.clientes.adeudos');
 Route::resource('/bibliotecas.clientes', 'ClienteController')
         ->parameters(['bibliotecas' => 'biblioteca_id']);
-
 
 Route::get('/home', 'HomeController@index')->name('home');
