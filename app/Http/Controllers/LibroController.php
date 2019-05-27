@@ -57,19 +57,19 @@ class LibroController extends Controller
     {
         //
         $request->validate([
-            'isbn' => 'required',
-            'titulo' => 'required',
-            'subtitulo' => 'nullable',
-            'autor' => 'required',
-            'editorial' => 'required',
-            'anio' => 'required',
-            'genero' => 'nullable',
-            'idioma' => 'required',
-            'seccion' => 'nullable',
-            'ejemplar' => 'nullable',
-            'diasMaxPrestamo' => 'required',
-            'linkImagen' => 'nullable',
-            'biblioteca_id' => 'required',
+            'isbn' =>['required','numeric','digits_between:10,13' ] ,
+            'titulo' => ['required','max:255', 'string'],
+            'subtitulo' => ['nullable', 'max:200'],
+            'autor' =>['required','max:255','string'],
+            'editorial' =>['required','max:255', 'string'],
+            'anio' => ['required', 'date_format:Y'],
+            'genero' => ['nullable', 'string', 'max:200'],
+            'idioma' => ['required', 'string'],
+            'seccion' => ['nullable', 'alpha_num'],
+            'ejemplar' => ['nullable', 'numeric'],
+            'diasMaxPrestamo' => ['required', 'numeric'],
+            'linkImagen' => ['nullable', 'image' => 'mimes:jpeg,png'],
+            'biblioteca_id' => ['required'],
         ]);
         if($request->hasFile('link'))
         {

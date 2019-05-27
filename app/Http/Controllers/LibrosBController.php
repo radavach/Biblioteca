@@ -64,14 +64,14 @@ class LibrosBController extends Controller
     {
         //
         $request->validate([
-            'isbn' => 'required',
-            'titulo' => 'required',
-            'autor' => 'required',
-            'editorial' => 'required',
-            'anio' => 'required',
-            'idioma' => 'required',
-            'diasMaxPrestamo' => 'required',
-            'biblioteca_id' => 'required',
+            'isbn' => ['required', 'numeric','digits_between:10,13'],
+            'titulo' => ['required', 'max:255', 'string'],
+            'autor' => ['required', 'max:255','string'],
+            'editorial' => ['required', 'max:255', 'string'],
+            'anio' => ['required', 'date_format:Y'],
+            'idioma' => ['required', 'string'],
+            'diasMaxPrestamo' => ['required', 'numeric'],
+            'biblioteca_id' => ['required'],
         ]);
 
         $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario'));

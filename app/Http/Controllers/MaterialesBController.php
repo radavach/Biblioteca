@@ -60,15 +60,15 @@ class MaterialesBController extends Controller
     {
         //
         $request->validate([
-            'idArticulo' => 'required',
-            'nombre' => 'required',
-            'seccion' => 'required',
-            'tipo' => 'required',
-            'ejemplar' => 'required',
-            'linkImagen' => 'required',
-            'autor' => 'required',
-            'anio' => 'required',
-            'biblioteca_id' => 'required',
+            'idArticulo' => ['required'],
+            'nombre' => ['required', 'max:255', 'string'],
+            'seccion' => ['required', 'alpha_num'],
+            'tipo' => ['required'],
+            'ejemplar' => ['required', 'numeric'],
+            'linkImagen' => ['required', 'image' => 'mimes:jpeg,png'],
+            'autor' => ['required', 'max:255', 'string'],
+            'anio' => ['required', 'date_format:Y'],
+            'biblioteca_id' => ['required'],
         ]);
 
         $material = Material::create($request->all());
