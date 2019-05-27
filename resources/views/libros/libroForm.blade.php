@@ -28,10 +28,10 @@
                 @if(!isset($biblio))
 
                     @if(isset($libro))
-                        <form action="{{ route('libros.update', $libro->id) }}" method="POST", enctype='multipart/form-data'>
+                        <form action="{{ route('libros.update', $libro->id) }}" method="POST">
                             <input type="hidden" name="_method" value="PATCH">
                     @else
-                        <form action="{{ route('libros.store') }}" method="POST", 'files'=>true>
+                        <form action="{{ route('libros.store') }}" method="POST">
                     @endif
                     
                 @else
@@ -171,7 +171,7 @@
                         @endif
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group", enctype='multipart/form-data'>
                         <label class="form-label">{{__('Imagen del ejemplar del libro')}}</label>
                         <input type="file"  name="linkImagen" value="{{ isset($libro) ? $libro->linkImagen: old('linkImagen') }}" placeholder="Imagen del ejemplar del Libro">
                             @if($errors->has('linkImagen'))

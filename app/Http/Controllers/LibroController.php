@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class LibroController extends Controller
 {
+    public function __construct()
+    {
+        // if(isset($_SESSION['biblioteca'])) unset($_SESSION['biblioteca']);
+        $this->middleware('auth')->except('index', 'show');
+        // $this->middleware('admin')->only('create', 'store', 'edit', 'update', 'destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -74,8 +80,9 @@ class LibroController extends Controller
             $file->move(public_path().'/images-database/', $nombre);
         }
 
+        // $libro->link = $nombre;
         $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario') + ['link' => $request->linkImagen]);
-
+        
         return redirect()->route('libros.index');
 
     }
