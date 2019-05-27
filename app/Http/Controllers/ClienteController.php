@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use App\Biblioteca;
 use App\Persona;
+use App\EjemplarL;
+use App\libroEM;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -14,11 +16,54 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($biblioteca_id)
     {
         //
-        $clientes = Cliente::all();
-        return view('clientes.clienteIndex', compact('clientes'));
+        $clientes = [];
+        $deudas = [];
+
+        // $client = Cliente::all();
+        // foreach($client as $cli)
+        // {
+        //     if(count($cli->movimiento_l))
+        //     {
+        //         foreach($cli->movimiento_l as $movimiento)
+        //         {
+        //             if(count($movimiento->ejemplares))
+        //             {
+        //                 foreach($movimiento->ejemplares as $ejemplar)
+        //                 {
+        //                     // dd($ejemplar->libro);
+        //                     if($ejemplar->libro->biblioteca_id != $biblioteca_id)
+        //                     {
+        //                         continue;
+        //                     }
+        //                     if(!$ejemplar->pivot->devuelto)
+        //                     {
+        //                         array_push($deudas, $ejemplar->pivot);
+        //                         array_push($clientes, $cli);
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        // dd($clientes);
+        // dd($deudas);
+
+        $registro = libroEM::all();
+
+        $ejemplares = libroEM::where([[ 'devuelto', '0']])->with('movimiento_l')->get();
+        foreach($ejemplares as $ejemplar)
+        {
+            if($ejemplar->ejemplar_L->libro->biblioteca_id != $biblioteca_id) continue;
+            array_push($deudas, $ejemplar);
+            array_push($clientes, $ejemplar->movimiento_l->cliente);
+        }
+
+        
+
+        return view('clientes.clienteIndex', compact('biblioteca_id', 'clientes', 'deudas'));
     }
 
     /**

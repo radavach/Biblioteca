@@ -29,7 +29,7 @@
         </li>
         
         <li class="nav-item">
-          <a href="{{ route('clientes.index') }}" class="nav-link active"><i class="fe fe-users"></i> Clientes</a>
+          <a href="{{ route('bibliotecas.clientes.index', $biblioteca_id) }}" class="nav-link active"><i class="fe fe-users"></i> Clientes</a>
         </li>
       @endif
     

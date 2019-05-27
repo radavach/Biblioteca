@@ -19,7 +19,7 @@
             <div class="card-body">
                 <div class="row" >
                     <div class="col-md-3">
-                        <img class="card-img-top" src="{{$ejemplar->libro->linkImagen}}" alt="No hay imagen disponible">
+                        <img class="card-img-top" src="{{$ejemplar->libro->link}}" alt="No hay imagen disponible">
                     </div>
                     <div class="col-md-3">
                         <b>
@@ -44,18 +44,24 @@
                             <p>{{ $ejemplar->comentario ?? 'No hay comentarios' }}</p>
                             <p>{{ $ejemplar->libro->diasMaxPrestamo ?? 'No disponible'}}</p>
                             @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca_id)))
-                                <p>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                           <a href="#" class ="btn btn-sm btn-warning"> Realizar prestamo </a>
-                                        </div>
-                                        @can('permisos_admin')
+                                @if(($ejemplar->estado == 1))
+                                    <p>
+                                        <div class="row">
                                             <div class="col-md-2">
-                                                
+                                            <a href="#" class ="btn btn-sm btn-warning"> Realizar prestamo </a>
                                             </div>
-                                        @endcan
-                                    </div>
-                                </p>
+                                        </div>
+                                    </p>
+                                @else
+                                    <p>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                            <a href="#" class ="btn btn-sm btn-green"> Devolver libro </a>
+                                            </div>
+                                        </div>
+                                    </p>
+                                @endif
+
                             @endif
                         
                     </div>
@@ -73,11 +79,12 @@
                         <tr>
                             <th>Fecha de prestamo</th>
                             <th>Fecha limite</th>
-                            <th>Comision</th>
                             <th>ISBN</th>
                             @if(\Auth::user() !==null)
-                                <th>ISBN</th>
-                                <th>Acciones</th>
+                                <th>Comision</th>
+                                <th>Usuario</th>
+                                <th>Empleado</th>
+                                @can('permisos_admin')<th>Acciones</th>@endcan
                             @endif
                         </tr>
                     </thead>
@@ -88,12 +95,16 @@
                                     {{ $movimiento->pivot->fechaPrestamo }}
                                 </td>
                                 <td>{{ date ( 'Y-m-j' , strtotime($movimiento->pivot->fechaPrestamo. "+ ".$ejemplar->libro->diasMaxPrestamo." days")) }}</td>
-                                <td>{{ $movimiento->pivot->comision }}</td>
                                 <td>{{ $movimiento->pivot->isbnLibro }}</td>
                                 @if(\Auth::user() !== null && (\Auth::user()->biblioteca_id == $biblioteca_id || Gate::check('permisos_admin')))
+                                    <td>{{ $movimiento->pivot->comision }}</td>
+                                    <td>{{ $movimiento->user->nombre }}</td>
+                                    <td>{{ $movimiento->cliente->nombre }}</td>
+                                    @can('permisos_admin')
                                     <td>
-                                       
+                                       <a class="btn btn-sm btn-danger" href="{{ route('bibliotecas.libros.ejemplares.movimientos.destroy', [$biblioteca_id, $libro_id, $ejemplar->id, $movimiento->id]) }} "><i class="fe fe-trash-2"></i>Eliminar del registro </a>
                                     </td>
+                                    @endcan
                                 @endif
                             </tr>
                         @endforeach

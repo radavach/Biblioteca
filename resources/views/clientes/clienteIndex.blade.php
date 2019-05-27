@@ -12,32 +12,38 @@
         <div class="card">
             <div class="card-header">
                 <h3>Bienvenido al sistema compañero trabajador!</h3>
-                <div class="ml-auto">
-                    <form class="input-icon my-3 my-lg-0" action="{{ route('clientes.create') }}">
+                <!-- <div class="ml-auto">
+                    <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.clientes.create', $biblioteca_id) }}">
                         <button type="submit" class="btn btn-primary">Registrar Cliente</button>
                     </form>
-                </div>
+                </div> -->
             </div>
 
             <div class="card-body">
                 <table class="table table-hover table-dark" >
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Nombre</th>
                             <th>Nombre Usuario</th> 
                             <th>Correo Electrónico</th> 
+                            <th>Libro</th>
+                            <th>Fecha Prestamo</th>
+                            <th>Fecha Limite</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($clientes as $cliente)
-                            <tr>
-                                <td><a href="{{ route('clientes.show', $cliente->id) }}">{{ $cliente->id }}</a></td>                        
-                                <td>{{ $cliente->persona->nombreUsuario }}</td>
-                                <td>{{ $cliente->persona->email }}</td>
-                                <td><a href="{{ route('clientes.edit', $cliente->id) }}" class = "btn btn-sm btn-warning">Editar</a></td>
+                        @for ($i = 0; $i < count($clientes); ++$i)
+                            <tr>                
+                                <th>{{ $clientes[$i]->nombre }}</th>                
+                                <td>{{ $clientes[$i]->nombreUsuario }}</td>
+                                <td>{{ $clientes[$i]->email }}</td>
+                                <td>{{ $deudas[$i]->ejemplar_l->libro->titulo }}</td>
+                                <td>{{ $deudas[$i]->fechaPrestamo }}</td>
+                                <td>{{ date ( 'Y-m-j' , strtotime($deudas[$i]->fechaPrestamo. "+ ".$deudas[$i]->ejemplar_l->libro->diasMaxPrestamo." days")) }}</td>
+                                <td><a href="{{ route('bibliotecas.clientes.edit', [$biblioteca_id, $clientes[$i]->id]) }}" class = "btn btn-sm btn-warning">Editar</a></td>
                             </tr>
-                        @endforeach
+                        @endfor
                     </tbody>
                 </table>
             </div>

@@ -15,9 +15,11 @@
             <div class="card-header">
                 <h3>{{ $libro->titulo }}</h3>
             </div>
-            <img class="card-img-top" src="{{$libro->linkImagen}}" alt="Al parecer no hay imagen">
             <div class="card-body">
                 <div class="row" >
+                    <div class="col-md-3">
+                        <img class="card-img-top" src="{{$libro->link}}" alt="No hay imagen disponible">
+                    </div>
                     <div class="col-md-3">
                         <h5>
                             <p>Subtítulo</p> 

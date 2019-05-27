@@ -123,6 +123,11 @@ class BibliotecaController extends Controller
     public function destroy(Biblioteca $biblioteca)
     {
         //
+        if(\Auth::user()->cannot('delete', $biblioteca))
+        {
+            return redirect()->back();
+        }
+
         $biblioteca->delete();
         return redirect()->route('bibliotecas.index')
             ->with([
