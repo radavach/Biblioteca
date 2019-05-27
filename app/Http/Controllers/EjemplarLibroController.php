@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EjemplarL;
 use App\Libro;
+use App\MovimientoL;
 use Illuminate\Http\Request;
 
 class EjemplarLibroController extends Controller
@@ -70,11 +71,10 @@ class EjemplarLibroController extends Controller
     public function show($biblioteca_id, $libro_id, EjemplarL $ejemplar)
     {
         //
-        $ejemp = EjemplarL::where('id', $ejemplar->id)
-            ->with(['movimientos' => function($query){
-                 $query->where('devuelto', '0');
-            }])->first();
-        $ejemplar = $ejemp;
+        $ejemplar = EjemplarL::where('id', $ejemplar->id)
+        ->with(['movimientos' => function($query){
+            $query->where('devuelto', '0')->with(['user', 'cliente']);
+        }])->first();
         return view('ejemplaresL.ejemplarIndex', compact('biblioteca_id', 'libro_id', 'ejemplar'));
     }
 

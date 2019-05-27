@@ -31,7 +31,7 @@ class BibliotecaController extends Controller
             $bibliotecas = Biblioteca::orderBy('nombre')->paginate(10);
         }
 
-        // $bibliotecas = Biblioteca::all();
+        
         return view('bibliotecas.bibliotecaIndex', compact('bibliotecas')); 
     }
 
@@ -123,6 +123,11 @@ class BibliotecaController extends Controller
     public function destroy(Biblioteca $biblioteca)
     {
         //
+        if(\Auth::user()->cannot('delete', $biblioteca))
+        {
+            return redirect()->back();
+        }
+
         $biblioteca->delete();
         return redirect()->route('bibliotecas.index')
             ->with([
