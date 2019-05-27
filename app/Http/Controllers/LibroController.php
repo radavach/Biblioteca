@@ -73,8 +73,9 @@ class LibroController extends Controller
             $file->move(public_path().'/images-database/', $nombre);
         }
 
+        // $libro->link = $nombre;
         $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario') + ['link' => $request->linkImagen]);
-
+        
         return redirect()->route('libros.index');
 
     }
