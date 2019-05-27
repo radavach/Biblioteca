@@ -17,6 +17,6 @@ class EjemplarL extends Model
 
     public function movimientos()
     {
-        return $this->belongsToMany(EjemplarL_MovimientoL::class);
+        return $this->belongsToMany(MovimientoL::class)->withPivot('fechaPrestamo', 'fechaDevolucion', 'comision', 'isbnLibro', 'numEjemplar', 'devuelto');
     }
 }

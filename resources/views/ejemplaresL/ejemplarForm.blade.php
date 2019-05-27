@@ -71,17 +71,17 @@
                     
                     <div class="form-group">
                         <label class="form-label">{{__('Número de Ejemplar')}}</label>
-                        <input type="text" class="form-control" name="numEjemp" value="{{ old('numEjemp') }}" placeholder="Número del ejemplar del libro">
+                        <input type="text" class="form-control" name="numEjemp" value="{{ $ejemplar->numEjemp ?? old('numEjemp') }}" placeholder="Número del ejemplar del libro">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">{{ __('Origen') }}</label>
-                        <input type="text" class="form-control" name="origen" value="{{ old('origen') }}" placeholder="Origen del ejemplar">
+                        <input type="text" class="form-control" name="origen" value="{{ $ejemplar->origen ?? old('origen') }}" placeholder="Origen del ejemplar">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">{{__('Comentario')}}</label>
-                        <input type="text" class="form-control" name="comentario" value="{{ old('comentario') }}" placeholder="Comentario sobre el ejemplar">
+                        <input type="text" class="form-control" name="comentario" value="{{ $ejemplar->comentario ?? old('comentario') }}" placeholder="Comentario sobre el ejemplar">
                    </div>
 
                    <div class="form-group">

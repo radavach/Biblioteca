@@ -14,14 +14,14 @@ class RelacionesYLLavesForaneas extends Migration
     public function up()
     {
         //
-        Schema::table('clientes', function(Blueprint $table){
-            $table->unsignedInteger('biblioteca_id');
+        // Schema::table('clientes', function(Blueprint $table){
+        //     $table->unsignedInteger('biblioteca_id');
             
-            $table->foreign('biblioteca_id')
-                ->references('id')
-                ->on('bibliotecas')
-                ->onDelete('cascade');
-        });
+        //     $table->foreign('biblioteca_id')
+        //         ->references('id')
+        //         ->on('bibliotecas')
+        //         ->onDelete('cascade');
+        // });
         
         Schema::table('users', function(Blueprint $table){
             $table->unsignedInteger('biblioteca_id');
@@ -61,15 +61,15 @@ class RelacionesYLLavesForaneas extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::table('ejemplarL_movimientoL', function(Blueprint $table){
-            $table->unsignedInteger('ejemplar_id');
-            $table->foreign('ejemplar_id')
+        Schema::table('ejemplar_l_movimiento_l', function(Blueprint $table){
+            $table->unsignedInteger('ejemplar_l_id');
+            $table->foreign('ejemplar_l_id')
                 ->references('id')
                 ->on('ejemplarL')
                 ->onDelete('cascade');  
                 
-            $table->unsignedInteger('movimiento_id');
-            $table->foreign('movimiento_id')
+            $table->unsignedInteger('movimiento_l_id');
+            $table->foreign('movimiento_l_id')
                 ->references('id')
                 ->on('movimientoL')
                 ->onDelete('cascade');        
@@ -120,9 +120,9 @@ class RelacionesYLLavesForaneas extends Migration
     public function down()
     {
         //
-        Schema::table('clientes', function(Blueprint $table){
-            $table->dropColumn('biblioteca_id');
-        });
+        // Schema::table('clientes', function(Blueprint $table){
+        //     $table->dropColumn('biblioteca_id');
+        // });
         
         Schema::table('users', function(Blueprint $table){
             $table->dropColumn('biblioteca_id');
@@ -142,9 +142,9 @@ class RelacionesYLLavesForaneas extends Migration
             $table->dropColumn('user_id');
         });
         
-        Schema::table('ejemplarL_movimientoL', function(Blueprint $table){
-            $table->dropColumn('ejemplar_id');
-            $table->dropColumn('movimiento_id');
+        Schema::table('ejemplar_l_movimiento_l', function(Blueprint $table){
+            $table->dropColumn('ejemplar_l_id');
+            $table->dropColumn('movimiento_l_id');
         });
         
         Schema::table('materiales', function(Blueprint $table){

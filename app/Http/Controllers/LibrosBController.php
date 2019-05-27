@@ -23,17 +23,16 @@ class LibrosBController extends Controller
                 ['titulo', 'like', '%'.$request->buscar.'%'],])
                 ->with('ejemplares')
                 ->orderBy('titulo')
-                ->paginate(5);
-            return view('libros.libroIndex', compact('biblioteca_id', 'libros', 'buscar'));
+                ->paginate(10);
         }
         else{
             // dd($request);
             $libros = Libro::where('biblioteca_id', $biblioteca_id)
                 ->with(['ejemplares'])
-                ->paginate(5);
-            return view('libros.libroIndex', compact('biblioteca_id', 'libros'));
+                ->paginate(10);
         }
-
+            
+        return view('libros.libroIndex', compact('biblioteca_id', 'libros'));
     }
 
     /**

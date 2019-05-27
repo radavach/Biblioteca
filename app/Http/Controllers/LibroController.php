@@ -19,11 +19,12 @@ class LibroController extends Controller
         // dd($request->buscar);
         if(!empty($request->buscar)){
             $libros = Libro::where('titulo', 'like', '%'.$request->buscar.'%')
+            ->with('ejemplares')
             ->orderBy('titulo')
-            ->paginate(5);
+            ->paginate(10);
         }
         else{
-            $libros = Libro::paginate(5);
+            $libros = Libro::with('ejemplares')->paginate(10);
         }
         return view('libros.libroIndex', compact('libros'));
     }

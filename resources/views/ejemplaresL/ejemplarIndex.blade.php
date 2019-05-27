@@ -3,73 +3,102 @@
 
 <div class="page-header">
     <div class="page-title">
-        INDEX LIBRO
+        EJEMPLAR
     </div>
 </div>
 
+@include('extra.mensajes')
+
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-10 offset-md-1">
         <div class="card">
             <div class="card-header">
-                <h3>Bienvenido al sistema compañero trabajador!</h3>
-                <div class="ml-auto">
-                    @if(!isset($biblioteca_id) && \Auth::user() !== null && Gate::check('permisos_admin'))
-                        <form class="input-icon my-3 my-lg-0" action="{{ route('libros.create') }}">
-                            <button type="submit" class="btn ">Registrar Libros</button>
-                        </form>
-                    @elseif(isset($biblioteca_id) && \Auth::user() !== null && (Gate::check('permisos_admin') || \Auth::user()->biblioteca_id == $biblioteca_id))
-                        <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.libros.create', $biblioteca_id) }}">
-                            <button type="submit" class="btn ">Registrar Libros</button>
-                        </form>
-                    @endif
-                </div>
+                <h3>  {{ $ejemplar->libro->titulo }} - {{ $ejemplar->estado ? 'Disponible' : 'Prestado' }}</h3>
             </div>
 
             <div class="card-body">
-                <table class="table table-hover table-dark" >
+                <div class="row" >
+                    <div class="col-md-3">
+                        <img class="card-img-top" src="{{$ejemplar->libro->linkImagen}}" alt="No hay imagen disponible">
+                    </div>
+                    <div class="col-md-3">
+                        <b>
+                            <p>Subtítulo</p> 
+                            <p>Idioma</p>
+                            <p>Sección</p>
+                            <p>Ejemplar</p>
+                            <p>Origen</p>
+                            <p>Comentario</p>
+                            <p>Días Máximos de Préstamo</p>
+                            @if(\Auth::user())<p>Acciones</p>@endif
+                        </b>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        
+                            <p>{{ $ejemplar->libro->subtitulo ?? 'No disponible'}}</p>
+                            <p>{{ $ejemplar->libro->idioma ?? 'No disponible'}}</p>
+                            <p>{{ $ejemplar->libro->seccion ?? 'No disponible'}}</p>
+                            <p>{{ $ejemplar->libro->ejemplar ?? 'No disponible'}}</p>
+                            <p>{{ $ejemplar->origen ?? 'No disponible' }}</p>
+                            <p>{{ $ejemplar->comentario ?? 'No hay comentarios' }}</p>
+                            <p>{{ $ejemplar->libro->diasMaxPrestamo ?? 'No disponible'}}</p>
+                            @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca_id)))
+                                <p>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                           <a href="#" class ="btn btn-sm btn-warning"> Realizar prestamo </a>
+                                        </div>
+                                        @can('permisos_admin')
+                                            <div class="col-md-2">
+                                                
+                                            </div>
+                                        @endcan
+                                    </div>
+                                </p>
+                            @endif
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="col-md-10 offset-md-1">
+        <div class="card">
+            <div class="card-header">Historial de adeudos</div>
+            <div class="card-body">
+                <table class="table table-hover table-dark">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Título</th> 
-                            <th>Autor</th>
-                            <th>ISBN</th> 
-                            <th>Ejemplares</th>
-                            @if(\Auth::user() !== null)<th>Acciones</th>@endif
+                            <th>Fecha de prestamo</th>
+                            <th>Fecha limite</th>
+                            <th>Comision</th>
+                            <th>ISBN</th>
+                            @if(\Auth::user() !==null)
+                                <th>ISBN</th>
+                                <th>Acciones</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($libros as $libro)
+                        @foreach($ejemplar->movimientos as $movimiento)
                             <tr>
                                 <td>
-                                    @if(!isset($biblioteca_id))
-                                        <a class="a-ESE-ENLACE-ES-MIO" href="{{ route('libros.show', $libro->id) }}">{{ $libro->id }}</a>
-                                    @else
-                                        <a class="a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.libros.show', [$biblioteca_id, $libro->id]) }}">{{ $libro->id }}</a>
-                                    @endif
+                                    {{ $movimiento->pivot->fechaPrestamo }}
                                 </td>
-                                <td>{{ $libro->titulo }}</td>
-                                <td>{{ $libro->autor }}</td>
-                                <td>{{ $libro->isbn }}</td>
-                                <td>
-                                    @foreach($libro->ejemplares as $ejemplar)
-                                    <ul class="nav nav-tabs border-0 ">
-                                        <li class="nav-item a-ESE-ENLACE-ES-MIO">{{ ($ejemplar->numEjemp)? $ejemplar->numEjemplar : $ejemplar->id }} - {{ $ejemplar->nombre }} {{ ($ejemplar->estado)? 'Disponible' : '' }}</li>
-                                    </ul>
-                                    @endforeach
-                                </td>
-                                @if(\Auth::user() !== null)
+                                <td>{{ date ( 'Y-m-j' , strtotime($movimiento->pivot->fechaPrestamo. "+ ".$ejemplar->libro->diasMaxPrestamo." days")) }}</td>
+                                <td>{{ $movimiento->pivot->comision }}</td>
+                                <td>{{ $movimiento->pivot->isbnLibro }}</td>
+                                @if(\Auth::user() !== null && (\Auth::user()->biblioteca_id == $biblioteca_id || Gate::check('permisos_admin')))
                                     <td>
-                                            <a href="{{ route('libros.edit', $libro->id) }}" class = "btn btn-sm btn-warning">Editar</a>
+                                       
                                     </td>
                                 @endif
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="col-lg-2 ml-auto">
-                {{ $libros->links() }}
             </div>
         </div>
     </div>
