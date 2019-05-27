@@ -13,4 +13,9 @@ class Cliente extends Model
     {
         return $this->hasMany(MovimientoL::class);
     }
+
+    public function getNombreApellidosAttribute()
+    {
+        return $this->nombre . ' ' . $this->apellidoPaterno . ' ' . $this->apellidoMaterno;
+    }
 }

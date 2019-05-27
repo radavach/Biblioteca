@@ -35,7 +35,7 @@
                     <tbody>
                         @for ($i = 0; $i < count($clientes); ++$i)
                             <tr>                
-                                <th>{{ $clientes[$i]->nombre }}</th>                
+                                <th>{{ $clientes[$i]->nombre_apellidos }}</th>                
                                 <td>{{ $clientes[$i]->nombreUsuario }}</td>
                                 <td>{{ $clientes[$i]->email }}</td>
                                 <td>{{ $deudas[$i]->ejemplar_l->libro->titulo }}</td>

@@ -31,7 +31,7 @@ class BibliotecaController extends Controller
             $bibliotecas = Biblioteca::orderBy('nombre')->paginate(10);
         }
 
-        // $bibliotecas = Biblioteca::all();
+        
         return view('bibliotecas.bibliotecaIndex', compact('bibliotecas')); 
     }
 

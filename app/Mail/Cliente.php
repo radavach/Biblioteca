@@ -33,4 +33,5 @@ class Cliente extends Mailable
     {
         return $this->view('mails.notificacion');
     }
+
 }

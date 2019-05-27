@@ -67,7 +67,7 @@ class ClienteController extends Controller
             array_push($clientes, $ejemplar->movimiento_l->cliente);
         }
 
-        
+        // dd($clientes[0]->nombre_apellidos);
 
         return view('clientes.clienteIndex', compact('biblioteca_id', 'clientes', 'deudas'));
     }
