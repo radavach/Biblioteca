@@ -15,11 +15,12 @@
             <div class="card-header">
                 <h3>{{ $libro->titulo }}</h3>
             </div>
+                
             <div class="card-body">
                 <div class="row" >
                     <div class="col-md-3">
-                        <img class="card-img-top" src="{{$libro->link}}" alt="No hay imagen disponible">
-                    </div>
+                        <img class="card-img-top" src="{{ asset('/images-database/'.$libro->link) }}" alt="">
+                     </div>
                     <div class="col-md-3">
                         <h5>
                             <p>Subtítulo</p> 
@@ -38,6 +39,7 @@
                     </div>
                     
                     <div class="col-md-6">
+                    
                         <h5>
                             <p>{{ $libro->subtitulo ?? 'No disponible'}}</p>
                             <p>{{ $libro->isbn ?? 'No disponible'}}</p>
@@ -49,7 +51,7 @@
                             <p>{{ $libro->seccion ?? 'No disponible'}}</p>
                             <p>{{ $libro->ejemplar ?? 'No disponible'}}</p>
                             <p>{{ $libro->diasMaxPrestamo ?? 'No disponible'}}</p>
-                            <p >{{ $libro->linkImagen ?? 'No disponible'}}</p>
+                            <p >{{ $libro->link ?? 'No disponible'}}</p>
                             @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca_id)))
                                 <p>
                                     <div class="row">

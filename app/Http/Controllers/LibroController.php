@@ -6,6 +6,7 @@ use App\Libro;
 use App\Biblioteca;
 use Illuminate\Http\Request;
 
+
 class LibroController extends Controller
 {
     public function __construct()
@@ -68,20 +69,23 @@ class LibroController extends Controller
             'seccion' => ['nullable', 'alpha_num'],
             'ejemplar' => ['nullable', 'numeric'],
             'diasMaxPrestamo' => ['required', 'numeric'],
-            'linkImagen' => ['nullable', 'image' => 'mimes:jpeg,png'],
+            'link' => ['nullable'],
             'biblioteca_id' => ['required'],
         ]);
+        $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario') + ['link' => $request->link]);
+
         if($request->hasFile('link'))
         {
             $file = $request->file('link');
             ///No se repetira el nombre del archivo
-            $nombre = time().$file->getLibroOrigialName();
+            $nombre = time().$file->getClientOriginalName();
         //  Es en la carpeta public ahí se almacenarán las imagenes 
             $file->move(public_path().'/images-database/', $nombre);
+            $libro->update(['link' => $nombre]);
         }
 
         // $libro->link = $nombre;
-        $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario') + ['link' => $request->linkImagen]);
+        
         
         return redirect()->route('libros.index');
 
@@ -138,7 +142,7 @@ class LibroController extends Controller
             'seccion' => 'nullable',
             'ejemplar' => 'nullable',
             'diasMaxPrestamo' => 'required',
-            'linkImagen' => 'nullable',
+            'link' => 'nullable',
             'biblioteca_id' => 'required',
         ]);
 
