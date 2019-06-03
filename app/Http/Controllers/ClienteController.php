@@ -25,6 +25,112 @@ class ClienteController extends Controller
     public function index($biblioteca_id)
     {
         //
+        $clientes = Cliente::all();
+
+        return view('clientes.clienteIndex', compact('biblioteca_id', 'clientes'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create($biblioteca_id)
+    {
+        //
+        return view('clientes.clienteForm', compact('biblioteca_id'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, $biblioteca_id)
+    {
+        //
+        $request->validate([
+            'nombre' => ['required', 'max:200', 'string'],
+            'apellidoPaterno' => ['required', 'max:100', 'string'],
+            'apellidoMaterno' => ['required','max:100', 'string'],
+            'nombreUsuario' => ['required','max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            //'biblioteca_id' -=> ['required'],          
+        ]);
+
+        $cliente = Cliente::create($request->all());
+        
+        return redirect()->route('bibliotecas.clientes.index', $biblioteca_id);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Cliente  $cliente
+     * @return \Illuminate\Http\Response
+     */
+    public function show($biblioteca_id, Cliente $cliente)
+    {
+        return view('clientes.clienteShow', compact('biblioteca_id', 'cliente', 'persona'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Cliente  $cliente
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($biblioteca_id, Cliente $cliente)
+    {
+        //
+        return view('clientes.clienteForm', compact('biblioteca_id', 'cliente'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Cliente  $cliente
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $biblioteca_id, Cliente $cliente)
+    {
+        //
+        $request->validate([
+            'nombre' => 'required|min:3',
+            'apellidoPaterno' => 'required|min:3',
+            'apellidoMaterno' => 'nullable|min:3',
+            'nombreUsuario' => 'required|min:3',
+            'email' => 'required|min:3',
+            'biblioteca_id' => 'required',
+        ]);
+        
+        $cliente->persona()->update($request->all());
+
+        return redirect()->route('bibliotecas.clientes.show', [$biblioteca_id, $cliente->id]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Cliente  $cliente
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($biblioteca_id, Cliente $cliente)
+    {
+        //
+        $cliente->persona()->delete();
+        return redirect()->route('bibliotecas.clientes.index')
+            ->with([
+                'mensaje' => 'Cliente Eliminado',
+                'alert-class' => 'alert-warning',
+            ]);
+    }
+
+    public function adeudos($biblioteca_id)
+    {
+
         $clientes = [];
         $deudas = [];
 
@@ -69,110 +175,6 @@ class ClienteController extends Controller
 
         // dd($clientes[0]->nombre_apellidos);
 
-        return view('clientes.clienteIndex', compact('biblioteca_id', 'clientes', 'deudas'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        $bibliotecas = Biblioteca::all();
-        return view('clientes.clienteForm', compact('bibliotecas'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-        $request->validate([
-            'nombre' => ['required', 'max:200', 'string'],
-            'apellidoPaterno' => ['required', 'max:100', 'string'],
-            'apellidoMaterno' => ['required','max:100', 'string'],
-            'nombreUsuario' => ['required','max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'biblioteca_id' => ['required'],
-        ]);
-
-        $persona = Persona::create($request->all());
-        $cliente = Cliente::create(['persona_id' => $persona->id, 'idCliente' => $persona->id]);
-        
-        return redirect()->route('clientes.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cliente $cliente)
-    {
-        //
-        $persona = $cliente->persona;
-        return view('clientes.clienteShow', compact('cliente', 'persona'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cliente $cliente)
-    {
-        //
-        $bibliotecas = Biblioteca::all();
-        $persona = $cliente->persona;
-        return view('clientes.clienteForm', compact('cliente', 'bibliotecas', 'persona'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cliente $cliente)
-    {
-        //
-        $request->validate([
-            'nombre' => 'required|min:3',
-            'apellidoPaterno' => 'required|min:3',
-            'apellidoMaterno' => 'nullable|min:3',
-            'nombreUsuario' => 'required|min:3',
-            'email' => 'required|min:3',
-            'biblioteca_id' => 'required',
-        ]);
-        
-        $cliente->persona()->update($request->all());
-
-        return redirect()->route('clientes.show', $cliente->id);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cliente $cliente)
-    {
-        //
-        $cliente->persona()->delete();
-        return redirect()->route('clientes.index')
-            ->with([
-                'mensaje' => 'Cliente Eliminado',
-                'alert-class' => 'alert-warning',
-            ]);
+        return view('clientes.clienteDeudas', compact('biblioteca_id', 'clientes', 'deudas'));
     }
 }

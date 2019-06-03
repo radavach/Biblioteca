@@ -61,7 +61,7 @@
                             <tr>
                                 <td>
                                     @if(!isset($biblioteca_id))
-                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('materiales.show', $material->id) }}">{{ $material->id }}:((</a>
+                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('materiales.show', $material->id) }}">{{ $material->id }}</a>
                                     @else
                                         <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.materiales.show', [$biblioteca_id, $material->id]) }}">{{ $material->id }}</a>
                                     @endif
