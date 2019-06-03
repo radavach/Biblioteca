@@ -51,11 +51,12 @@ class ClienteController extends Controller
     {
         //
         $request->validate([
-            'nombre' => 'required|min:3',
-            'apellidoPaterno' => 'required|min:3',
-            'apellidoMaterno' => 'required|min:3',
-            'nombreUsuario' => 'required|min:3',
-            'email' => 'required|min:3',
+            'nombre' => ['required', 'max:200', 'string'],
+            'apellidoPaterno' => ['required', 'max:100', 'string'],
+            'apellidoMaterno' => ['required','max:100', 'string'],
+            'nombreUsuario' => ['required','max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            //'biblioteca_id' -=> ['required'],          
         ]);
 
         $cliente = Cliente::create($request->all());

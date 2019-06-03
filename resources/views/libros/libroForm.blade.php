@@ -9,6 +9,7 @@
 <div class="row">
     <div class="col-md-10 offset-1">
         <div class="card">
+        
           <div class="card-header">
             <h3 class="card-title">Capturar Libro</h3>
           </div>
@@ -28,19 +29,21 @@
                 @if(!isset($biblio))
 
                     @if(isset($libro))
-                        <form action="{{ route('libros.update', $libro->id) }}" method="POST">
+                        <form action="{{ route('libros.update', $libro->id) }}" method="POST", enctype="multipart/form-data">
                             <input type="hidden" name="_method" value="PATCH">
                     @else
-                        <form action="{{ route('libros.store') }}" method="POST">
+                        <form action="{{ route('libros.store') }}" method="POST",  enctype="multipart/form-data">
+                        
                     @endif
                     
                 @else
 <!-- enviar todos los archivos dentro del mismo enctype -->
                     @if(isset($libro))
-                        <form action="{{ route('bibliotecas.libros.update', [$biblio, $libro->id]) }}" method="POST" >
+                        <form action="{{ route('bibliotecas.libros.update', [$biblio, $libro->id]) }}" method="POST", enctype="multipart/form-data">
                             <input type="hidden" name="_method" value="PATCH">
+                            
                     @else
-                        <form action="{{ route('bibliotecas.libros.store', $biblio) }}" method="POST">
+                        <form action="{{ route('bibliotecas.libros.store', $biblio) }}" method="POST", enctype="multipart/form-data">
                     @endif
 
                 @endif
@@ -171,12 +174,12 @@
                         @endif
                     </div>
 
-                    <div class="form-group", enctype='multipart/form-data'>
+                    <div class="form-group">
                         <label class="form-label">{{__('Imagen del ejemplar del libro')}}</label>
-                        <input type="file"  name="linkImagen" value="{{ isset($libro) ? $libro->linkImagen: old('linkImagen') }}" placeholder="Imagen del ejemplar del Libro">
-                            @if($errors->has('linkImagen'))
+                        <input type="file"  name="link" value="{{ isset($libro) ? $libro->link: old('link') }}" placeholder="Imagen del ejemplar del Libro">
+                            @if($errors->has('link'))
                                 <span class= "invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('linkImagen') }}</strong>
+                                    <strong>{{ $errors->first('link') }}</strong>
                                 </span>
                             @endif
                     </div>

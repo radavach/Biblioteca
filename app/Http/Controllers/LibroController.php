@@ -6,6 +6,7 @@ use App\Libro;
 use App\Biblioteca;
 use Illuminate\Http\Request;
 
+
 class LibroController extends Controller
 {
     public function __construct()
@@ -57,31 +58,34 @@ class LibroController extends Controller
     {
         //
         $request->validate([
-            'isbn' => 'required',
-            'titulo' => 'required',
-            'subtitulo' => 'nullable',
-            'autor' => 'required',
-            'editorial' => 'required',
-            'anio' => 'required',
-            'genero' => 'nullable',
-            'idioma' => 'required',
-            'seccion' => 'nullable',
-            'ejemplar' => 'nullable',
-            'diasMaxPrestamo' => 'required',
-            'linkImagen' => 'nullable',
-            'biblioteca_id' => 'required',
+            'isbn' =>['required','numeric','digits_between:10,13' ] ,
+            'titulo' => ['required','max:255', 'string'],
+            'subtitulo' => ['nullable', 'max:200'],
+            'autor' =>['required','max:255','string'],
+            'editorial' =>['required','max:255', 'string'],
+            'anio' => ['required', 'date_format:Y'],
+            'genero' => ['nullable', 'string', 'max:200'],
+            'idioma' => ['required', 'string'],
+            'seccion' => ['nullable', 'alpha_num'],
+            'ejemplar' => ['nullable', 'numeric'],
+            'diasMaxPrestamo' => ['required', 'numeric'],
+            'link' => ['nullable'],
+            'biblioteca_id' => ['required'],
         ]);
+        $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario') + ['link' => $request->link]);
+
         if($request->hasFile('link'))
         {
             $file = $request->file('link');
             ///No se repetira el nombre del archivo
-            $nombre = time().$file->getLibroOrigialName();
+            $nombre = time().$file->getClientOriginalName();
         //  Es en la carpeta public ahí se almacenarán las imagenes 
             $file->move(public_path().'/images-database/', $nombre);
+            $libro->update(['link' => $nombre]);
         }
 
         // $libro->link = $nombre;
-        $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario') + ['link' => $request->linkImagen]);
+        
         
         return redirect()->route('libros.index');
 
@@ -138,7 +142,7 @@ class LibroController extends Controller
             'seccion' => 'nullable',
             'ejemplar' => 'nullable',
             'diasMaxPrestamo' => 'required',
-            'linkImagen' => 'nullable',
+            'link' => 'nullable',
             'biblioteca_id' => 'required',
         ]);
 

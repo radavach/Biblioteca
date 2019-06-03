@@ -56,10 +56,10 @@ class BibliotecaController extends Controller
     {
         //
         $request->validate([
-            'nombre' => 'required|min:3',
-            'horaApertura' => 'required',
-            'horaCierre' => 'required',
-            'email' => 'required',
+            'nombre' => ['required', 'max:255', 'string'],
+            'horaApertura' => ['required','string'],
+            'horaCierre' => ['required','string'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
 
         $biblioteca = Biblioteca::create($request->all());

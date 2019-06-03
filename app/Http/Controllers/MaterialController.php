@@ -48,15 +48,15 @@ class MaterialController extends Controller
     {
         //
         $request->validate([
-            'idArticulo' => 'required',
-            'nombre' => 'required',
-            'seccion' => 'nullable',
-            'tipo' => 'nullable',
-            'ejemplar' => 'nullable',
-            'linkImagen' => 'nullable',
-            'autor' => 'nullable',
-            'anio' => 'nullable',
-            'biblioteca_id' => 'required',
+            'idArticulo' => ['required'],
+            'nombre' => ['required', 'max:255', 'string'],
+            'seccion' => ['nullable', 'alpha_num'],
+            'tipo' => ['nullable'],
+            'ejemplar' => ['nullable', 'numeric'],
+            'linkImagen' => ['nullable', 'image' => 'mimes:jpeg,png'],
+            'autor' => ['nullable', 'max:255', 'string'],
+            'anio' => ['nullable', 'date_format:Y'],
+            'biblioteca_id' => ['required'],
         ]);
 
         $material = Material::create($request->all());

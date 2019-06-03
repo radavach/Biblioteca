@@ -50,10 +50,10 @@ class EjemplarLibroController extends Controller
     {
         //
         $request->validate([
-            'numEjemp' => 'nullable',
-            'origen' => 'nullable',
-            'estado' => 'required',
-            'comentario' => 'nullable',
+            'numEjemp' => ['nullable', 'numeric'],
+            'origen' => ['nullable', 'max:200','string'],
+            'estado' => ['required'],
+            'comentario' => ['nullable', 'max:255', 'string'],
         ]);
 
         $ejemplar = EjemplarL::create($request->all() + ['libro_id' => $libro_id]);
