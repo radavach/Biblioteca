@@ -41,12 +41,14 @@
                             <td>{{ $cliente->email }}</td>
                             <td>
                                 <a href="{{ route('bibliotecas.clientes.edit', [$biblioteca_id, $cliente->id]) }}" class="btn btn-sm btn-warning">
+                                    <i class="fe fe-edit-3"></i>                                    
                                     Editar
                                 </a>
                                 <form action="{{ route('bibliotecas.clientes.destroy', [$biblioteca_id, $cliente->id]) }}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE"> 
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fe fe-trash-2"></i>                                    
                                         Borrar
                                     </button>
                                 </form>

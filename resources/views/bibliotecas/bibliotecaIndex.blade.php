@@ -3,7 +3,7 @@
 
 <div class="page-header">
     <div class="page-title">
-        INDEX BIBLIOTECAS
+        {{ isset($biblioteca_id)? 'BIBLIOTECA - '.$biblioteca_id->nombre : 'Selecciona una biblioteca para continuar' }}
     </div>
     
     @if(!isset($biblioteca_id))
@@ -31,8 +31,10 @@
                 @if(!isset($biblioteca_id) && \Auth::user() !== null && Gate::check('permisos_admin'))
                     <div class="ml-auto">
                         <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.create') }}">
-                            @csrf
-                            <button type="submit" class="btn ">Registrar Biblioteca</button>
+                            <button type="submit" class="btn btn-green">
+                                Registrar Biblioteca
+                                <i class="fe fe-share"></i>
+                            </button>
                         </form>
                     </div>
                 @endif
@@ -55,9 +57,9 @@
                             <tr>
                                 <td>
                                     @if(!isset($biblioteca_id))
-                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.show', $biblioteca->id) }}">{{ $biblioteca->id }}</a>
+                                        <a class= "enlace_no_fondo" href="{{ route('bibliotecas.show', $biblioteca->id) }}">{{ $biblioteca->id }}</a>
                                     @else
-                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.bibliotecas.show', [$biblioteca_id, $biblioteca->id]) }}">{{ $biblioteca->id }}</a>
+                                        <a class= "enlace_no_fondo" href="{{ route('bibliotecas.bibliotecas.show', [$biblioteca_id, $biblioteca->id]) }}">{{ $biblioteca->id }}</a>
                                     @endif
                                 </td>
                                 <td>{{ $biblioteca->nombre }}</td>
@@ -66,9 +68,16 @@
                                 <td>
                                     @if(\Auth::user() !== null && (($biblioteca->id == \Auth::user()->biblioteca_id) || Gate::check('permisos_admin') ))
                                         @if(isset($biblioteca_id))
-                                            <a href="{{ route('bibliotecas.bibliotecas.edit', [$biblioteca_id, $biblioteca->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                            <a href="{{ route('bibliotecas.bibliotecas.edit', [$biblioteca_id, $biblioteca->id]) }}" class="btn btn-sm btn-warning">
+                                                <i class="fe fe-edit-3"></i>
+                                                Editar
+                                                
+                                            </a>
                                         @else
-                                            <a href="{{ route('bibliotecas.edit', $biblioteca->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                                            <a href="{{ route('bibliotecas.edit', $biblioteca->id) }}" class="btn btn-sm btn-warning">
+                                                <i class="fe fe-edit-3"></i>
+                                                Editar
+                                            </a>
                                         @endif
                                     @endif
                                 </td>

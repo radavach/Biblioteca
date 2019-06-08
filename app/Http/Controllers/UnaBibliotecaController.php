@@ -19,11 +19,11 @@ class UnaBibliotecaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($biblioteca_id)
+    public function index(Biblioteca $biblioteca_id)
     {
         //
         // dd($biblioteca_id);
-        $bibliotecas = Biblioteca::where('id', $biblioteca_id)
+        $bibliotecas = Biblioteca::where('id', $biblioteca_id->id)
                 ->orderBy('nombre')
                ->paginate();
         return view('bibliotecas.bibliotecaIndex', compact('biblioteca_id','bibliotecas'));
@@ -71,7 +71,8 @@ class UnaBibliotecaController extends Controller
     public function edit($biblioteca_id, Biblioteca $biblioteca)
     {
         //
-        dd($biblioteca);
+        // dd($biblioteca);
+        return view('bibliotecas.bibliotecaForm', compact('biblioteca_id', 'biblioteca'));
     }
 
     /**

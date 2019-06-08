@@ -13,6 +13,6 @@ class Biblioteca extends Model
 
     public function setNombreAttribute($nombre)
     {
-        $this->attributes['nombre'] = strtoupper($nombre);
+        $this->attributes['nombre'] = mb_strtoupper($nombre);
     }
 }

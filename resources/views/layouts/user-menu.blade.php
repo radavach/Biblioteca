@@ -3,13 +3,13 @@
     <span class="avatar" style="background-image: <?php 
             if(\Auth::user() !== null): 
                 isset(\Auth::user()->imagen)? 
-                    print 'url(./assets/images/imagenes/'.Auth::user()->imagen.'.jpg)' : 
-                    print 'url(./assets/images/imagenes/'.((Auth::user()->id % 80) + 1).'.jpg)';
+                    print 'url(./images/imagenes/'.Auth::user()->imagen.'.jpg)' : 
+                    print 'url(./images/imagenes/'.((Auth::user()->id % 80) + 1).'.jpg)';
             else: 
                 isset($icon_num)? 
-                    // print 'url(./assets/images/imagenes/'.$icon_num.'.jpg)' : 
-                    print 'url(./assets/images/imagenes/'.$icon_num.'.jpg)' : 
-                    print 'url(./assets/images/imagenes/3.jpg)'; 
+                    // print 'url(./images/imagenes/'.$icon_num.'.jpg)' : 
+                    print 'url(./images/imagenes/'.$icon_num.'.jpg)' : 
+                    print 'url(./images/imagenes/3.jpg)'; 
             endif; ?> ">
     </span>
     <span class="ml-2 d-none d-lg-block">

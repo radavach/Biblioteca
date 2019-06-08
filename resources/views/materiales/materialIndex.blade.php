@@ -3,7 +3,11 @@
 
 <div class="page-header">
     <div class="page-title">
-        INDEX MATERIALES
+    @if(isset($biblioteca_id))
+            <h3>BIBLIOTECA - <a class="enlace_no_fondo" href="{{ route('bibliotecas.show', [$biblioteca_id]) }}">{{ $biblioteca_id->nombre }}</a></h3>
+        @else
+            <h3>COLECCION GENERAL DE LIBROS</h3>
+        @endif
     </div>
 
     <div class="col-lg-3 ml-auto">
@@ -28,18 +32,15 @@
         <div class="card">
             <div class="card-header">
                 <h3>Bienvenido al sistema</h3>
-
                 @if(\Auth::user() !== null)
                     <div class="ml-auto">
                         @if(!isset($biblioteca_id) && Gate::check('permisos_admin') )
                             <form class="input-icon my-3 my-lg-0" action="{{ route('materiales.create') }}">
-                                <button type="submit" class="btn ">Registrar Material</button>
-                            </form>
-                        @elseif(\Auth::user()->biblioteca_id == $biblioteca_id || Gate::check('permisos_admin'))
+                        @elseif(isset($biblioteca_id) && (Gate::check('permisos_admin') || Gate::check('es_trabajador', $biblioteca_id->id)))
                             <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.materiales.create', $biblioteca_id) }}">
-                                <button type="submit" class="btn ">Registrar Material</button>
-                            </form>
                         @endif
+                                <button type="submit" class="btn btn-green">Registrar Material <i class="fe fe-share"></i></button>
+                            </form>
                     </div>
                 @endif
             </div>
@@ -60,11 +61,7 @@
                         @foreach ($materiales as $material)
                             <tr>
                                 <td>
-                                    @if(!isset($biblioteca_id))
-                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('materiales.show', $material->id) }}">{{ $material->id }}</a>
-                                    @else
-                                        <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.materiales.show', [$biblioteca_id, $material->id]) }}">{{ $material->id }}</a>
-                                    @endif
+                                    <a class= "a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.materiales.show', [$material->biblioteca_id, $material->id]) }}">{{ $material->id }}</a>
                                 </td>
                                 <td>{{ $material->nombre }}</td>
                                 <td>{{ $material->seccion }}</td>
@@ -80,19 +77,18 @@
                                         <h6>No hay ejemplares<h6>
                                     @endif
                                 </td>
-                                @if(\Auth::user() !== null)
+                                @if(\Auth::user() !== null && (Gate::check('permisos_admin') || Gate::check('es_trabajador', $biblioteca_id->id)))
                                     <td>
-                                        @if(isset($biblioteca_id))
-                                            <a href="{{ route('bibliotecas.materiales.edit', [$biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning">Editar</a>
-                                        @else
-                                            <a href="{{ route('materiales.edit', $material->id) }}" class="btn btn-sm btn-warning">Editar</a>
-                                        @endif
+                                        <a href="{{ route('bibliotecas.materiales.edit', [$material->biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning"><i class="fe fe-edit-3"></i>Editar</a>
                                     </td>
                                 @endif
                             </tr>
                         @endforeach
                     </tbody>
                  </table>
+            </div>
+            <div class="col-lg-3 ml-auto">
+                {{ $materiales->links() }}
             </div>
         </div>
     </div>

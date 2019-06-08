@@ -179,6 +179,11 @@ a {
   -webkit-text-decoration-skip: objects;
 }
 
+.enlace_no_fondo {
+  color: white;
+  background-color: transparent !important;
+}
+
 a:hover {
   color: #295a9f;
   text-decoration: underline;

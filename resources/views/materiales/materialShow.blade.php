@@ -3,7 +3,7 @@
 
 <div class="page-header">
     <div class="page-title">
-        INDEX MATERIALES
+        SHOW MATERIAL
     </div>
 </div>
 
@@ -38,7 +38,10 @@
                                 <p>     
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <a href="{{ route('bibliotecas.materiales.edit', [$material->biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                            <a href="{{ route('bibliotecas.materiales.edit', [$material->biblioteca_id, $material->id]) }}" class="btn btn-sm btn-warning">
+                                                <i class="fe fe-edit-3"></i>
+                                                Editar
+                                            </a>
                                         </div>
                                         @can('permisos_admin')
                                         <div class="col-md-2">
@@ -46,6 +49,7 @@
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fe fe-trash-2"></i>
                                                     Borrar
                                                 </button>
                                             </form>

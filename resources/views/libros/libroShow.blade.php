@@ -19,7 +19,8 @@
             <div class="card-body">
                 <div class="row" >
                     <div class="col-md-3">
-                        <img class="card-img-top" src="{{ asset('/images-database/'.$libro->link) }}" alt="">
+                        <!-- <img class="card-img-top" src="{{ asset('/images-database/'.$libro->link) }}" alt=""> -->
+                        <img class="card-img-top" src="{{ $libro->link }}" alt="">
                      </div>
                     <div class="col-md-3">
                         <h5>
@@ -51,12 +52,13 @@
                             <p>{{ $libro->seccion ?? 'No disponible'}}</p>
                             <p>{{ $libro->ejemplar ?? 'No disponible'}}</p>
                             <p>{{ $libro->diasMaxPrestamo ?? 'No disponible'}}</p>
-                            <p >{{ $libro->link ?? 'No disponible'}}</p>
+                            <p>{{ $libro->linkImagen ?? 'No disponible'}}</p>
                             @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca_id)))
                                 <p>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class="btn btn-sm btn-warning">
+                                                <i class="fe fe-edit-3"></i>
                                                 Editar
                                             </a>
                                         </div>
@@ -66,6 +68,7 @@
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm btn-danger">
+                                                        <i class="fe fe-trash-2"></i>
                                                         Borrar
                                                     </button>
                                                 </form>

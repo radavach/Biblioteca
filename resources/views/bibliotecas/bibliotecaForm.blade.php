@@ -112,11 +112,14 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary ml-auto">Aceptar</button>
-                @can('permisos_admin')
-                  <a href="{{ route('bibliotecas.index') }}" class="btn btn-danger">Cancelar</a>
-                @else
-                  <a href="{{ route('bibliotecas.unaBiblioteca.index', \Auth::user()->biblioteca_id) }}" class="btn btn-danger">Cancelar</a>
-                @endcan
+                @if(isset($biblioteca_id) and (Gate::check('permisos_admin') || (\Auth::user()->$biblioteca_id == $biblioteca_id)))
+                    <a href="{{ route('bibliotecas.bibliotecas.index', [$biblioteca_id]) }}" class="btn btn-danger">Cancelar</a>
+                
+                @else                
+                    @can('permisos_admin')
+                        <a href="{{ route('bibliotecas.index') }}" class="btn btn-danger">Cancelar</a>
+                    @endcan
+                @endif
 
             </form>
 

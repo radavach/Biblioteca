@@ -30,6 +30,7 @@ class CreaTablaLibros extends Migration
             $table->string('seccion')->nullable();
             $table->integer('ejemplar')->nullable();
             $table->integer('diasMaxPrestamo');
+            $table->string('link')->nullable();
             $table->string('linkImagen')->nullable();
             $table->timestamps();
         });

@@ -20,12 +20,12 @@ class LibrosBController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $biblioteca_id)
+    public function index(Request $request, Biblioteca $biblioteca_id)
     {
         
         if(!empty($request->buscar)){
             $libros = Libro::where([
-                ['biblioteca_id', $biblioteca_id],
+                ['biblioteca_id', $biblioteca_id->id],
                 ['titulo', 'like', '%'.$request->buscar.'%'],])
                 ->with('ejemplares')
                 ->orderBy('titulo')
@@ -33,7 +33,7 @@ class LibrosBController extends Controller
         }
         else{
             // dd($request);
-            $libros = Libro::where('biblioteca_id', $biblioteca_id)
+            $libros = Libro::where('biblioteca_id', $biblioteca_id->id)
                 ->with(['ejemplares'])
                 ->paginate(10);
         }

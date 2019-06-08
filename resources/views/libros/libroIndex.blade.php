@@ -3,7 +3,11 @@
 
 <div class="page-header">
     <div class="page-title">
-        INDEX LIBRO
+        @if(isset($biblioteca_id))
+            <h3>BIBLIOTECA - <a class="enlace_no_fondo" href="{{ route('bibliotecas.show', [$biblioteca_id]) }}">{{ $biblioteca_id->nombre }}</a></h3>
+        @else
+            <h3>COLECCION GENERAL DE LIBROS</h3>
+        @endif
     </div>
 
     <div class="col-lg-3 ml-auto">
@@ -27,18 +31,21 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3>Bienvenido al sistema compañero trabajador!</h3>
-                <div class="ml-auto">
-                    @if(!isset($biblioteca_id) && \Auth::user() !== null && Gate::check('permisos_admin'))
-                        <form class="input-icon my-3 my-lg-0" action="{{ route('libros.create') }}">
-                            <button type="submit" class="btn ">Registrar Libros</button>
-                        </form>
-                    @elseif(isset($biblioteca_id) && \Auth::user() !== null && (Gate::check('permisos_admin') || \Auth::user()->biblioteca_id == $biblioteca_id))
-                        <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.libros.create', $biblioteca_id) }}">
-                            <button type="submit" class="btn ">Registrar Libros</button>
-                        </form>
-                    @endif
-                </div>
+                @if(isset($biblioteca_id))<h3>Colección de nuestros libros</h3>@endif
+                @if(\Auth::user() !== null)
+                    <div class="ml-auto">
+                        @if(!isset($biblioteca_id) && Gate::check('permisos_admin'))
+                            <form class="input-icon my-3 my-lg-0" action="{{ route('libros.create') }}">
+                        @elseif(isset($biblioteca_id) && (Gate::check('permisos_admin') || Gate::check('es_trabajador', $biblioteca_id->id)))
+                            <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.libros.create', $biblioteca_id) }}">
+                        @endif
+                                <button type="submit" class="btn btn-green">
+                                    Registrar Libros
+                                    <i class="fe fe-share"></i>
+                                </button>
+                            </form>
+                    </div>
+                @endif
             </div>
             
             <div class="card-body">
@@ -59,7 +66,7 @@
                         <!-- ///<img class="group list-group-image" src="images-database/{{$libro->link}}" alt=" "> -->
                             <tr>
                                 <td>
-                                    <a class="a-ESE-ENLACE-ES-MIO" href="{{ route('bibliotecas.libros.show', [$libro->biblioteca_id, $libro->id]) }}">{{ $libro->id }}</a>
+                                    <a class="enlace_no_fondo" href="{{ route('bibliotecas.libros.show', [$libro->biblioteca_id, $libro->id]) }}">{{ $libro->id }}</a>
                                 </td>
                                 <td>{{ $libro->titulo }}</td>
                                 <td>{{ $libro->autor }}</td>
@@ -75,9 +82,12 @@
                                         <h6>No hay ejemplares</h6>
                                     @endif
                                 </td>
-                                @if(\Auth::user() !== null)
+                                @if(\Auth::user() !== null && isset($biblioteca_id) && (Gate::check('permisos_admin') || Gate::check('es_trabajador', $biblioteca_id->id)))
                                     <td>
-                                            <a href="{{ route('libros.edit', $libro->id) }}" class = "btn btn-sm btn-warning">Editar</a>
+                                        <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class = "btn btn-sm btn-warning">
+                                            <i class="fe fe-edit-3"></i>
+                                            Editar
+                                        </a>
                                     </td>
                                 @endif
                             </tr>

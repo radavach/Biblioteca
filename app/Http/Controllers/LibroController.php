@@ -22,8 +22,6 @@ class LibroController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        // dd($request->buscar);
         if(!empty($request->buscar)){
             $libros = Libro::where('titulo', 'like', '%'.$request->buscar.'%')
             ->with('ejemplares')
@@ -69,7 +67,7 @@ class LibroController extends Controller
             'seccion' => ['nullable', 'alpha_num'],
             'ejemplar' => ['nullable', 'numeric'],
             'diasMaxPrestamo' => ['required', 'numeric'],
-            'link' => ['nullable'],
+            'link' => ['required'],
             'biblioteca_id' => ['required'],
         ]);
         $libro = Libro::create($request->except('numEjemp', 'origen', 'estado', 'comentario') + ['link' => $request->link]);
@@ -78,10 +76,13 @@ class LibroController extends Controller
         {
             $file = $request->file('link');
             ///No se repetira el nombre del archivo
-            $nombre = time().$file->getClientOriginalName();
-        //  Es en la carpeta public ahí se almacenarán las imagenes 
-            $file->move(public_path().'/images-database/', $nombre);
-            $libro->update(['link' => $nombre]);
+            $linkImagen = time().$file->getClientOriginalName();
+            //Se obtiene la direccion completa del archivio
+            $link = asset('/images-database/'.$linkImagen);
+            //Es en la carpeta public ahí se almacenarán las imagenes 
+            $file->move(public_path().'/images-database/', $linkImagen);
+            //Se guardan los cambios sobre la imagen
+            $libro->update(['link' => $link, 'linkImagen' => $linkImagen]);
         }
 
         // $libro->link = $nombre;
@@ -89,84 +90,5 @@ class LibroController extends Controller
         
         return redirect()->route('libros.index');
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Libro  $libro
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Libro $libro)
-    {
-        //
-        return view('libros.libroShow', compact('libro'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Libro  $libro
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Libro $libro)
-    {
-        //
-        // $ejemplares = $libro->ejemplares();
-        // $bibliotecas = Biblioteca::all();
-        // return view('libros.libroForm', compact('bibliotecas', 'ejemplares', 'libro'));
-
-        // return view('bibliotecas.librosB.edit', [$libro->biblioteca_id, $libro]);
-        return redirect()->route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Libro  $libro
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Libro $libro)
-    {
-        //
-        $request->validate([
-            'isbn' => 'required',
-            'titulo' => 'required',
-            // 'subtitulo' => 'nullable',
-            'autor' => 'required',
-            'editorial' => 'required',
-            'anio' => 'required',
-            'genero' => 'nullable',
-            'idioma' => 'required',
-            'seccion' => 'nullable',
-            'ejemplar' => 'nullable',
-            'diasMaxPrestamo' => 'required',
-            'link' => 'nullable',
-            'biblioteca_id' => 'required',
-        ]);
-
-        $libro->update($request->except('numEjemp', 'origen', 'estado', 'comentario'));
-
-       
-
-        return redirect()->route('libros.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Libro  $libro
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Libro $libro)
-    {
-        //
-        $libro->delete();
-        return redirect()->route('libros.index')
-            >with([
-                'mensaje' => 'Libro Eliminado',
-                'alert-class' => 'alert-warning',
-            ]);
     }
 }

@@ -35,5 +35,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->esAdmin == 1;
         });
 
+        Gate::define('es_trabajador', function($user, $biblioteca_id){
+            // dd($biblioteca_id);
+            return $user->biblioteca_id == $biblioteca_id;
+        });
+
     }
 }

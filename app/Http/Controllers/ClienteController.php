@@ -22,10 +22,10 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($biblioteca_id)
+    public function index(Biblioteca $biblioteca_id)
     {
         //
-        $clientes = Cliente::all();
+        $clientes = Cliente::paginate(10);
 
         return view('clientes.clienteIndex', compact('biblioteca_id', 'clientes'));
     }

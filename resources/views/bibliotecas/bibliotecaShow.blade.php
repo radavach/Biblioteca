@@ -43,8 +43,13 @@
                                 <td>{{ $biblioteca->facebook }}</td>
                                 <td>{{ $biblioteca->email }}</td>
                                 <td>
-                                    @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca_id)))
-                                            <a href="{{ route('bibliotecas.edit', $biblioteca->id) }}" class="btn btn-sm btn-warning">
+                                    @if(\Auth::user() !== null && (Gate::check('permisos_admin') || (\Auth::user()->biblioteca_id == $biblioteca->id)))
+                                            @if(isset($biblioteca_id))
+                                                <a href="{{ route('bibliotecas.bibliotecas.edit', [$biblioteca->id, $biblioteca_id]) }}" class="btn btn-sm btn-warning">
+                                            @else
+                                                <a href="{{ route('bibliotecas.edit', $biblioteca->id) }}" class="btn btn-sm btn-warning">
+                                            @endif
+                                                <i class="fe fe-edit-3"></i>
                                                 Editar
                                             </a>
                                         @can('permisos_admin')
@@ -52,6 +57,7 @@
                                                 <input type="hidden" name="_method" value="DELETE"> 
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fe fe-trash-2"></i>
                                                     Borrar
                                                 </button>
                                             </form>

@@ -19,19 +19,19 @@ class MaterialesBController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($biblioteca_id, Request $request)
+    public function index(Biblioteca $biblioteca_id, Request $request)
     {
         //
         if(!empty($request->buscar)){
             // dd($request);
-            $materiales = Material::where('biblioteca_id', $biblioteca_id)
+            $materiales = Material::where('biblioteca_id', $biblioteca_id->id)
                     ->where('nombre', 'like', '%'.$request->buscar.'%')
                     ->with('ejemplares')
                     ->orderBy('nombre')
                     ->paginate(5);
         }
         else{
-            $materiales = Material::where('biblioteca_id', $biblioteca_id)
+            $materiales = Material::where('biblioteca_id', $biblioteca_id->id)
                     ->with('ejemplares')
                     ->paginate(5);
         }

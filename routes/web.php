@@ -36,8 +36,6 @@ Route::resource('/bibliotecas', 'BibliotecaController')->except(['index']);
 //Esta parte se puede hacer con de otra manera pero me empeñe en crear las rutas una por una así que asi se quedan :3
 //Manipular los relacionado a una sola biblioteca
 Route::match(['GET', 'POST'], '/bibliotecas/{biblioteca_id}/bibliotecas/listado', 'UnaBibliotecaController@index')->name('bibliotecas.bibliotecas.index');
-Route::post('/bibliotecas/{biblioteca_id}/bibliotecas', 'UnaBibliotecaController@store')->name('bibliotecas.bibliotecas.store');
-Route::get('/bibliotecas/{biblioteca_id}/bibliotecas/create', 'UnaBibliotecaController@create')->name('bibliotecas.bibliotecas.create');
 Route::get('/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}', 'UnaBibliotecaController@show')->name('bibliotecas.bibliotecas.show');
 Route::delete('/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}', 'UnaBibliotecaController@destroy')->name('bibliotecas.bibliotecas.destroy');
 Route::match(['put', 'patch'], '/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}', 'UnaBibliotecaController@update')->name('bibliotecas.bibliotecas.update');
@@ -46,7 +44,8 @@ Route::get('/bibliotecas/{biblioteca_id}/bibliotecas/{biblioteca}/edit', 'UnaBib
 
 ///Manejar todos los libros
 Route::match(['GET', 'POST'], '/libros/listado', 'LibroController@index')->name('libros.index');
-Route::resource('/libros', 'LibroController')->except(['index']);
+Route::get('/libros/create', 'LibroController@create')->name('libros.create');
+Route::post('/libros', 'LibroController@store')->name('libros.store');
 
 
 ///Manejar los libros de exclusivamente una biblioteca
@@ -69,10 +68,8 @@ Route::resource('/bibliotecas.libros.ejemplares.movimientos', 'MovimientoLibroCo
         
 //Para manejar todos los materiales registrados
 Route::match(['GET','POST'], '/materiales/listado', 'MaterialController@index')->name('materiales.index');
-Route::resource('/materiales', 'MaterialController')
-        ->except(['index'])
-        ->parameters(['materiales' => 'material']
-);
+Route::get('/material/create', 'MaterialController@create')->name('materiales.create');
+Route::post('/materiales', 'MaterialController@store')->name('materiales.store');
 
 
 ///Manejar todos los materiales de una biblioteca
