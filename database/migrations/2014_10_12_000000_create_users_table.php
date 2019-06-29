@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('telefono')->nullable();
             $table->string('direccion');
             $table->string('rfc')->nullable();
+            $table->string('imagen')->nullable();
             $table->boolean('esAdmin');
         });
     }

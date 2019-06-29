@@ -9,8 +9,8 @@
 
 @include('extra.mensajes')
 
-<div class="row">
-    <div class="col-md-10 offset-md-1">
+<div class="row justify-content-center">
+    <div class="col-md-10">
         <div class="card">
             <div class="card-header">
                 <h3>{{ $libro->titulo }}</h3>
@@ -19,9 +19,8 @@
             <div class="card-body">
                 <div class="row" >
                     <div class="col-md-3">
-                        <!-- <img class="card-img-top" src="{{ asset('/images-database/'.$libro->link) }}" alt=""> -->
                         <img class="card-img-top" src="{{ $libro->link }}" alt="">
-                     </div>
+                    </div>
                     <div class="col-md-3">
                         <h5>
                             <p>Subtítulo</p> 
@@ -84,9 +83,23 @@
         </div>
     </div>
 
-    <div class="col-md-10 offset-md-1">
+    <div class="col-md-10">
         <div class="card">
-            <div class="card-header">Ejemplares</div>
+            <div class="card-header">
+                Ejemplares
+
+                
+                @if(isset($biblioteca_id) && \Auth::user() !== null && (Gate::check('permisos_admin') || Gate::check('es_trabajador', $biblioteca_id)))
+                    <div class="ml-auto">
+                        <form class="input-icon my-3 my-lg-0" action="{{ route('bibliotecas.libros.ejemplares.create', [$biblioteca_id, $libro]) }}">
+                            <button type="submit" class="btn btn-green">
+                                Registrar Ejemplar
+                                <i class="fe fe-share"></i>
+                            </button>
+                        </form>
+                    </div>
+                @endif
+            </div>
             <div class="card-body">
                 <table class="table table-hover table-dark">
                     <thead>

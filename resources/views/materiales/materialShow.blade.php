@@ -9,8 +9,8 @@
 
 @include('extra.mensajes')  
 
-<div class="row">
-    <div class="col-md-10 offset-md-1">
+<div class="row justify-content-center">
+    <div class="col-md-10 ">
         <div class="card">
             <div class="card-header">
                 <h3>{{ $material->nombre }}</h3>
@@ -65,7 +65,7 @@
     </div>
 
     
-    <div class="col-md-10 offset-md-1">
+    <div class="col-md-10 ">
             <div class="card">
                 <div class="card-header">Ejemplares</div>
                 <div class="card-body">

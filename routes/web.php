@@ -25,6 +25,8 @@ Route::get('/inicio', function()
 });
 
 
+// Route::get('/redirect', 'PaginaController@redirect')->name('redireccionar');
+
 Auth::routes();
 
 
@@ -62,8 +64,12 @@ Route::resource('/bibliotecas.libros.ejemplares', 'EjemplarLibroController')
 
 
 //Manejar los movimientos de un ejemplar Libros
-Route::resource('/bibliotecas.libros.ejemplares.movimientos', 'MovimientoLibroController')
-        ->parameters(['bibliotecas' => 'biblioteca_id', 'ejemplares' => 'ejemplar']);
+Route::match(['GET','POST'], '/bibliotecas/{biblioteca_id}/libros/{libro}/movimientos', 'MovimientoLibroController@prestamo')->name('bibliotecas.libros.ejemplares.movimientos.prestamo');
+Route::match(['GET','POST'], '/movimientos', 'MovimientoLibroController@inicio')->name('movimientos.inicio');
+Route::match(['GET','POST'], '/movimientos/prestar/{cliente}/{ejemplar}', 'MovimientoLibroController@prestamo')->name('realizar.prestamo');
+Route::match(['GET','POST'], '/movimientos/entrega/{cliente}/{ejemplar}', 'MovimientoLibroController@entrega')->name('realizar.entrega');
+// Route::resource('/bibliotecas.libros.ejemplares.movimientos', 'MovimientoLibroController')
+//         ->parameters(['bibliotecas' => 'biblioteca_id', 'ejemplares' => 'ejemplar']);
 
         
 //Para manejar todos los materiales registrados
@@ -96,5 +102,16 @@ Route::resource('/bibliotecas.materiales.ejemplares.movimientos', 'MovimientoMat
 Route::get('/bibliotecas/{biblioteca_id}/clientes/adeudos', 'ClienteController@adeudos')->name('bibliotecas.clientes.adeudos');
 Route::resource('/bibliotecas.clientes', 'ClienteController')
         ->parameters(['bibliotecas' => 'biblioteca_id']);
+
+//Mostrando el perfil completo
+Route::get('/Myperfil', 'UserController@perfil')->name('profile.index');
+//Mostrando el formulario para actualizar la informacion
+Route::get('/perfil', 'UserController@editPerfil')->name('profile.edit');
+//Recibiendo el request para actualizar la informacion
+Route::put('/perfil', 'UserController@updatePerfil')->name('profile.update');
+//Mostrando el formulario para actualizar la foto
+Route::get('/photo', 'UserController@editPhoto')->name('photo.edit');
+//Recibiendo el request para actualizar la foto
+Route::get('/photo/{imagen}', 'UserController@updatePhoto')->name('photo.update');
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -1,11 +1,5 @@
 @extends('layouts.tabler')
 @section('contenido')
-<!-- 
-<div class="page-header">
-    <div class="page-title">
-        INDEX CLIENTE
-    </div>
-</div> -->
 
 <div class="row">
     <div class="col-md-12">

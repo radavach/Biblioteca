@@ -22,7 +22,6 @@ class BibliotecaController extends Controller
     public function index(Request $request)
     {
         //
-
         if (!empty($request->buscar)) {
             $bibliotecas = Biblioteca::where('nombre', 'like', '%'.$request->buscar.'%')
                 ->orderBy('nombre')

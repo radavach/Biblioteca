@@ -1,28 +1,28 @@
 <div class="dropdown">
-    <a href="#" class="nav-link pr-0 leading-none clas-esp" data-toggle="dropdown">
-    <span class="avatar" style="background-image: <?php 
-            if(\Auth::user() !== null): 
-                isset(\Auth::user()->imagen)? 
-                    print 'url(./images/imagenes/'.Auth::user()->imagen.'.jpg)' : 
-                    print 'url(./images/imagenes/'.((Auth::user()->id % 80) + 1).'.jpg)';
-            else: 
-                isset($icon_num)? 
-                    // print 'url(./images/imagenes/'.$icon_num.'.jpg)' : 
-                    print 'url(./images/imagenes/'.$icon_num.'.jpg)' : 
-                    print 'url(./images/imagenes/3.jpg)'; 
-            endif; ?> ">
-    </span>
-    <span class="ml-2 d-none d-lg-block">
-        <span class="text-default texto-celestial-blue">@if(Auth::user() !== null) {{ Auth::user()->name }} @else Anonimo @endif </span>
-        @if(isset(Auth::user()->rol)) <small class="text-muted d-block mt-1 texto-resolution-blue">{{ Auth::user()->rol }} </small> @endif
-        @if(\Auth::user() !== null)<small class="text-muted d-block mt-1 texto-resolution-blue">@if(Auth::user()->esAdmin) Administrador @else Empleado  @endif</small> @endif
-    </span>
+    <a href="{{ (\Auth::user() != NULL)? route('profile.index') : route('login') }}" class="nav-link pr-0 leading-none clas-esp" data-toggle="dropdown">
+        <span class="avatar" style="background-image: <?php 
+                if(\Auth::user() !== NULL): 
+                    (\Auth::user()->imagen !== NULL)? 
+                        print 'url(./images/imagenes/'.Auth::user()->imagen.'.jpg)' : 
+                        print 'url(./images/imagenes/'.((Auth::user()->id % 80) + 1).'.jpg)';
+                else: 
+                    isset($icon_num)? 
+                        // print 'url(./images/imagenes/'.$icon_num.'.jpg)' : 
+                        print 'url(./images/imagenes/'.$icon_num.'.jpg)' : 
+                        print 'url(./images/imagenes/3.jpg)'; 
+                endif; ?>">
+        </span>
+        <span class="ml-2 d-none d-lg-block">
+            <span class="text-default texto-celestial-blue">@if(Auth::user() !== null) {{ Auth::user()->name }} @else Anonimo @endif </span>
+            @if(isset(Auth::user()->rol)) <small class="text-muted d-block mt-1 texto-resolution-blue">{{ Auth::user()->rol }} </small> @endif
+            @if(\Auth::user() !== null)<small class="text-muted d-block mt-1 texto-resolution-blue">@if(Auth::user()->esAdmin) Administrador @else Empleado  @endif</small> @endif
+        </span>
     </a>
     
     <div id="menu-user-dropdown" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
         
         @if(\Auth::user() !== null)
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route('profile.index') }}">
                 <i class="dropdown-icon fe fe-lock"></i> Profile
             </a>
             <a class="dropdown-item" href="{{ route('logout') }}"

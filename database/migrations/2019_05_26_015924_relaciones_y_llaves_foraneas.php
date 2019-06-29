@@ -24,7 +24,7 @@ class RelacionesYLLavesForaneas extends Migration
         // });
         
         Schema::table('users', function(Blueprint $table){
-            $table->unsignedInteger('biblioteca_id');
+            $table->unsignedInteger('biblioteca_id')->nullable();
             $table->foreign('biblioteca_id')
                 ->references('id')
                 ->on('bibliotecas')

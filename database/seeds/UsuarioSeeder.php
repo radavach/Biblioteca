@@ -16,7 +16,7 @@ class UsuarioSeeder extends Seeder
 
         $nombre = 'Christian Daniel';
         $apellidoPat = 'Ramos';
-        $apellidoMat = 'Materno';
+        $apellidoMat = 'Vallejo';
         factory(App\User::class)->create([
             'nombre' => $nombre,
             'apellidoPaterno' => $apellidoPat,

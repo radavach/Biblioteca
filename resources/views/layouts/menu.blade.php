@@ -25,6 +25,10 @@
 
       @if(\Auth::user() !== null)
         <li class="nav-item">
+          <a href="{{ route('movimientos.inicio') }}" class="nav-link active"><i class="fe fe-book"></i> Movimientos</a>
+        </li>
+
+        <li class="nav-item">
           <a href="{{ route('bibliotecas.materiales.index', $biblioteca_id) }}" class="nav-link active"><i class="fe fe-scissors"></i> Materiales</a>
         </li>
         

@@ -22,6 +22,7 @@
                             <th>Nombre Usuario</th> 
                             <th>Correo Electrónico</th> 
                             <th>Libro</th>
+                            <th>Ejemplar</th>
                             <th>Fecha Prestamo</th>
                             <th>Fecha Limite</th>
                             <th>Acciones</th>
@@ -34,6 +35,7 @@
                                 <td>{{ $clientes[$i]->nombreUsuario }}</td>
                                 <td>{{ $clientes[$i]->email }}</td>
                                 <td>{{ $deudas[$i]->ejemplar_l->libro->titulo }}</td>
+                                <td>{{ $deudas[$i]->ejemplar_l->numEjemp }}</td>
                                 <td>{{ $deudas[$i]->fechaPrestamo }}</td>
                                 <td>{{ date ( 'Y-m-j' , strtotime($deudas[$i]->fechaPrestamo. "+ ".$deudas[$i]->ejemplar_l->libro->diasMaxPrestamo." days")) }}</td>
                                 <td><a href="{{ route('bibliotecas.clientes.edit', [$biblioteca_id, $clientes[$i]->id]) }}" class = "btn btn-sm btn-warning">Editar</a></td>

@@ -71,9 +71,10 @@ class EjemplarLibroController extends Controller
     public function show($biblioteca_id, $libro_id, EjemplarL $ejemplar)
     {
         //
+        // dd($biblioteca_id);
         $ejemplar = EjemplarL::where('id', $ejemplar->id)
         ->with(['movimientos' => function($query){
-            $query->where('devuelto', '0')->with(['user', 'cliente']);
+            $query->with(['user', 'cliente']);
         }])->first();
         return view('ejemplaresL.ejemplarIndex', compact('biblioteca_id', 'libro_id', 'ejemplar'));
     }

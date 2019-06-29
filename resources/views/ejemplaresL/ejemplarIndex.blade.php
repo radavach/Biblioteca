@@ -9,8 +9,8 @@
 
 @include('extra.mensajes')
 
-<div class="row">
-    <div class="col-md-10 offset-md-1">
+<div class="row justify-content-center">
+    <div class="col-md-10 ">
         <div class="card">
             <div class="card-header">
                 <h3>  {{ $ejemplar->libro->titulo }} - {{ $ejemplar->estado ? 'Disponible' : 'Prestado' }}</h3>
@@ -48,7 +48,11 @@
                                     <p>
                                         <div class="row">
                                             <div class="col-md-2">
-                                            <a href="#" class ="btn btn-sm btn-warning"> Realizar prestamo </a>
+                                            <a href="#" onclick="document.prestamo.submit()" class ="btn btn-sm btn-warning"> Realizar prestamo </a>
+                                            <form action="{{ route('movimientos.inicio') }}" method="POST" name="prestamo">
+                                                @csrf
+                                                <input type="hidden" name="ejemplar" value="{{ $ejemplar->id }}">
+                                            </form> 
                                             </div>
                                         </div>
                                     </p>
@@ -56,7 +60,11 @@
                                     <p>
                                         <div class="row">
                                             <div class="col-md-2">
-                                            <a href="#" class ="btn btn-sm btn-green"> Devolver libro </a>
+                                            <a href="#" onclick="document.devolucion.submit()" class="btn btn-sm btn-green"> Devolver libro </a>
+                                            <form action="{{ route('movimientos.inicio') }}" method="POST" name="devolucion">
+                                                @csrf
+                                                <input type="hidden" name="ejemplar" value="{{ $ejemplar->id }}">
+                                            </form> 
                                             </div>
                                         </div>
                                     </p>
@@ -70,7 +78,7 @@
         </div>
     </div>
 
-    <div class="col-md-10 offset-md-1">
+    <div class="col-md-10 ">
         <div class="card">
             <div class="card-header">Historial de adeudos</div>
             <div class="card-body">
@@ -78,33 +86,31 @@
                     <thead>
                         <tr>
                             <th>Fecha de prestamo</th>
+                            <th>Fecha de devolución</th>
                             <th>Fecha limite</th>
                             <th>ISBN</th>
                             @if(\Auth::user() !==null)
                                 <th>Comision</th>
                                 <th>Usuario</th>
                                 <th>Empleado</th>
-                                @can('permisos_admin')<th>Acciones</th>@endcan
                             @endif
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($ejemplar->movimientos as $movimiento)
                             <tr>
-                                <td>
-                                    {{ $movimiento->pivot->fechaPrestamo }}
-                                </td>
-                                <td>{{ date ( 'Y-m-j' , strtotime($movimiento->pivot->fechaPrestamo. "+ ".$ejemplar->libro->diasMaxPrestamo." days")) }}</td>
+                                <td>{{ $movimiento->pivot->fechaPrestamo ?? 'No disponible' }}</td>
+                                <td>{{ $movimiento->pivot->fechaPrestamo ?? 'No disponible' }}</td>
+                                @if($movimiento->pivot->devuelto)
+                                    <td>NULL</td>
+                                @else
+                                    <td>{{ date ( 'Y-m-j' , strtotime($movimiento->pivot->fechaPrestamo. "+ ".$ejemplar->libro->diasMaxPrestamo." days")) }}</td>
+                                @endif
                                 <td>{{ $movimiento->pivot->isbnLibro }}</td>
                                 @if(\Auth::user() !== null && (\Auth::user()->biblioteca_id == $biblioteca_id || Gate::check('permisos_admin')))
                                     <td>{{ $movimiento->pivot->comision }}</td>
-                                    <td>{{ $movimiento->user->nombre }}</td>
                                     <td>{{ $movimiento->cliente->nombre }}</td>
-                                    @can('permisos_admin')
-                                    <td>
-                                       <a class="btn btn-sm btn-danger" href="{{ route('bibliotecas.libros.ejemplares.movimientos.destroy', [$biblioteca_id, $libro_id, $ejemplar->id, $movimiento->id]) }} "><i class="fe fe-trash-2"></i>Eliminar del registro </a>
-                                    </td>
-                                    @endcan
+                                    <td>{{ $movimiento->user->nombre }}</td>
                                 @endif
                             </tr>
                         @endforeach

@@ -85,7 +85,7 @@ class RegisterController extends Controller
         $esAdmin = FALSE;
         if(isset($data['esAdmin']))
         {
-            $data['esAdmin'] === 'TRUE' ? $esAdmin = true :  $esAdmin = false;
+            $data['esAdmin'] === 'TRUE' ? $esAdmin = TRUE :  $esAdmin = FALSE;
         }
 
         $name = $data['nombre'] . " " . $data['apellidoPaterno'] . " " . $data['apellidoMaterno'];

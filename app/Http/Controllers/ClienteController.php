@@ -134,35 +134,6 @@ class ClienteController extends Controller
         $clientes = [];
         $deudas = [];
 
-        // $client = Cliente::all();
-        // foreach($client as $cli)
-        // {
-        //     if(count($cli->movimiento_l))
-        //     {
-        //         foreach($cli->movimiento_l as $movimiento)
-        //         {
-        //             if(count($movimiento->ejemplares))
-        //             {
-        //                 foreach($movimiento->ejemplares as $ejemplar)
-        //                 {
-        //                     // dd($ejemplar->libro);
-        //                     if($ejemplar->libro->biblioteca_id != $biblioteca_id)
-        //                     {
-        //                         continue;
-        //                     }
-        //                     if(!$ejemplar->pivot->devuelto)
-        //                     {
-        //                         array_push($deudas, $ejemplar->pivot);
-        //                         array_push($clientes, $cli);
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-        // dd($clientes);
-        // dd($deudas);
-
         $registro = libroEM::all();
 
         $ejemplares = libroEM::where([[ 'devuelto', '0']])->with('movimiento_l')->get();
@@ -172,8 +143,6 @@ class ClienteController extends Controller
             array_push($deudas, $ejemplar);
             array_push($clientes, $ejemplar->movimiento_l->cliente);
         }
-
-        // dd($clientes[0]->nombre_apellidos);
 
         return view('clientes.clienteDeudas', compact('biblioteca_id', 'clientes', 'deudas'));
     }

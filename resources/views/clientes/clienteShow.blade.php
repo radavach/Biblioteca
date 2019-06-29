@@ -7,55 +7,62 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3>Bienvenido al sistema compañero trabajador!</h3>
+                <h3>{{ $cliente->nombre_apellidos }}</h3>
             </div>
 
             <div class="card-body">
-                <table class="table table-hover table-dark" >
-
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th> 
-                            <th colspan="2">Apellido</th> 
-                            <th>Nombre Usuario</th> 
-                            <th>Telefono</th> 
-                            <th>Direccion</th> 
-                            <th>Correo Electronico</th> 
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ $cliente->id }}</td>
-                            <td>{{ $cliente->nombre }}</td>
-                            <td>{{ $cliente->apellidoPaterno }}</td>
-                            <td>{{ $cliente->apellidoMaterno }}</td>
-                            <td>{{ $cliente->nombreUsuario }}</td>
-                            <td>{{ $cliente->telefono }}</td>
-                            <td>{{ $cliente->direccion }}</td>
-                            <td>{{ $cliente->email }}</td>
-                            <td>
-                                <a href="{{ route('bibliotecas.clientes.edit', [$biblioteca_id, $cliente->id]) }}" class="btn btn-sm btn-warning">
-                                    <i class="fe fe-edit-3"></i>                                    
-                                    Editar
-                                </a>
-                                <form action="{{ route('bibliotecas.clientes.destroy', [$biblioteca_id, $cliente->id]) }}" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE"> 
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fe fe-trash-2"></i>                                    
-                                        Borrar
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-md-2">
+                        <img class="card-img-top" src="{{asset('images/imagenes')}}/{{$cliente->id ?? $icon_num}}.jpg" alt="No hay imagen disponible">
+                    </div>
+                    <div class="col-md-3">
+                        <h5>
+                            <p>ID</p>
+                            <p>Nombre</p> 
+                            <p>Nombre Usuario</p> 
+                            <p>Telefono</p> 
+                            <p>Direccion</p> 
+                            <p>Correo Electronico</p> 
+                            <p>Acciones</p>
+                        </h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>
+                            <p>{{ $cliente->id }}</p>
+                            <p>{{ $cliente->nombre }} {{ $cliente->apellidoPaterno }} {{ $cliente->apellidoMaterno }}</p>
+                            <p>{{ $cliente->nombreUsuario }}</p>
+                            <p>{{ $cliente->telefono }}</p>
+                            <p>{{ $cliente->direccion }}</p>
+                            <p>{{ $cliente->email }}</p>
+                            @if(\Auth::user() !== null && Gate::check('permisos_admin'))
+                                <p>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <a href="{{ route('bibliotecas.clientes.edit', [$biblioteca_id, $cliente->id]) }}" class="btn btn-sm btn-warning">
+                                                <i class="fe fe-edit-3"></i>
+                                                Editar
+                                            </a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <form action="{{ route('bibliotecas.clientes.destroy', [$biblioteca_id, $cliente->id]) }}" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE"> 
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fe fe-trash-2"></i>                                    
+                                                    Borrar
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </p>
+                            @endif
+                        </h5>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

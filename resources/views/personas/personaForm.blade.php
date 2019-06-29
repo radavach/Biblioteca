@@ -5,8 +5,8 @@
         AGREGAR PERSONA
     </div>
 </div>
-<div class="row">
-    <div class="col-md-10 offset-1">
+<div class="row justify-content-center">
+    <div class="col-md-10 ">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Capturar Persona</h3>

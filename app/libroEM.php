@@ -18,4 +18,9 @@ class libroEM extends Model
     {
         return $this->belongsTo(MovimientoL::class);
     }
+    public function cambiarEstado()
+    {
+        $this->devuelto = !$this->devuelto;
+        $this->save();
+    }
 }

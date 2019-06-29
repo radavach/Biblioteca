@@ -6,8 +6,8 @@
         AGREGAR EJEMPLAR
     </div>
 </div>
-<div class="row">
-    <div class="col-md-10 offset-md-1">
+<div class="row justify-content-center">
+    <div class="col-md-10 ">
         <div class="card">
             <div class="card-header">
                 <h3>{{ $libro->titulo }}</h3>
@@ -45,12 +45,16 @@
                             <p>{{ $libro->linkImagen ?? 'No disponible'}}</p>
                         <h5>
                     </div>
+                    
+                    <div class="col-md-3">
+                        <img class="card-img-top" src="{{ $libro->link }}" alt="">
+                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-10 offset-1">
+    <div class="col-md-10 ">
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Ejemplar</h3>

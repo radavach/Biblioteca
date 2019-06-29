@@ -63,7 +63,6 @@
                     </thead>
                     <tbody>
                         @foreach ($libros as $libro)
-                        <!-- ///<img class="group list-group-image" src="images-database/{{$libro->link}}" alt=" "> -->
                             <tr>
                                 <td>
                                     <a class="enlace_no_fondo" href="{{ route('bibliotecas.libros.show', [$libro->biblioteca_id, $libro->id]) }}">{{ $libro->id }}</a>
@@ -82,7 +81,7 @@
                                         <h6>No hay ejemplares</h6>
                                     @endif
                                 </td>
-                                @if(\Auth::user() !== null && isset($biblioteca_id) && (Gate::check('permisos_admin') || Gate::check('es_trabajador', $biblioteca_id->id)))
+                                @if(\Auth::user() !== null && (Gate::check('permisos_admin') || Gate::check('es_trabajador', $libro->biblioteca_id)))
                                     <td>
                                         <a href="{{ route('bibliotecas.libros.edit', [$libro->biblioteca_id, $libro->id]) }}" class = "btn btn-sm btn-warning">
                                             <i class="fe fe-edit-3"></i>
